@@ -7,116 +7,142 @@
   <meta name="description" content="외국인의 한국 생활을 로컬 디깅으로 바꾸는 지역 기반 생활 내비게이션·커뮤니티 플랫폼" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     /* ─── Variables ─── */
     :root {
-      --font-kr: 'Noto Sans KR', 'Inter', sans-serif;
-      --font-en: 'Inter', 'Noto Sans KR', sans-serif;
+      --font-display-en: 'Bebas Neue', 'Inter', sans-serif;
+      --font-display-kr: 'Black Han Sans', 'Noto Sans KR', sans-serif;
+      --font-body-kr: 'Noto Sans KR', sans-serif;
+      --font-body-en: 'Inter', sans-serif;
 
-      --c-bg:           #FAFAF8;
-      --c-surface:      #FFFFFF;
-      --c-surface-2:    #F4F4F0;
-      --c-primary:      #0D6B4E;
-      --c-primary-h:    #0A5840;
-      --c-primary-lt:   #E8F5F0;
-      --c-primary-ltr:  #F2FAF6;
-      --c-accent:       #F97316;
-      --c-accent-lt:    #FEF3E8;
-      --c-blue:         #2563EB;
-      --c-blue-lt:      #EFF6FF;
-      --c-dark:         #0B0F19;
-      --c-dark-2:       #111827;
-      --c-text:         #111827;
-      --c-text-2:       #4B5563;
-      --c-text-3:       #9CA3AF;
-      --c-border:       #E5E7EB;
-      --c-border-lt:    #F3F4F6;
+      --yellow:      #FFD600;
+      --yellow-dark: #F5C800;
+      --yellow-pale: #FFFBE6;
+      --black:       #0D0D0D;
+      --black-2:     #1A1A1A;
+      --red:         #E63946;
+      --red-dark:    #C1121F;
+      --white:       #FFFFFF;
+      --gray-light:  #F5F5F5;
+      --gray-mid:    #E0E0E0;
+      --text-on-yellow: #0D0D0D;
+      --text-on-black:  #FFFFFF;
 
-      --r-sm:  6px;
-      --r-md:  12px;
-      --r-lg:  20px;
-      --r-xl:  28px;
-      --r-2xl: 40px;
+      --border: 2.5px solid #0D0D0D;
+      --border-thick: 3.5px solid #0D0D0D;
+
+      --r-sm:   6px;
+      --r-md:   10px;
+      --r-lg:   16px;
+      --r-xl:   24px;
       --r-full: 9999px;
 
-      --sh-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-      --sh-md:  0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
-      --sh-lg:  0 8px 32px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.04);
-      --sh-xl:  0 20px 60px rgba(0,0,0,.12);
-      --sh-glow: 0 0 40px rgba(13,107,78,.15);
+      --sh-card: 4px 4px 0px #0D0D0D;
+      --sh-card-lg: 6px 6px 0px #0D0D0D;
+      --sh-card-yellow: 4px 4px 0px var(--yellow);
+
+      --dot-black: radial-gradient(circle, rgba(0,0,0,0.14) 2px, transparent 2px);
+      --dot-yellow: radial-gradient(circle, rgba(255,214,0,0.25) 2px, transparent 2px);
+      --dot-white: radial-gradient(circle, rgba(255,255,255,0.12) 2px, transparent 2px);
 
       --max-w: 1160px;
-      --sp-section: clamp(72px, 10vw, 128px);
-      --sp-nav: 72px;
+      --nav-h: 68px;
+      --sp-section: clamp(64px, 9vw, 112px);
     }
 
     /* ─── Reset ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-    body {
-      font-family: var(--font-kr);
-      background: var(--c-bg);
-      color: var(--c-text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    body { font-family: var(--font-body-kr); background: var(--white); color: var(--black); line-height: 1.6; overflow-x: hidden; }
+    [data-lang="en"] body { font-family: var(--font-body-en); }
     img { max-width: 100%; display: block; }
     a { text-decoration: none; color: inherit; }
     button { cursor: pointer; font-family: inherit; border: none; background: none; }
     ul { list-style: none; }
 
-    [data-lang="en"] body { font-family: var(--font-en); }
-
-    /* ─── Language visibility ─── */
+    /* ─── Lang toggle ─── */
     [data-lang="ko"] .en { display: none !important; }
     [data-lang="en"] .ko { display: none !important; }
 
-    /* ─── Layout helpers ─── */
-    .container {
-      width: 100%;
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 20px;
+    /* ─── Layout ─── */
+    .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 20px; }
+    .section { padding: var(--sp-section) 0; }
+
+    /* ─── Dot pattern helpers ─── */
+    .dots-black {
+      background-image: var(--dot-black);
+      background-size: 20px 20px;
     }
-    .section {
-      padding: var(--sp-section) 0;
+    .dots-yellow {
+      background-image: var(--dot-yellow);
+      background-size: 20px 20px;
     }
-    .section-label {
+    .dots-white {
+      background-image: var(--dot-white);
+      background-size: 20px 20px;
+    }
+
+    /* ─── Section label pill ─── */
+    .sec-label {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--c-primary);
-      background: var(--c-primary-lt);
+      gap: 8px;
+      border: var(--border);
       border-radius: var(--r-full);
-      padding: 5px 14px;
-      margin-bottom: 20px;
-    }
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      padding: 5px 16px;
+      font-size: 0.75rem;
       font-weight: 800;
-      line-height: 1.2;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      background: var(--white);
+      color: var(--black);
+    }
+    .sec-label.on-dark {
+      background: var(--black);
+      color: var(--yellow);
+      border-color: var(--yellow);
+    }
+    .sec-label.on-yellow {
+      background: var(--yellow);
+      color: var(--black);
+      border-color: var(--black);
+    }
+    .sec-label .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+    .sec-label.on-dark .dot { background: var(--yellow); }
+    .sec-label.on-yellow .dot { background: var(--black); }
+
+    /* ─── Section titles ─── */
+    .sec-title {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.15;
       letter-spacing: -0.02em;
-      color: var(--c-text);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
-    .section-sub {
-      font-size: clamp(1rem, 2vw, 1.125rem);
-      color: var(--c-text-2);
-      line-height: 1.7;
-      max-width: 600px;
+    .sec-title-display {
+      font-family: var(--font-display-kr);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
     }
-    .section-header {
-      text-align: center;
-      margin-bottom: clamp(40px, 6vw, 72px);
+    [data-lang="en"] .sec-title-display {
+      font-family: var(--font-display-en);
+      letter-spacing: 0.02em;
     }
-    .section-header .section-sub {
-      margin: 0 auto;
+    .sec-sub {
+      font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
+      line-height: 1.75;
+      max-width: 580px;
     }
+    .sec-header { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
+    .sec-header .sec-sub { margin: 0 auto; }
 
     /* ─── Buttons ─── */
     .btn {
@@ -125,53 +151,60 @@
       justify-content: center;
       gap: 8px;
       font-size: 0.9375rem;
-      font-weight: 600;
+      font-weight: 800;
       border-radius: var(--r-full);
-      padding: 14px 28px;
-      transition: all 0.2s ease;
+      padding: 14px 32px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
       white-space: nowrap;
+      border: var(--border-thick);
+      letter-spacing: 0.01em;
     }
-    .btn-primary {
-      background: var(--c-primary);
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(13,107,78,.30);
+    .btn-black {
+      background: var(--black);
+      color: var(--yellow);
+      border-color: var(--black);
+      box-shadow: var(--sh-card);
     }
-    .btn-primary:hover {
-      background: var(--c-primary-h);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(13,107,78,.35);
+    .btn-black:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--black); }
+    .btn-yellow {
+      background: var(--yellow);
+      color: var(--black);
+      border-color: var(--black);
+      box-shadow: var(--sh-card);
     }
-    .btn-ghost {
+    .btn-yellow:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--black); }
+    .btn-outline {
       background: transparent;
-      color: var(--c-text);
-      border: 1.5px solid var(--c-border);
+      color: var(--black);
+      border-color: var(--black);
     }
-    .btn-ghost:hover {
-      border-color: var(--c-primary);
-      color: var(--c-primary);
-      background: var(--c-primary-ltr);
+    .btn-outline:hover { background: var(--black); color: var(--yellow); }
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--white);
     }
-    .btn-lg {
-      padding: 16px 36px;
-      font-size: 1rem;
+    .btn-outline-white:hover { background: var(--yellow); color: var(--black); border-color: var(--yellow); }
+    .btn-lg { padding: 16px 40px; font-size: 1rem; }
+    .btn-red {
+      background: var(--red);
+      color: var(--white);
+      border-color: var(--red-dark);
+      box-shadow: 4px 4px 0 var(--red-dark);
     }
+    .btn-red:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--red-dark); }
 
     /* ─── NAV ─── */
     .nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      height: var(--sp-nav);
-      background: rgba(250,250,248,0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      height: var(--nav-h);
+      background: var(--white);
+      border-bottom: var(--border);
+      transition: box-shadow 0.2s;
     }
-    .nav.scrolled {
-      border-bottom-color: var(--c-border);
-      box-shadow: var(--sh-sm);
-    }
+    .nav.scrolled { box-shadow: 0 4px 0 var(--black); }
     .nav-inner {
       height: 100%;
       display: flex;
@@ -183,935 +216,660 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 1.125rem;
-      color: var(--c-text);
+      color: var(--black);
       flex-shrink: 0;
     }
-    .nav-logo-icon {
-      width: 32px;
-      height: 32px;
-      background: var(--c-primary);
+    .nav-logo-box {
+      width: 32px; height: 32px;
+      background: var(--yellow);
+      border: var(--border);
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 15px;
     }
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .nav-right { display: flex; align-items: center; gap: 8px; }
     .lang-switcher {
       display: flex;
       align-items: center;
-      background: var(--c-surface-2);
+      border: var(--border);
       border-radius: var(--r-full);
-      padding: 3px;
-      border: 1px solid var(--c-border);
+      overflow: hidden;
+      background: var(--white);
     }
     .lang-btn {
       font-size: 0.8125rem;
-      font-weight: 500;
-      color: var(--c-text-3);
-      padding: 5px 12px;
-      border-radius: var(--r-full);
-      transition: all 0.2s ease;
-      font-family: var(--font-en);
-    }
-    .lang-btn.active {
-      background: var(--c-surface);
-      color: var(--c-text);
       font-weight: 700;
-      box-shadow: var(--sh-sm);
+      color: var(--black);
+      padding: 6px 14px;
+      transition: all 0.15s;
+      font-family: var(--font-body-en);
+      border-radius: 0;
+      letter-spacing: 0.02em;
     }
-    .nav-cta {
-      display: none;
-    }
-    @media (min-width: 640px) {
-      .nav-cta { display: inline-flex; }
-    }
+    .lang-btn:first-child { border-right: var(--border); }
+    .lang-btn.active { background: var(--yellow); color: var(--black); }
+    .nav-cta { display: none; }
+    @media (min-width: 600px) { .nav-cta { display: inline-flex; } }
 
     /* ─── HERO ─── */
     .hero {
-      padding-top: calc(var(--sp-nav) + clamp(48px, 8vw, 96px));
-      padding-bottom: clamp(64px, 10vw, 120px);
-      background: linear-gradient(160deg, #FAFAF8 0%, #EEF7F2 50%, #F5F0FC 100%);
+      padding-top: calc(var(--nav-h) + clamp(40px, 6vw, 80px));
+      padding-bottom: clamp(40px, 6vw, 80px);
+      background-color: var(--yellow);
+      background-image: var(--dot-black);
+      background-size: 22px 22px;
       position: relative;
+      overflow: hidden;
     }
-    .hero::before {
-      content: '';
+    /* Corner dot block decoration */
+    .hero-dot-corner {
       position: absolute;
-      top: -120px; right: -120px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(13,107,78,.07) 0%, transparent 70%);
+      top: 0; right: 0;
+      width: 220px; height: 220px;
+      background-color: var(--black);
+      background-image: var(--dot-yellow);
+      background-size: 16px 16px;
+      clip-path: polygon(100% 0, 100% 100%, 0 0);
       pointer-events: none;
-      z-index: 0;
+      opacity: 0.9;
+    }
+    .hero-dot-corner-bl {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 180px; height: 180px;
+      background-color: var(--black);
+      background-image: var(--dot-yellow);
+      background-size: 16px 16px;
+      clip-path: polygon(0 100%, 100% 100%, 0 0);
+      pointer-events: none;
+      opacity: 0.9;
     }
     .hero-inner {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 48px;
+      gap: 40px;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
     @media (min-width: 900px) {
-      .hero-inner {
-        grid-template-columns: 1fr 1fr;
-        gap: 64px;
-      }
+      .hero-inner { grid-template-columns: 1fr 1fr; gap: 60px; }
     }
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: var(--c-primary-lt);
-      color: var(--c-primary);
-      font-size: 0.8125rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: var(--r-full);
-      margin-bottom: 24px;
-      border: 1px solid rgba(13,107,78,.15);
-    }
-    .hero-badge .badge-dot { width: 6px; height: 6px; background: var(--c-primary); border-radius: 50%; animation: pulse 2s infinite; flex-shrink: 0; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
-    .hero-title {
-      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+      gap: 8px;
+      background: var(--black);
+      color: var(--yellow);
+      font-size: 0.8rem;
       font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      color: var(--c-text);
+      padding: 6px 16px;
+      border-radius: var(--r-full);
       margin-bottom: 20px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero-badge .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+    .hero-title {
+      font-family: var(--font-display-kr);
+      font-size: clamp(2.75rem, 7vw, 5rem);
+      line-height: 1.1;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+    [data-lang="en"] .hero-title {
+      font-family: var(--font-display-en);
+      font-size: clamp(3rem, 7.5vw, 5.5rem);
+      letter-spacing: 0.03em;
+      line-height: 1.0;
     }
     .hero-title em {
       font-style: normal;
-      color: var(--c-primary);
+      color: var(--red);
+      -webkit-text-stroke: 1px var(--black);
     }
     .hero-sub {
-      font-size: clamp(1rem, 2vw, 1.125rem);
-      color: var(--c-text-2);
-      line-height: 1.75;
-      margin-bottom: 36px;
-      max-width: 520px;
+      font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
+      color: var(--black);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 500px;
+      opacity: 0.85;
     }
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 40px;
-    }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; }
     .hero-note {
       font-size: 0.8125rem;
-      color: var(--c-text-3);
+      color: var(--black);
+      opacity: 0.65;
       display: flex;
       align-items: center;
       gap: 6px;
+      font-weight: 600;
     }
-    .hero-note::before { content: '✦'; font-size: 10px; color: var(--c-primary); }
+    .hero-note::before { content: '▶'; font-size: 9px; color: var(--red); }
 
-    /* ─── Hero Visual ─── */
+    /* ─── Hero phone ─── */
     .hero-visual {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0 160px;
+      padding: 0 150px;
       overflow: visible;
     }
-    @media (max-width: 1060px) {
-      .hero-visual { padding: 0 90px; }
-    }
-    @media (max-width: 900px) {
-      .hero-visual { padding: 0; }
-    }
-    .phone-wrap {
-      position: relative;
-      width: 260px;
-      margin: 0 auto;
-    }
+    @media (max-width: 1060px) { .hero-visual { padding: 0 80px; } }
+    @media (max-width: 900px)  { .hero-visual { padding: 0; } }
+    .phone-wrap { position: relative; width: 260px; margin: 0 auto; }
     .phone {
-      width: 260px;
-      height: 520px;
-      background: #1A1A2E;
+      width: 260px; height: 520px;
+      background: var(--black);
       border-radius: 40px;
       padding: 10px;
-      box-shadow: var(--sh-xl), 0 0 0 1px rgba(255,255,255,.08) inset;
+      border: var(--border-thick);
+      box-shadow: 8px 8px 0 var(--black);
       position: relative;
     }
     .phone-screen {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       background: #F8FAFB;
       border-radius: 32px;
       overflow: hidden;
       position: relative;
     }
     .phone-notch {
-      position: absolute;
-      top: 0; left: 50%;
+      position: absolute; top: 0; left: 50%;
       transform: translateX(-50%);
       width: 80px; height: 26px;
-      background: #1A1A2E;
+      background: var(--black);
       border-radius: 0 0 16px 16px;
       z-index: 2;
     }
     .pscreen-header {
       padding: 36px 14px 10px;
-      background: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      background: var(--black);
+      display: flex; align-items: center; justify-content: space-between;
     }
     .pscreen-search {
       flex: 1;
-      background: #F3F4F6;
+      background: rgba(255,255,255,0.12);
       border-radius: var(--r-full);
       padding: 7px 12px;
       font-size: 11px;
-      color: #9CA3AF;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      color: rgba(255,255,255,0.5);
+      display: flex; align-items: center; gap: 6px;
       margin-right: 8px;
     }
     .pscreen-avatar {
       width: 28px; height: 28px;
-      background: var(--c-primary);
+      background: var(--yellow);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #fff;
+      border: 2px solid var(--yellow);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; color: var(--black); font-weight: 800;
     }
     .pscreen-map {
       height: 180px;
-      background: linear-gradient(135deg, #E8F5F0 0%, #D1EDE3 50%, #C8E6DA 100%);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(135deg, #E8F5F0 0%, #D4EDE5 100%);
+      position: relative; overflow: hidden;
     }
     .map-grid {
       position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.4) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.4) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(0,0,0,.07) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,0,0,.07) 1px, transparent 1px);
       background-size: 24px 24px;
     }
-    .map-road-h {
-      position: absolute;
-      left: 0; right: 0;
-      height: 3px;
-      background: rgba(255,255,255,.7);
-      border-radius: 2px;
-    }
-    .map-road-v {
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 3px;
-      background: rgba(255,255,255,.7);
-      border-radius: 2px;
-    }
-    .map-pin {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+    .map-road-h { position: absolute; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.8); }
+    .map-road-v { position: absolute; top: 0; bottom: 0; width: 3px; background: rgba(255,255,255,.8); }
+    .map-pin { position: absolute; display: flex; flex-direction: column; align-items: center; }
     .map-pin-dot {
       width: 22px; height: 22px;
-      border-radius: 50% 50% 50% 0;
-      transform: rotate(-45deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+      border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 2px 2px 0 rgba(0,0,0,.3);
+      border: 1.5px solid rgba(0,0,0,.2);
     }
     .map-pin-dot span { transform: rotate(45deg); font-size: 11px; }
     .map-pin-label {
-      background: #fff;
-      font-size: 9px;
-      font-weight: 600;
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-top: 3px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.12);
-      white-space: nowrap;
+      background: var(--black); color: var(--yellow);
+      font-size: 8px; font-weight: 800;
+      padding: 2px 6px; border-radius: 4px; margin-top: 3px;
+      white-space: nowrap; letter-spacing: 0.03em;
     }
-    .pscreen-places {
-      padding: 12px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .pscreen-places { padding: 10px 10px; display: flex; flex-direction: column; gap: 7px; }
     .place-card-mini {
-      background: #fff;
-      border-radius: 10px;
-      padding: 9px 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.06);
+      background: var(--white);
+      border-radius: 8px; padding: 8px 10px;
+      display: flex; align-items: center; gap: 8px;
+      border: 1.5px solid var(--black);
+      box-shadow: 2px 2px 0 var(--black);
     }
-    .place-icon-mini {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      flex-shrink: 0;
-    }
+    .place-icon-mini { width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; border: 1.5px solid var(--black); }
     .place-info-mini { flex: 1; min-width: 0; }
-    .place-name-mini { font-size: 10px; font-weight: 700; color: #111; }
-    .place-meta-mini { font-size: 9px; color: #9CA3AF; }
-    .place-badge-mini {
-      font-size: 8px;
-      padding: 2px 6px;
-      border-radius: var(--r-full);
-      font-weight: 600;
-    }
+    .place-name-mini { font-size: 10px; font-weight: 800; color: var(--black); }
+    .place-meta-mini { font-size: 9px; color: #666; }
+    .place-badge-mini { font-size: 8px; padding: 2px 6px; border-radius: var(--r-full); font-weight: 700; border: 1.5px solid var(--black); }
     .pscreen-nav {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: #fff;
-      border-top: 1px solid #F3F4F6;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--black); border-top: 2px solid var(--yellow);
+      display: flex; align-items: center; justify-content: space-around;
       padding: 10px 0 14px;
     }
-    .pnav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      font-size: 8px;
-      color: #9CA3AF;
-    }
-    .pnav-item.active { color: var(--c-primary); }
+    .pnav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 8px; color: rgba(255,255,255,.4); }
+    .pnav-item.active { color: var(--yellow); }
     .pnav-icon { font-size: 18px; }
 
-    /* Floating cards around phone */
+    /* Float cards */
     .float-card {
       position: absolute;
-      background: #fff;
-      border-radius: 14px;
+      background: var(--white);
+      border-radius: 12px;
       padding: 10px 14px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.12), 0 2px 6px rgba(0,0,0,.06);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      display: flex; align-items: center; gap: 10px;
       white-space: nowrap;
       animation: float-y 4s ease-in-out infinite;
       z-index: 20;
       min-width: 170px;
-      border: 1px solid rgba(0,0,0,.06);
+      border: var(--border-thick);
+      box-shadow: var(--sh-card-lg);
     }
-    @keyframes float-y {
-      0%,100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    .fc-1 { top: 40px; right: -140px; animation-delay: 0s; }
-    .fc-2 { bottom: 100px; left: -150px; animation-delay: 1.4s; }
-    .fc-3 { top: 220px; right: -140px; animation-delay: 2.8s; }
-    @media (max-width: 1060px) {
-      .fc-1 { right: -80px; }
-      .fc-2 { left: -80px; }
-      .fc-3 { right: -80px; }
-    }
-    @media (max-width: 900px) {
-      .fc-1, .fc-2, .fc-3 { display: none; }
-    }
+    @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .fc-1 { top: 40px; right: -145px; animation-delay: 0s; }
+    .fc-2 { bottom: 100px; left: -155px; animation-delay: 1.4s; }
+    .fc-3 { top: 220px; right: -145px; animation-delay: 2.8s; }
+    @media (max-width: 1060px) { .fc-1{right:-80px} .fc-2{left:-80px} .fc-3{right:-80px} }
+    @media (max-width: 900px) { .fc-1,.fc-2,.fc-3{display:none} }
     .fc-icon { font-size: 22px; flex-shrink: 0; line-height: 1; }
     .fc-label { display: flex; flex-direction: column; gap: 2px; }
-    .fc-text { font-weight: 700; color: var(--c-text); font-size: 12px; line-height: 1.3; }
-    .fc-sub { font-size: 11px; color: var(--c-text-3); line-height: 1.3; }
+    .fc-text { font-weight: 800; color: var(--black); font-size: 12px; line-height: 1.3; }
+    .fc-sub { font-size: 10px; color: #666; line-height: 1.3; }
+    /* yellow top stripe on float cards */
+    .float-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--yellow);
+      border-radius: 12px 12px 0 0;
+    }
 
     /* ─── PROBLEM ─── */
-    .problem {
-      background: var(--c-dark);
-      color: #fff;
-    }
-    .problem .section-label {
-      background: rgba(255,255,255,.1);
-      color: rgba(255,255,255,.7);
-    }
-    .problem .section-title { color: #fff; }
-    .problem .section-sub { color: rgba(255,255,255,.6); }
-    .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-    @media (min-width: 768px) {
-      .problem-grid { grid-template-columns: 1fr 1fr; }
-    }
+    .problem { background-color: var(--black); background-image: var(--dot-white); background-size: 22px 22px; }
+    .problem-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 768px) { .problem-grid { grid-template-columns: 1fr 1fr; } }
     .problem-group {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
+      border: 2px solid rgba(255,255,255,.15);
       border-radius: var(--r-xl);
       padding: 32px;
     }
     .problem-group-title {
-      font-size: 0.9375rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 0.875rem; font-weight: 800; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
     }
     .ptag {
-      font-size: 0.75rem;
-      padding: 3px 10px;
-      border-radius: var(--r-full);
-      font-weight: 600;
+      font-size: 0.75rem; padding: 4px 12px; border-radius: var(--r-full);
+      font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
     }
-    .ptag-foreign { background: rgba(13,107,78,.25); color: #5EEAD4; }
-    .ptag-korean  { background: rgba(249,115,22,.2);  color: #FCA978; }
-    .problem-items { display: flex; flex-direction: column; gap: 12px; }
+    .ptag-foreign { background: var(--yellow); color: var(--black); }
+    .ptag-korean  { background: var(--red);    color: var(--white); }
+    .problem-items { display: flex; flex-direction: column; gap: 10px; }
     .problem-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px;
+      display: flex; align-items: flex-start; gap: 12px; padding: 12px;
       background: rgba(255,255,255,.05);
       border-radius: var(--r-md);
+      border-left: 3px solid var(--yellow);
       transition: background 0.2s;
     }
-    .problem-item:hover { background: rgba(255,255,255,.08); }
+    .problem-item.red-accent { border-left-color: var(--red); }
+    .problem-item:hover { background: rgba(255,255,255,.09); }
     .problem-emoji { font-size: 18px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
-    .problem-text { font-size: 0.875rem; color: rgba(255,255,255,.8); line-height: 1.5; }
+    .problem-text { font-size: 0.875rem; color: rgba(255,255,255,.85); line-height: 1.5; }
 
     /* ─── SOLUTION ─── */
-    .solution { background: var(--c-bg); }
-    .solution-pillars {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    @media (min-width: 640px) {
-      .solution-pillars { grid-template-columns: repeat(3, 1fr); }
-    }
+    .solution { background: var(--white); }
+    .solution-pillars { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 640px) { .solution-pillars { grid-template-columns: repeat(3, 1fr); } }
     .pillar {
-      background: var(--c-surface);
-      border: 1px solid var(--c-border);
+      background: var(--white);
+      border: var(--border-thick);
       border-radius: var(--r-xl);
       padding: 32px 28px;
       text-align: center;
-      transition: all 0.25s ease;
+      box-shadow: var(--sh-card-lg);
+      transition: transform 0.15s, box-shadow 0.15s;
       position: relative;
       overflow: hidden;
     }
-    .pillar::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: 3px 3px 0 0;
-      background: var(--c-primary);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
+    .pillar:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--black); }
+    .pillar-stripe {
+      position: absolute; top: 0; left: 0; right: 0; height: 8px;
     }
-    .pillar:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); }
-    .pillar:hover::before { transform: scaleX(1); }
+    .pillar:nth-child(1) .pillar-stripe { background: var(--yellow); }
+    .pillar:nth-child(2) .pillar-stripe { background: var(--red); }
+    .pillar:nth-child(3) .pillar-stripe { background: var(--black); }
     .pillar-icon {
       width: 60px; height: 60px;
-      border-radius: var(--r-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      margin: 0 auto 20px;
+      border-radius: var(--r-lg); border: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; margin: 0 auto 20px;
     }
-    .pillar-title { font-size: 1.125rem; font-weight: 700; margin-bottom: 10px; }
-    .pillar-desc { font-size: 0.875rem; color: var(--c-text-2); line-height: 1.65; }
+    .pillar:nth-child(1) .pillar-icon { background: var(--yellow); }
+    .pillar:nth-child(2) .pillar-icon { background: var(--red); }
+    .pillar:nth-child(3) .pillar-icon { background: var(--black); }
+    .pillar-title { font-size: 1.125rem; font-weight: 800; margin-bottom: 10px; }
+    .pillar-desc { font-size: 0.875rem; color: #444; line-height: 1.65; }
 
     /* ─── FEATURES ─── */
-    .features { background: var(--c-surface-2); }
-    .features-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
+    .features {
+      background-color: var(--yellow);
+      background-image: var(--dot-black);
+      background-size: 22px 22px;
     }
-    @media (min-width: 640px)  { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+    .features-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
     .feature-card {
-      background: var(--c-surface);
+      background: var(--white);
       border-radius: var(--r-lg);
       padding: 28px 24px;
-      border: 1px solid var(--c-border);
-      transition: all 0.25s ease;
+      border: var(--border-thick);
+      box-shadow: var(--sh-card-lg);
+      transition: transform 0.15s, box-shadow 0.15s;
     }
-    .feature-card:hover {
-      box-shadow: var(--sh-md);
-      border-color: rgba(13,107,78,.2);
-      transform: translateY(-2px);
-    }
+    .feature-card:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 var(--black); }
     .feature-icon {
       width: 48px; height: 48px;
       border-radius: var(--r-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 16px;
+      border: var(--border);
+      background: var(--yellow);
     }
-    .feature-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .feature-desc { font-size: 0.875rem; color: var(--c-text-2); line-height: 1.6; }
+    .feature-title { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+    .feature-desc { font-size: 0.875rem; color: #444; line-height: 1.6; }
 
     /* ─── DUAL AUDIENCE ─── */
-    .dual { background: var(--c-bg); }
-    .dual-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
+    .dual { background: var(--white); }
+    .dual-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
     @media (min-width: 768px) { .dual-grid { grid-template-columns: 1fr 1fr; } }
     .dual-card {
       border-radius: var(--r-xl);
       padding: clamp(32px, 5vw, 52px);
+      border: var(--border-thick);
+      box-shadow: var(--sh-card-lg);
       position: relative;
       overflow: hidden;
     }
-    .dual-card::after {
-      content: '';
-      position: absolute;
-      bottom: -40px; right: -40px;
-      width: 180px; height: 180px;
-      border-radius: 50%;
-      opacity: 0.08;
-    }
     .dual-card-foreign {
-      background: linear-gradient(135deg, #0D6B4E 0%, #0A5840 100%);
-      color: #fff;
+      background-color: var(--black);
+      background-image: var(--dot-yellow);
+      background-size: 20px 20px;
+      color: var(--white);
     }
-    .dual-card-foreign::after { background: #fff; }
     .dual-card-korean {
-      background: linear-gradient(135deg, #1A1A2E 0%, #2D1B69 100%);
-      color: #fff;
+      background-color: var(--red);
+      background-image: var(--dot-black);
+      background-size: 20px 20px;
+      color: var(--white);
+      border-color: var(--red-dark);
+      box-shadow: 6px 6px 0 var(--red-dark);
     }
-    .dual-card-korean::after { background: #fff; }
     .dual-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: var(--r-full);
-      margin-bottom: 16px;
+      display: inline-block; font-size: 0.75rem; font-weight: 800;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: var(--r-full); margin-bottom: 16px;
     }
-    .dual-card-foreign .dual-tag { background: rgba(255,255,255,.2); color: rgba(255,255,255,.9); }
-    .dual-card-korean  .dual-tag { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
+    .dual-card-foreign .dual-tag { background: var(--yellow); color: var(--black); }
+    .dual-card-korean  .dual-tag { background: var(--black); color: var(--white); }
     .dual-title {
-      font-size: clamp(1.375rem, 3vw, 1.875rem);
-      font-weight: 800;
-      line-height: 1.25;
-      margin-bottom: 20px;
+      font-family: var(--font-display-kr);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      line-height: 1.2; margin-bottom: 24px;
     }
-    .dual-points { display: flex; flex-direction: column; gap: 12px; }
-    .dual-point {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.9375rem;
-      line-height: 1.5;
+    [data-lang="en"] .dual-title {
+      font-family: var(--font-display-en);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.03em; line-height: 1.05;
     }
+    .dual-points { display: flex; flex-direction: column; gap: 11px; }
+    .dual-point { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9375rem; line-height: 1.5; }
     .dual-check {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      flex-shrink: 0;
-      margin-top: 2px;
+      width: 20px; height: 20px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; flex-shrink: 0; margin-top: 2px; font-weight: 900;
     }
-    .dual-card-foreign .dual-check { background: rgba(255,255,255,.25); }
-    .dual-card-korean  .dual-check { background: rgba(255,255,255,.2); }
+    .dual-card-foreign .dual-check { background: var(--yellow); color: var(--black); }
+    .dual-card-korean  .dual-check { background: var(--black); color: var(--white); }
 
     /* ─── LOCAL DIGGING ─── */
-    .digging { background: var(--c-surface-2); }
-    .digging-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-    @media (min-width: 900px) {
-      .digging-inner { grid-template-columns: 1fr 1fr; gap: 72px; }
-    }
-    .digging-highlights {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
+    .digging { background: var(--gray-light); }
+    .digging-inner { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+    @media (min-width: 900px) { .digging-inner { grid-template-columns: 1fr 1fr; gap: 64px; } }
+    .digging-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .dig-card {
-      background: var(--c-surface);
-      border-radius: var(--r-lg);
-      padding: 20px;
-      border: 1px solid var(--c-border);
-      transition: all 0.25s ease;
+      background: var(--white);
+      border-radius: var(--r-lg); padding: 20px;
+      border: var(--border-thick);
+      box-shadow: var(--sh-card);
+      transition: transform 0.15s, box-shadow 0.15s;
     }
-    .dig-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
+    .dig-card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--black); }
     .dig-icon { font-size: 28px; margin-bottom: 10px; }
-    .dig-title { font-size: 0.9375rem; font-weight: 700; margin-bottom: 6px; }
-    .dig-desc { font-size: 0.8125rem; color: var(--c-text-2); line-height: 1.55; }
+    .dig-title { font-size: 0.9375rem; font-weight: 800; margin-bottom: 6px; }
+    .dig-desc { font-size: 0.8125rem; color: #555; line-height: 1.55; }
 
     /* ─── WHY NOW ─── */
     .whynow {
-      background: linear-gradient(160deg, #0B0F19 0%, #0D1F2D 100%);
-      color: #fff;
+      background-color: var(--black);
+      background-image: var(--dot-white);
+      background-size: 24px 24px;
     }
-    .whynow .section-label { background: rgba(255,255,255,.1); color: rgba(255,255,255,.7); }
-    .whynow .section-title { color: #fff; }
-    .whynow .section-sub { color: rgba(255,255,255,.65); }
-    .whynow-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-    @media (min-width: 768px) {
-      .whynow-grid { grid-template-columns: repeat(4, 1fr); }
-    }
+    .whynow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (min-width: 768px) { .whynow-grid { grid-template-columns: repeat(4, 1fr); } }
     .whynow-item {
       background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: var(--r-lg);
-      padding: 24px 20px;
-      text-align: center;
-      transition: background 0.25s;
+      border: 2px solid rgba(255,255,255,.12);
+      border-radius: var(--r-lg); padding: 24px 20px; text-align: center;
+      transition: background 0.2s, border-color 0.2s;
     }
-    .whynow-item:hover { background: rgba(255,255,255,.08); }
+    .whynow-item:hover { background: rgba(255,214,0,.08); border-color: var(--yellow); }
     .whynow-icon { font-size: 28px; margin-bottom: 12px; }
     .whynow-stat {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #5EEAD4;
-      margin-bottom: 6px;
+      font-family: var(--font-display-en);
+      font-size: 2rem; color: var(--yellow);
+      margin-bottom: 6px; line-height: 1; letter-spacing: 0.04em;
     }
-    .whynow-label { font-size: 0.8125rem; color: rgba(255,255,255,.65); line-height: 1.4; }
+    .whynow-label { font-size: 0.8125rem; color: rgba(255,255,255,.6); line-height: 1.4; }
 
     /* ─── APP PREVIEW ─── */
     .apppreview {
-      background: var(--c-dark-2);
-      overflow: hidden;
+      background-color: var(--black-2);
+      background-image: var(--dot-white);
+      background-size: 22px 22px;
     }
-    .apppreview .section-label { background: rgba(255,255,255,.1); color: rgba(255,255,255,.6); }
-    .apppreview .section-title { color: #fff; }
-    .apppreview .section-sub { color: rgba(255,255,255,.55); }
-    .screens-wrap {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 20px 0 0;
-    }
-    .screen-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-    .screen-label {
-      font-size: 0.8125rem;
-      color: rgba(255,255,255,.5);
-      font-weight: 500;
-    }
+    .screens-wrap { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; padding: 20px 0 0; }
+    .screen-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .screen-label { font-size: 0.8125rem; color: rgba(255,255,255,.5); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
     .mini-phone {
-      width: 150px;
-      height: 300px;
-      background: #1A1A2E;
-      border-radius: 24px;
-      padding: 6px;
-      box-shadow: var(--sh-xl);
-      position: relative;
+      width: 148px; height: 296px;
+      background: var(--black);
+      border-radius: 22px; padding: 6px;
+      border: 2px solid var(--yellow);
+      box-shadow: 4px 4px 0 var(--yellow);
     }
-    .mini-phone-screen {
-      width: 100%; height: 100%;
-      background: #F8FAFB;
-      border-radius: 20px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .mini-header {
-      padding: 8px;
-      background: #fff;
-      border-bottom: 1px solid #F3F4F6;
-      font-size: 7px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    .mini-phone-screen { width: 100%; height: 100%; background: #F8FAFB; border-radius: 17px; overflow: hidden; display: flex; flex-direction: column; }
+    .mini-header { padding: 8px; background: var(--black); font-size: 7px; font-weight: 800; display: flex; align-items: center; justify-content: space-between; color: var(--yellow); }
     .mini-body { flex: 1; overflow: hidden; position: relative; }
-    .mini-bg-map {
-      background: linear-gradient(135deg, #EDF7F2, #D5EDE5);
-      width: 100%; height: 100%;
-      position: relative;
-    }
-    .mini-pin {
-      position: absolute;
-      width: 14px; height: 14px;
-      border-radius: 50% 50% 50% 0;
-      transform: rotate(-45deg);
-      display: flex; align-items: center; justify-content: center;
-    }
+    .mini-bg-map { background: linear-gradient(135deg, #EDF7F2, #D5EDE5); width: 100%; height: 100%; position: relative; }
+    .mini-pin { position: absolute; width: 14px; height: 14px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; border: 1.5px solid rgba(0,0,0,.3); }
     .mini-pin-inner { font-size: 7px; transform: rotate(45deg); }
     .mini-list { padding: 6px; display: flex; flex-direction: column; gap: 5px; }
     .mini-list-item {
-      background: #fff;
-      border-radius: 6px;
-      padding: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.06);
+      background: var(--white); border-radius: 5px; padding: 5px;
+      display: flex; align-items: center; gap: 5px;
+      border: 1.5px solid var(--black); box-shadow: 1px 1px 0 var(--black);
     }
     .mli-icon { font-size: 12px; }
-    .mli-text { font-size: 7px; color: #333; font-weight: 600; }
+    .mli-text { font-size: 7px; color: #111; font-weight: 700; }
     .mini-etiq { padding: 6px; display: flex; flex-direction: column; gap: 4px; }
     .mini-etiq-item {
-      background: #fff;
-      border-radius: 6px;
-      padding: 5px 6px;
-      border-left: 3px solid var(--c-primary);
-      font-size: 7px;
-      color: #333;
-      line-height: 1.3;
+      background: var(--white); border-radius: 5px; padding: 5px 6px;
+      border-left: 3px solid var(--yellow);
+      font-size: 7px; color: #111; line-height: 1.3; font-weight: 600;
+      border-top: 1px solid var(--black); border-right: 1px solid var(--black); border-bottom: 1px solid var(--black);
     }
     .mini-meet { padding: 6px; display: flex; flex-direction: column; gap: 5px; }
     .mini-meet-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 6px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.06);
+      background: var(--white); border-radius: 7px; padding: 6px;
+      border: 1.5px solid var(--black); box-shadow: 1px 1px 0 var(--black);
     }
     .mmc-top { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
-    .mmc-avatar { width: 14px; height: 14px; border-radius: 50%; font-size: 8px; display: flex; align-items: center; justify-content: center; }
-    .mmc-name { font-size: 7px; font-weight: 600; }
-    .mmc-title { font-size: 8px; font-weight: 700; margin-bottom: 3px; }
-    .mmc-info { font-size: 7px; color: #9CA3AF; }
+    .mmc-avatar { width: 14px; height: 14px; border-radius: 50%; font-size: 8px; display: flex; align-items: center; justify-content: center; background: var(--yellow); color: var(--black); font-weight: 800; }
+    .mmc-name { font-size: 7px; font-weight: 700; }
+    .mmc-title { font-size: 8px; font-weight: 800; margin-bottom: 3px; }
+    .mmc-info { font-size: 7px; color: #888; }
     .mini-profile { padding: 8px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .mp-av {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--c-primary), #0A5840);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-    }
-    .mp-name { font-size: 9px; font-weight: 700; }
-    .mp-tags { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
-    .mp-tag { font-size: 7px; padding: 2px 5px; border-radius: 4px; background: var(--c-primary-lt); color: var(--c-primary); font-weight: 600; }
+    .mp-av { width: 40px; height: 40px; border-radius: 50%; background: var(--yellow); border: 2px solid var(--black); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .mp-name { font-size: 9px; font-weight: 800; }
+    .mp-tags { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; }
+    .mp-tag { font-size: 7px; padding: 2px 5px; border-radius: 4px; background: var(--yellow); color: var(--black); font-weight: 800; border: 1px solid var(--black); }
     .mp-stats { display: flex; gap: 8px; }
     .mp-stat { text-align: center; }
-    .mp-stat-n { font-size: 11px; font-weight: 800; }
-    .mp-stat-l { font-size: 7px; color: #9CA3AF; }
+    .mp-stat-n { font-size: 11px; font-weight: 900; color: var(--black); }
+    .mp-stat-l { font-size: 7px; color: #888; }
 
     /* ─── CTA ─── */
     .cta-section {
-      background: linear-gradient(160deg, #0D6B4E 0%, #0A5840 50%, #073D2E 100%);
+      background-color: var(--yellow);
+      background-image: var(--dot-black);
+      background-size: 22px 22px;
       padding: var(--sp-section) 0;
       position: relative;
       overflow: hidden;
     }
-    .cta-section::before {
-      content: '';
+    .cta-starburst {
       position: absolute;
-      top: -100px; right: -100px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(255,255,255,.06) 0%, transparent 70%);
-      pointer-events: none;
+      width: 120px; height: 120px;
+      background: var(--black);
+      clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+      top: -20px; right: 80px;
+      animation: spin-slow 12s linear infinite;
+      opacity: 0.9;
     }
-    .cta-section::after {
-      content: '';
+    .cta-starburst-sm {
       position: absolute;
-      bottom: -80px; left: -80px;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(255,255,255,.04) 0%, transparent 70%);
-      pointer-events: none;
+      width: 70px; height: 70px;
+      background: var(--red);
+      clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+      bottom: 30px; left: 60px;
+      animation: spin-slow 8s linear infinite reverse;
     }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
     .cta-inner { text-align: center; position: relative; z-index: 1; }
     .cta-badge {
-      display: inline-block;
-      background: rgba(255,255,255,.15);
-      color: rgba(255,255,255,.9);
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 5px 14px;
-      border-radius: var(--r-full);
-      margin-bottom: 20px;
-      letter-spacing: 0.04em;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--black); color: var(--yellow);
+      font-size: 0.75rem; font-weight: 800; padding: 6px 16px;
+      border-radius: var(--r-full); margin-bottom: 20px;
+      letter-spacing: 0.07em; text-transform: uppercase;
     }
     .cta-title {
-      font-size: clamp(1.875rem, 4.5vw, 3rem);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-      letter-spacing: -0.025em;
-      margin-bottom: 16px;
+      font-family: var(--font-display-kr);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800; color: var(--black);
+      line-height: 1.1; margin-bottom: 16px;
     }
-    .cta-sub {
-      font-size: 1.0625rem;
-      color: rgba(255,255,255,.7);
-      line-height: 1.6;
-      margin-bottom: 40px;
+    [data-lang="en"] .cta-title {
+      font-family: var(--font-display-en);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      letter-spacing: 0.03em; line-height: 1.0;
     }
+    .cta-sub { font-size: 1.0625rem; color: rgba(0,0,0,.65); line-height: 1.6; margin-bottom: 36px; font-weight: 600; }
     .cta-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 420px;
-      margin: 0 auto 20px;
+      display: flex; flex-direction: column; gap: 12px;
+      max-width: 440px; margin: 0 auto 16px;
     }
-    @media (min-width: 480px) {
-      .cta-form { flex-direction: row; }
-    }
+    @media (min-width: 480px) { .cta-form { flex-direction: row; } }
     .cta-input {
-      flex: 1;
-      padding: 14px 20px;
+      flex: 1; padding: 14px 20px;
       border-radius: var(--r-full);
-      border: none;
-      background: rgba(255,255,255,.15);
-      backdrop-filter: blur(8px);
-      color: #fff;
-      font-size: 0.9375rem;
-      font-family: inherit;
-      outline: none;
-      transition: background 0.2s;
+      border: var(--border-thick);
+      background: var(--white);
+      color: var(--black); font-size: 0.9375rem;
+      font-family: inherit; outline: none;
+      box-shadow: var(--sh-card);
+      transition: box-shadow 0.15s;
     }
-    .cta-input::placeholder { color: rgba(255,255,255,.5); }
-    .cta-input:focus { background: rgba(255,255,255,.22); }
+    .cta-input::placeholder { color: #888; }
+    .cta-input:focus { box-shadow: 4px 4px 0 var(--red); }
     .cta-submit {
       padding: 14px 28px;
-      background: #fff;
-      color: var(--c-primary);
+      background: var(--black); color: var(--yellow);
       border-radius: var(--r-full);
-      font-size: 0.9375rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
+      font-size: 0.9375rem; font-weight: 800;
+      border: var(--border-thick);
+      box-shadow: var(--sh-card);
+      font-family: inherit; cursor: pointer;
       white-space: nowrap;
-      transition: all 0.2s ease;
-      font-family: inherit;
+      transition: transform 0.15s, box-shadow 0.15s;
     }
-    .cta-submit:hover { background: #F0FAF6; transform: translateY(-1px); }
-    .cta-note {
-      font-size: 0.8125rem;
-      color: rgba(255,255,255,.45);
-    }
+    .cta-submit:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--black); }
+    .cta-note { font-size: 0.8125rem; color: rgba(0,0,0,.5); font-weight: 600; }
     .cta-success {
       display: none;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: var(--r-md);
-      padding: 16px 24px;
-      color: #fff;
-      font-weight: 600;
-      font-size: 0.9375rem;
-      margin: 0 auto 20px;
-      max-width: 420px;
+      background: var(--black); border: var(--border-thick);
+      border-radius: var(--r-md); padding: 16px 24px;
+      color: var(--yellow); font-weight: 800; font-size: 0.9375rem;
+      margin: 0 auto 16px; max-width: 440px;
+      box-shadow: var(--sh-card-lg);
     }
-    .cta-success.visible { display: flex; align-items: center; gap: 8px; justify-content: center; }
+    .cta-success.visible { display: flex; align-items: center; gap: 10px; justify-content: center; }
 
     /* ─── FOOTER ─── */
     .footer {
-      background: var(--c-dark);
-      color: rgba(255,255,255,.55);
+      background: var(--black);
+      color: rgba(255,255,255,.5);
       padding: 48px 0 32px;
     }
-    .footer-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 36px;
-    }
-    @media (min-width: 640px) {
-      .footer-inner { grid-template-columns: 1fr 1fr; }
-    }
-    @media (min-width: 900px) {
-      .footer-inner { grid-template-columns: 2fr 1fr 1fr; }
-    }
+    .footer-inner { display: grid; grid-template-columns: 1fr; gap: 36px; }
+    @media (min-width: 640px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px)  { .footer-inner { grid-template-columns: 2fr 1fr 1fr; } }
     .footer-brand { max-width: 280px; }
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 800;
-      color: #fff;
-      font-size: 1rem;
-      margin-bottom: 12px;
-    }
-    .footer-logo-icon {
-      width: 28px; height: 28px;
-      background: var(--c-primary);
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 14px;
-    }
+    .footer-logo { display: flex; align-items: center; gap: 8px; font-weight: 900; color: var(--yellow); font-size: 1rem; margin-bottom: 12px; }
+    .footer-logo-box { width: 28px; height: 28px; background: var(--yellow); border-radius: 6px; border: 2px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; color: var(--black); font-size: 14px; font-weight: 900; }
     .footer-desc { font-size: 0.875rem; line-height: 1.65; margin-bottom: 20px; }
     .footer-lang { display: flex; }
-    .footer-nav-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.4);
-      margin-bottom: 14px;
-    }
+    .footer-lang .lang-switcher { border-color: rgba(255,255,255,.2); }
+    .footer-lang .lang-btn { color: rgba(255,255,255,.6); }
+    .footer-lang .lang-btn:first-child { border-right-color: rgba(255,255,255,.2); }
+    .footer-lang .lang-btn.active { background: var(--yellow); color: var(--black); }
+    .footer-nav-title { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 14px; }
     .footer-links { display: flex; flex-direction: column; gap: 10px; }
-    .footer-link {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,.55);
-      transition: color 0.15s;
-    }
-    .footer-link:hover { color: rgba(255,255,255,.9); }
+    .footer-link { font-size: 0.875rem; color: rgba(255,255,255,.5); transition: color 0.15s; }
+    .footer-link:hover { color: var(--yellow); }
     .footer-bottom {
-      margin-top: 36px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 0.8125rem;
+      margin-top: 36px; padding-top: 24px;
+      border-top: 2px solid rgba(255,255,255,.1);
+      display: flex; flex-direction: column; gap: 8px; font-size: 0.8125rem;
     }
-    @media (min-width: 640px) {
-      .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
-    }
+    @media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
 
     /* ─── Animations ─── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
     .reveal-delay-4 { transition-delay: 0.4s; }
     .reveal-delay-5 { transition-delay: 0.5s; }
 
-    /* ─── Misc ─── */
-    .text-primary { color: var(--c-primary); }
-    .text-center { text-align: center; }
-    .mt-4 { margin-top: 4px; }
-    .mb-16 { margin-bottom: 16px; }
-
-    @media (max-width: 480px) {
-      .phone-wrap { transform: scale(0.88); transform-origin: center top; }
-    }
-    @media (max-width: 360px) {
-      .phone-wrap { transform: scale(0.78); }
-    }
+    @media (max-width: 480px) { .phone-wrap { transform: scale(0.88); transform-origin: center top; } }
   </style>
 </head>
 <body>
@@ -1121,15 +879,15 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <div class="nav-logo-icon">L</div>
+        <div class="nav-logo-box">L</div>
         <span>Localoop Korea</span>
       </a>
       <div class="nav-right">
-        <div class="lang-switcher" role="group" aria-label="언어 선택">
+        <div class="lang-switcher" role="group">
           <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')">한국어</button>
           <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
         </div>
-        <a href="#cta" class="btn btn-primary nav-cta">
+        <a href="#cta" class="btn btn-black nav-cta" style="padding:9px 20px;font-size:0.875rem;border-radius:var(--r-full)">
           <span class="ko">사전등록</span>
           <span class="en">Join Waitlist</span>
         </a>
@@ -1140,6 +898,8 @@
 
 <!-- ─── HERO ─── -->
 <section class="hero" id="hero">
+  <div class="hero-dot-corner"></div>
+  <div class="hero-dot-corner-bl"></div>
   <div class="container">
     <div class="hero-inner">
       <div class="hero-content">
@@ -1153,15 +913,15 @@
           <span class="en">Turn Life in Korea<br>into <em>Local Digging</em></span>
         </h1>
         <p class="hero-sub reveal reveal-delay-2">
-          <span class="ko">언어 장벽, 낯선 동네, 외로운 일상—<br>Localoop Korea가 외국인의 한국 생활을 더 쉽고, 더 즐겁고, 더 로컬하게 만듭니다. 외국인과 한국인이 함께 만들어가는 지역 기반 생활 플랫폼.</span>
-          <span class="en">Language barriers, unfamiliar streets, the loneliness of a new city — Localoop Korea makes life in Korea easier, more local, and genuinely connected. A region-based platform built for foreigners and Koreans together.</span>
+          <span class="ko">언어 장벽, 낯선 동네, 외로운 일상—Localoop Korea가 외국인의 한국 생활을 더 쉽고, 더 즐겁고, 더 로컬하게 만듭니다. 외국인과 한국인이 함께 만들어가는 지역 기반 생활 플랫폼.</span>
+          <span class="en">Language barriers, unfamiliar streets, the loneliness of a new city — Localoop Korea makes life in Korea easier, more local, and genuinely connected.</span>
         </p>
         <div class="hero-ctas reveal reveal-delay-3">
-          <a href="#cta" class="btn btn-primary btn-lg">
+          <a href="#cta" class="btn btn-black btn-lg">
             <span class="ko">사전등록하기</span>
             <span class="en">Join the Waitlist</span>
           </a>
-          <a href="#apppreview" class="btn btn-ghost btn-lg">
+          <a href="#apppreview" class="btn btn-outline btn-lg">
             <span class="ko">서비스 미리보기</span>
             <span class="en">Preview the App</span>
           </a>
@@ -1174,7 +934,6 @@
 
       <div class="hero-visual reveal reveal-delay-2">
         <div class="phone-wrap">
-          <!-- Floating cards -->
           <div class="float-card fc-1">
             <span class="fc-icon">🍜</span>
             <div class="fc-label">
@@ -1202,8 +961,6 @@
               <span class="fc-sub en">Hongdae · 12 going</span>
             </div>
           </div>
-
-          <!-- Phone mockup -->
           <div class="phone">
             <div class="phone-notch"></div>
             <div class="phone-screen">
@@ -1222,60 +979,48 @@
                 <div class="map-road-v" style="left:35%"></div>
                 <div class="map-road-v" style="left:65%"></div>
                 <div class="map-pin" style="top:22%;left:28%">
-                  <div class="map-pin-dot" style="background:var(--c-primary)"><span>🍱</span></div>
+                  <div class="map-pin-dot" style="background:var(--yellow)"><span>🍱</span></div>
                   <div class="map-pin-label ko">현지 맛집</div>
                   <div class="map-pin-label en">Local food</div>
                 </div>
                 <div class="map-pin" style="top:44%;left:56%">
-                  <div class="map-pin-dot" style="background:var(--c-accent)"><span>👥</span></div>
+                  <div class="map-pin-dot" style="background:var(--red)"><span>👥</span></div>
                   <div class="map-pin-label ko">모임 장소</div>
                   <div class="map-pin-label en">Meetup spot</div>
                 </div>
                 <div class="map-pin" style="top:15%;left:62%">
-                  <div class="map-pin-dot" style="background:var(--c-blue)"><span>📍</span></div>
+                  <div class="map-pin-dot" style="background:var(--black)"><span style="color:var(--yellow)">📍</span></div>
                   <div class="map-pin-label ko">외국인 친화</div>
                   <div class="map-pin-label en">Foreigner-friendly</div>
                 </div>
               </div>
               <div class="pscreen-places">
                 <div class="place-card-mini">
-                  <div class="place-icon-mini" style="background:#FEF3C7">🍜</div>
+                  <div class="place-icon-mini" style="background:var(--yellow)">🍜</div>
                   <div class="place-info-mini">
                     <div class="place-name-mini ko">을지로 골목 국밥</div>
                     <div class="place-name-mini en">Euljiro Alley Gukbap</div>
                     <div class="place-meta-mini ko">현지인 추천 · 4.9★</div>
                     <div class="place-meta-mini en">Local pick · 4.9★</div>
                   </div>
-                  <div class="place-badge-mini" style="background:#DCFCE7;color:#15803D">✓</div>
+                  <div class="place-badge-mini" style="background:var(--yellow)">✓</div>
                 </div>
                 <div class="place-card-mini">
-                  <div class="place-icon-mini" style="background:#EFF6FF">☕</div>
+                  <div class="place-icon-mini" style="background:#E8F5F0">☕</div>
                   <div class="place-info-mini">
                     <div class="place-name-mini ko">성수 숨겨진 카페</div>
                     <div class="place-name-mini en">Hidden café, Seongsu</div>
                     <div class="place-meta-mini ko">로컬 디깅 · 4.8★</div>
                     <div class="place-meta-mini en">Local digging · 4.8★</div>
                   </div>
-                  <div class="place-badge-mini" style="background:#EFF6FF;color:#2563EB">🔍</div>
+                  <div class="place-badge-mini" style="background:#E8F5F0">🔍</div>
                 </div>
               </div>
               <div class="pscreen-nav">
-                <div class="pnav-item active">
-                  <span class="pnav-icon">🗺️</span>
-                  <span class="ko">지도</span><span class="en">Map</span>
-                </div>
-                <div class="pnav-item">
-                  <span class="pnav-icon">🔍</span>
-                  <span class="ko">탐색</span><span class="en">Explore</span>
-                </div>
-                <div class="pnav-item">
-                  <span class="pnav-icon">📅</span>
-                  <span class="ko">모임</span><span class="en">Meetup</span>
-                </div>
-                <div class="pnav-item">
-                  <span class="pnav-icon">👤</span>
-                  <span class="ko">프로필</span><span class="en">Profile</span>
-                </div>
+                <div class="pnav-item active"><span class="pnav-icon">🗺️</span><span class="ko">지도</span><span class="en">Map</span></div>
+                <div class="pnav-item"><span class="pnav-icon">🔍</span><span class="ko">탐색</span><span class="en">Explore</span></div>
+                <div class="pnav-item"><span class="pnav-icon">📅</span><span class="ko">모임</span><span class="en">Meetup</span></div>
+                <div class="pnav-item"><span class="pnav-icon">👤</span><span class="ko">프로필</span><span class="en">Profile</span></div>
               </div>
             </div>
           </div>
@@ -1288,85 +1033,42 @@
 <!-- ─── PROBLEM ─── -->
 <section class="section problem" id="problem">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label ko">문제</div>
-      <div class="section-label en">The Problem</div>
-      <h2 class="section-title">
+    <div class="sec-header reveal">
+      <div class="sec-label on-dark"><span class="dot"></span><span class="ko">문제</span><span class="en">THE PROBLEM</span></div>
+      <h2 class="sec-title" style="color:var(--white)">
         <span class="ko">한국 생활, 솔직히 쉽지 않습니다</span>
         <span class="en">Life in Korea isn't always easy</span>
       </h2>
-      <p class="section-sub">
+      <p class="sec-sub" style="color:rgba(255,255,255,.6)">
         <span class="ko">외국인도, 한국인도 각자의 어려움을 가지고 있습니다.</span>
         <span class="en">Both foreigners and Koreans face their own challenges.</span>
       </p>
     </div>
-
     <div class="problem-grid">
       <div class="problem-group reveal reveal-delay-1">
-        <div class="problem-group-title">
+        <div class="problem-group-title" style="color:var(--white)">
           <span class="ptag ptag-foreign ko">외국인</span>
-          <span class="ptag ptag-foreign en">For Foreigners</span>
+          <span class="ptag ptag-foreign en">Foreigners</span>
         </div>
         <div class="problem-items">
-          <div class="problem-item">
-            <span class="problem-emoji">🗣️</span>
-            <span class="problem-text ko">한국어를 못 하면 아무것도 못 할 것 같아요</span>
-            <span class="problem-text en">Getting around without Korean feels impossible</span>
-          </div>
-          <div class="problem-item">
-            <span class="problem-emoji">💳</span>
-            <span class="problem-text ko">카드가 안 되고, ATM도 찾기 어렵고</span>
-            <span class="problem-text en">Cash, cards, ATMs — it's all confusing</span>
-          </div>
-          <div class="problem-item">
-            <span class="problem-emoji">🚌</span>
-            <span class="problem-text ko">버스, 지하철... 어떻게 타야 하는지 모르겠어요</span>
-            <span class="problem-text en">Public transport is overwhelming to navigate</span>
-          </div>
-          <div class="problem-item">
-            <span class="problem-emoji">📋</span>
-            <span class="problem-text ko">행정 절차가 너무 복잡하고 어려워요</span>
-            <span class="problem-text en">Administrative tasks feel endless and opaque</span>
-          </div>
-          <div class="problem-item">
-            <span class="problem-emoji">🙏</span>
-            <span class="problem-text ko">한국 에티켓, 뭘 조심해야 하는지 모르겠어요</span>
-            <span class="problem-text en">I don't know the unspoken rules and etiquette</span>
-          </div>
-          <div class="problem-item">
-            <span class="problem-emoji">👥</span>
-            <span class="problem-text ko">한국 친구를 사귀고 싶은데 기회가 없어요</span>
-            <span class="problem-text en">It's hard to make genuine Korean friends</span>
-          </div>
+          <div class="problem-item"><span class="problem-emoji">🗣️</span><span class="problem-text ko">한국어를 못 하면 아무것도 못 할 것 같아요</span><span class="problem-text en">Getting around without Korean feels impossible</span></div>
+          <div class="problem-item"><span class="problem-emoji">💳</span><span class="problem-text ko">카드가 안 되고, ATM도 찾기 어렵고</span><span class="problem-text en">Cash, cards, ATMs — it's all confusing</span></div>
+          <div class="problem-item"><span class="problem-emoji">🚌</span><span class="problem-text ko">버스, 지하철... 어떻게 타야 하는지 모르겠어요</span><span class="problem-text en">Public transport is overwhelming to navigate</span></div>
+          <div class="problem-item"><span class="problem-emoji">📋</span><span class="problem-text ko">행정 절차가 너무 복잡하고 어려워요</span><span class="problem-text en">Administrative tasks feel endless and opaque</span></div>
+          <div class="problem-item"><span class="problem-emoji">🙏</span><span class="problem-text ko">한국 에티켓, 뭘 조심해야 하는지 모르겠어요</span><span class="problem-text en">I don't know the unspoken rules and etiquette</span></div>
+          <div class="problem-item"><span class="problem-emoji">👥</span><span class="problem-text ko">한국 친구를 사귀고 싶은데 기회가 없어요</span><span class="problem-text en">It's hard to make genuine Korean friends</span></div>
         </div>
       </div>
-
       <div class="problem-group reveal reveal-delay-2">
-        <div class="problem-group-title">
+        <div class="problem-group-title" style="color:var(--white)">
           <span class="ptag ptag-korean ko">한국인</span>
-          <span class="ptag ptag-korean en">For Koreans</span>
+          <span class="ptag ptag-korean en">Koreans</span>
         </div>
         <div class="problem-items">
-          <div class="problem-item">
-            <span class="problem-emoji">🌍</span>
-            <span class="problem-text ko">자연스럽게 외국인 친구를 만날 방법이 없어요</span>
-            <span class="problem-text en">Hard to meet foreign friends in a natural way</span>
-          </div>
-          <div class="problem-item">
-            <span class="problem-emoji">💬</span>
-            <span class="problem-text ko">믿을 만한 언어 교환 파트너를 찾기가 어려워요</span>
-            <span class="problem-text en">No reliable, comfortable language exchange exists</span>
-          </div>
-          <div class="problem-item">
-            <span class="problem-emoji">📍</span>
-            <span class="problem-text ko">내가 아는 좋은 동네, 맛집을 나눌 공간이 없어요</span>
-            <span class="problem-text en">Nowhere meaningful to share my real local favorites</span>
-          </div>
-          <div class="problem-item">
-            <span class="problem-emoji">🤝</span>
-            <span class="problem-text ko">외국인들에게 진짜 한국을 소개하고 싶은데 방법이 없어요</span>
-            <span class="problem-text en">I want to share real Korea with foreigners, but how?</span>
-          </div>
+          <div class="problem-item red-accent"><span class="problem-emoji">🌍</span><span class="problem-text ko">자연스럽게 외국인 친구를 만날 방법이 없어요</span><span class="problem-text en">Hard to meet foreign friends in a natural way</span></div>
+          <div class="problem-item red-accent"><span class="problem-emoji">💬</span><span class="problem-text ko">믿을 만한 언어 교환 파트너를 찾기가 어려워요</span><span class="problem-text en">No reliable, comfortable language exchange exists</span></div>
+          <div class="problem-item red-accent"><span class="problem-emoji">📍</span><span class="problem-text ko">내가 아는 좋은 동네, 맛집을 나눌 공간이 없어요</span><span class="problem-text en">Nowhere meaningful to share my real local favorites</span></div>
+          <div class="problem-item red-accent"><span class="problem-emoji">🤝</span><span class="problem-text ko">외국인들에게 진짜 한국을 소개하고 싶은데 방법이 없어요</span><span class="problem-text en">I want to share real Korea with foreigners, but how?</span></div>
         </div>
       </div>
     </div>
@@ -1376,40 +1078,41 @@
 <!-- ─── SOLUTION ─── -->
 <section class="section solution" id="solution">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label ko">솔루션</div>
-      <div class="section-label en">The Solution</div>
-      <h2 class="section-title">
-        <span class="ko">Localoop Korea가 모든 것을 연결합니다</span>
-        <span class="en">Localoop Korea connects it all</span>
+    <div class="sec-header reveal">
+      <div class="sec-label"><span class="dot"></span><span class="ko">솔루션</span><span class="en">THE SOLUTION</span></div>
+      <h2 class="sec-title sec-title-display">
+        <span class="ko">Localoop Korea가<br>모든 것을 연결합니다</span>
+        <span class="en">Localoop Korea<br>connects it all</span>
       </h2>
-      <p class="section-sub">
+      <p class="sec-sub" style="color:#555">
         <span class="ko">관광을 넘어, 진짜 한국 생활로. 정보에서 관계로. 한국 생활의 모든 것을 로컬하게.</span>
-        <span class="en">Beyond tourism, into real local life. From information to genuine connection. Everything for living in Korea, done locally.</span>
+        <span class="en">Beyond tourism, into real local life. From information to genuine connection.</span>
       </p>
     </div>
-
     <div class="solution-pillars">
       <div class="pillar reveal reveal-delay-1">
-        <div class="pillar-icon" style="background:#EAF5F0">🗺️</div>
+        <div class="pillar-stripe"></div>
+        <div class="pillar-icon">🗺️</div>
         <div class="pillar-title ko">생활 내비게이션</div>
         <div class="pillar-title en">Living Navigation</div>
-        <p class="pillar-desc ko">외국인 친화적 장소 찾기부터 에티켓 가이드, 결제·교통·행정 실용 정보까지. 한국 생활의 길잡이.</p>
-        <p class="pillar-desc en">Find foreigner-friendly places, learn etiquette, and get practical guides for payment, transport, and admin processes.</p>
+        <p class="pillar-desc ko">외국인 친화적 장소 찾기부터 에티켓 가이드, 결제·교통·행정 실용 정보까지.</p>
+        <p class="pillar-desc en">Find foreigner-friendly places, learn etiquette, and get practical guides for payment, transport, and admin.</p>
       </div>
       <div class="pillar reveal reveal-delay-2">
-        <div class="pillar-icon" style="background:#FFF7ED">🤝</div>
+        <div class="pillar-stripe"></div>
+        <div class="pillar-icon">🤝</div>
         <div class="pillar-title ko">로컬 커뮤니티</div>
         <div class="pillar-title en">Local Community</div>
-        <p class="pillar-desc ko">지역 기반 친구 연결, 언어 교환, 모임과 이벤트. 외국인과 한국인이 진짜 관계를 만드는 공간.</p>
-        <p class="pillar-desc en">Region-based friend connections, language exchange, and meetups. Where foreigners and Koreans build real relationships.</p>
+        <p class="pillar-desc ko">지역 기반 친구 연결, 언어 교환, 모임과 이벤트. 진짜 관계를 만드는 공간.</p>
+        <p class="pillar-desc en">Region-based friend connections, language exchange, and meetups. Real relationships.</p>
       </div>
       <div class="pillar reveal reveal-delay-3">
-        <div class="pillar-icon" style="background:#EFF6FF">🔍</div>
+        <div class="pillar-stripe"></div>
+        <div class="pillar-icon" style="color:var(--yellow)">🔍</div>
         <div class="pillar-title ko">로컬 디깅</div>
         <div class="pillar-title en">Local Digging</div>
-        <p class="pillar-desc ko">현지인만 아는 숨겨진 동네, 맛집, 골목, 그리고 진짜 한국 경험. 관광을 넘어선 생활.</p>
-        <p class="pillar-desc en">Hidden neighborhoods, local restaurants, back alleys, and real Korean experiences — the stuff only locals know.</p>
+        <p class="pillar-desc ko">현지인만 아는 숨겨진 동네, 맛집, 그리고 진짜 한국 경험. 관광을 넘어선 생활.</p>
+        <p class="pillar-desc en">Hidden neighborhoods, local restaurants, and real Korean experiences — only locals know.</p>
       </div>
     </div>
   </div>
@@ -1418,57 +1121,55 @@
 <!-- ─── FEATURES ─── -->
 <section class="section features" id="features">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label ko">핵심 기능</div>
-      <div class="section-label en">Core Features</div>
-      <h2 class="section-title">
-        <span class="ko">한국 생활에 필요한 모든 것</span>
-        <span class="en">Everything you need for life in Korea</span>
+    <div class="sec-header reveal">
+      <div class="sec-label on-yellow"><span class="dot"></span><span class="ko">핵심 기능</span><span class="en">CORE FEATURES</span></div>
+      <h2 class="sec-title sec-title-display">
+        <span class="ko">한국 생활에 필요한<br>모든 것</span>
+        <span class="en">Everything you need<br>for life in Korea</span>
       </h2>
     </div>
-
     <div class="features-grid">
       <div class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon" style="background:#EAF5F0">📍</div>
+        <div class="feature-icon">📍</div>
         <h3 class="feature-title ko">외국인 친화 장소 발견</h3>
-        <h3 class="feature-title en">Foreigner-Friendly Place Discovery</h3>
+        <h3 class="feature-title en">Foreigner-Friendly Places</h3>
         <p class="feature-desc ko">영어 메뉴, 카드 결제, 외국인 응대 가능한 식당·카페·관공서·병원을 지도에서 바로 찾아보세요.</p>
-        <p class="feature-desc en">Find restaurants, cafes, hospitals, and offices that are easy to navigate as a foreigner — with English menus, card payment, and English-speaking staff.</p>
+        <p class="feature-desc en">Find restaurants, cafes, hospitals, and offices that are easy to navigate as a foreigner.</p>
       </div>
       <div class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon" style="background:#FFF7ED">🙏</div>
+        <div class="feature-icon">🙏</div>
         <h3 class="feature-title ko">에티켓 &amp; 문화 가이드</h3>
         <h3 class="feature-title en">Etiquette &amp; Culture Guide</h3>
         <p class="feature-desc ko">한국에서 꼭 알아야 할 예절과 문화 팁. 가이드북에 없는 진짜 현지 감각을 배워보세요.</p>
-        <p class="feature-desc en">Korean customs and social norms — the stuff guidebooks skip. Learn the unwritten rules that make daily life smoother.</p>
+        <p class="feature-desc en">Korean customs and social norms — the stuff guidebooks skip.</p>
       </div>
       <div class="feature-card reveal reveal-delay-3">
-        <div class="feature-icon" style="background:#FEF3E8">🍜</div>
+        <div class="feature-icon">🍜</div>
         <h3 class="feature-title ko">현지인 추천 맛집 &amp; 메뉴</h3>
-        <h3 class="feature-title en">Local Restaurant &amp; Menu Picks</h3>
+        <h3 class="feature-title en">Local Restaurant Picks</h3>
         <p class="feature-desc ko">진짜 한국인이 즐겨 찾는 동네 맛집과 추천 메뉴. 리뷰 앱이 아닌 현지인의 직접 추천.</p>
-        <p class="feature-desc en">Authentic restaurant picks from real Koreans who eat there every week — not algorithm-ranked review aggregators.</p>
+        <p class="feature-desc en">Authentic picks from real Koreans who eat there every week — not review aggregators.</p>
       </div>
       <div class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon" style="background:#EFF6FF">👥</div>
+        <div class="feature-icon">👥</div>
         <h3 class="feature-title ko">지역 기반 친구 연결</h3>
-        <h3 class="feature-title en">Region-Based Friend Connection</h3>
+        <h3 class="feature-title en">Region-Based Connections</h3>
         <p class="feature-desc ko">내 동네의 외국인/한국인 유저와 자연스럽게 연결되세요. 공통 관심사로 더 가까워집니다.</p>
-        <p class="feature-desc en">Meet foreigners and Koreans in your neighborhood naturally, through shared places, interests, and experiences.</p>
+        <p class="feature-desc en">Meet foreigners and Koreans in your neighborhood naturally, through shared interests.</p>
       </div>
       <div class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon" style="background:#F3E8FF">📅</div>
+        <div class="feature-icon">📅</div>
         <h3 class="feature-title ko">모임 &amp; 이벤트</h3>
         <h3 class="feature-title en">Meetups &amp; Events</h3>
         <p class="feature-desc ko">근처 모임을 찾거나 직접 이벤트를 만들어보세요. 언어 교환, 문화 체험, 동네 탐방까지.</p>
-        <p class="feature-desc en">Find local meetups or create your own events. Language exchanges, cultural experiences, neighborhood explorations, and more.</p>
+        <p class="feature-desc en">Find local meetups or create your own. Language exchanges, cultural experiences, and more.</p>
       </div>
       <div class="feature-card reveal reveal-delay-3">
-        <div class="feature-icon" style="background:#DCFCE7">📖</div>
+        <div class="feature-icon">📖</div>
         <h3 class="feature-title ko">실용 생활 가이드</h3>
         <h3 class="feature-title en">Practical Living Guide</h3>
         <p class="feature-desc ko">결제, 교통, 행정 절차를 단계별로 쉽게 해결. 외국인이 한국에서 혼자도 살아갈 수 있도록.</p>
-        <p class="feature-desc en">Step-by-step help for payments, public transport, and administrative processes — so you can handle Korea on your own.</p>
+        <p class="feature-desc en">Step-by-step help for payments, transport, and admin — handle Korea on your own.</p>
       </div>
     </div>
   </div>
@@ -1477,19 +1178,13 @@
 <!-- ─── DUAL AUDIENCE ─── -->
 <section class="section dual" id="audience">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label ko">두 가지 경험</div>
-      <div class="section-label en">Two Experiences, One Platform</div>
-      <h2 class="section-title">
+    <div class="sec-header reveal">
+      <div class="sec-label"><span class="dot"></span><span class="ko">두 가지 경험</span><span class="en">TWO EXPERIENCES</span></div>
+      <h2 class="sec-title sec-title-display">
         <span class="ko">누구를 위한 서비스인가요?</span>
         <span class="en">Who is this for?</span>
       </h2>
-      <p class="section-sub">
-        <span class="ko">외국인도, 한국인도 — 각자에게 완전히 다른 가치를 드립니다.</span>
-        <span class="en">Foreigners and Koreans — each getting a completely different kind of value.</span>
-      </p>
     </div>
-
     <div class="dual-grid">
       <div class="dual-card dual-card-foreign reveal reveal-delay-1">
         <div class="dual-tag ko">외국인을 위해</div>
@@ -1497,65 +1192,24 @@
         <h3 class="dual-title ko">한국 생활이<br>더 쉬워집니다</h3>
         <h3 class="dual-title en">Korea, finally<br>on your terms</h3>
         <div class="dual-points">
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">언어 걱정 없이 한국을 즐기세요</span>
-            <span class="en">Explore Korea without the language stress</span>
-          </div>
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">현지인이 추천하는 진짜 맛집과 동네를 발견하세요</span>
-            <span class="en">Find neighborhoods and food that locals actually love</span>
-          </div>
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">한국 문화와 에티켓을 자연스럽게 배우세요</span>
-            <span class="en">Learn Korean culture and etiquette naturally</span>
-          </div>
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">비슷한 상황의 외국인 &amp; 한국 친구와 연결되세요</span>
-            <span class="en">Connect with other foreigners and Korean friends nearby</span>
-          </div>
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">결제·교통·행정, 실용 가이드로 쉽게 해결하세요</span>
-            <span class="en">Solve everyday friction with clear, practical guides</span>
-          </div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">언어 걱정 없이 한국을 즐기세요</span><span class="en">Explore Korea without the language stress</span></div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">현지인이 추천하는 진짜 맛집과 동네를 발견하세요</span><span class="en">Find neighborhoods and food that locals actually love</span></div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">한국 문화와 에티켓을 자연스럽게 배우세요</span><span class="en">Learn Korean culture and etiquette naturally</span></div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">외국인 &amp; 한국 친구와 자연스럽게 연결되세요</span><span class="en">Connect with other foreigners and Korean friends nearby</span></div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">결제·교통·행정, 실용 가이드로 쉽게 해결하세요</span><span class="en">Solve everyday friction with clear, practical guides</span></div>
         </div>
       </div>
-
       <div class="dual-card dual-card-korean reveal reveal-delay-2">
         <div class="dual-tag ko">한국인을 위해</div>
         <div class="dual-tag en">For Koreans</div>
         <h3 class="dual-title ko">세계와 연결되는<br>새로운 방법</h3>
         <h3 class="dual-title en">Connect with the world<br>through your neighborhood</h3>
         <div class="dual-points">
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">자연스럽게 외국인 친구를 만나세요</span>
-            <span class="en">Meet foreign friends in a natural, comfortable setting</span>
-          </div>
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">언어 교환과 진짜 문화 교류를 즐기세요</span>
-            <span class="en">Practice language through real friendships, not textbooks</span>
-          </div>
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">내가 사랑하는 동네와 맛집을 세계에 알려주세요</span>
-            <span class="en">Share your favorite local spots with a global audience</span>
-          </div>
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">외국인에게 진짜 한국을 소개하는 로컬 가이드가 되세요</span>
-            <span class="en">Become a local guide for foreigners discovering real Korea</span>
-          </div>
-          <div class="dual-point">
-            <div class="dual-check">✓</div>
-            <span class="ko">글로벌 감각으로 내 커뮤니티를 더 넓게 넓히세요</span>
-            <span class="en">Expand your circle with a truly global community mindset</span>
-          </div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">자연스럽게 외국인 친구를 만나세요</span><span class="en">Meet foreign friends in a natural, comfortable setting</span></div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">언어 교환과 진짜 문화 교류를 즐기세요</span><span class="en">Practice language through real friendships, not textbooks</span></div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">내가 사랑하는 동네와 맛집을 세계에 알려주세요</span><span class="en">Share your favorite local spots with a global audience</span></div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">외국인에게 진짜 한국을 소개하는 로컬 가이드가 되세요</span><span class="en">Become a local guide for foreigners discovering real Korea</span></div>
+          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">글로벌 감각으로 내 커뮤니티를 더 넓히세요</span><span class="en">Expand your circle with a global community mindset</span></div>
         </div>
       </div>
     </div>
@@ -1567,51 +1221,25 @@
   <div class="container">
     <div class="digging-inner">
       <div class="reveal">
-        <div class="section-label ko">로컬 디깅</div>
-        <div class="section-label en">Local Digging</div>
-        <h2 class="section-title">
+        <div class="sec-label"><span class="dot"></span><span class="ko">로컬 디깅</span><span class="en">LOCAL DIGGING</span></div>
+        <h2 class="sec-title sec-title-display">
           <span class="ko">로컬 디깅이란<br>무엇인가요?</span>
           <span class="en">What is<br>Local Digging?</span>
         </h2>
-        <p class="section-sub" style="margin-bottom:24px">
+        <p class="sec-sub" style="color:#444;margin-bottom:20px">
           <span class="ko">유명 관광지 너머, 진짜 한국이 있습니다. 현지인이 매일 가는 동네 맛집, 아무도 모르는 골목, 계절마다 바뀌는 로컬 문화—로컬 디깅은 그 모든 것을 직접 경험하는 방법입니다.</span>
-          <span class="en">Beyond the tourist trail, the real Korea is waiting. Local digging means exploring neighborhoods, foods, habits, and hidden gems that locals actually live and love — and connecting with the people behind them.</span>
+          <span class="en">Beyond the tourist trail, the real Korea is waiting. Local digging means exploring neighborhoods, foods, habits, and hidden gems that locals actually live and love.</span>
         </p>
-        <p class="section-sub" style="font-size:0.875rem; color:var(--c-text-3)">
-          <span class="ko">이것은 여행 앱이 아닙니다. 한국을 생활처럼 경험하는 플랫폼입니다.</span>
-          <span class="en">This is not a travel app. It's a platform for experiencing Korea like you actually live there.</span>
+        <p style="font-size:0.875rem;color:#888;font-weight:700;letter-spacing:0.04em;text-transform:uppercase">
+          <span class="ko">이것은 여행 앱이 아닙니다 ▶</span>
+          <span class="en">This is not a travel app ▶</span>
         </p>
       </div>
-
       <div class="digging-highlights">
-        <div class="dig-card reveal reveal-delay-1">
-          <div class="dig-icon">🏘️</div>
-          <h4 class="dig-title ko">숨겨진 동네 발견</h4>
-          <h4 class="dig-title en">Hidden Neighborhoods</h4>
-          <p class="dig-desc ko">관광객이 모르는 진짜 동네를 탐색하세요</p>
-          <p class="dig-desc en">Explore streets and districts tourists never find</p>
-        </div>
-        <div class="dig-card reveal reveal-delay-2">
-          <div class="dig-icon">🍱</div>
-          <h4 class="dig-title ko">로컬 맛집 &amp; 메뉴</h4>
-          <h4 class="dig-title en">Local Food &amp; Menus</h4>
-          <p class="dig-desc ko">매주 가는 현지인만 아는 맛집과 메뉴를 추천받으세요</p>
-          <p class="dig-desc en">Real recommendations from people who eat there every week</p>
-        </div>
-        <div class="dig-card reveal reveal-delay-3">
-          <div class="dig-icon">👣</div>
-          <h4 class="dig-title ko">문화 체험 &amp; 로컬 습관</h4>
-          <h4 class="dig-title en">Cultural Habits &amp; Experiences</h4>
-          <p class="dig-desc ko">한국 사람들이 실제로 즐기는 문화를 직접 경험하세요</p>
-          <p class="dig-desc en">Join the rhythms of local life, not just sightseeing</p>
-        </div>
-        <div class="dig-card reveal reveal-delay-4">
-          <div class="dig-icon">🤝</div>
-          <h4 class="dig-title ko">진짜 인연</h4>
-          <h4 class="dig-title en">Real Human Connection</h4>
-          <p class="dig-desc ko">장소를 통해 사람과 연결되는 진짜 관계를 만드세요</p>
-          <p class="dig-desc en">Find friends and community through shared places and experiences</p>
-        </div>
+        <div class="dig-card reveal reveal-delay-1"><div class="dig-icon">🏘️</div><h4 class="dig-title ko">숨겨진 동네 발견</h4><h4 class="dig-title en">Hidden Neighborhoods</h4><p class="dig-desc ko">관광객이 모르는 진짜 동네를 탐색하세요</p><p class="dig-desc en">Explore streets tourists never find</p></div>
+        <div class="dig-card reveal reveal-delay-2"><div class="dig-icon">🍱</div><h4 class="dig-title ko">로컬 맛집 &amp; 메뉴</h4><h4 class="dig-title en">Local Food &amp; Menus</h4><p class="dig-desc ko">매주 가는 현지인만 아는 맛집과 메뉴</p><p class="dig-desc en">From people who eat there every week</p></div>
+        <div class="dig-card reveal reveal-delay-3"><div class="dig-icon">👣</div><h4 class="dig-title ko">문화 체험 &amp; 로컬 습관</h4><h4 class="dig-title en">Cultural Habits</h4><p class="dig-desc ko">한국 사람들이 실제로 즐기는 문화</p><p class="dig-desc en">Join the rhythms of local life</p></div>
+        <div class="dig-card reveal reveal-delay-4"><div class="dig-icon">🤝</div><h4 class="dig-title ko">진짜 인연</h4><h4 class="dig-title en">Real Connection</h4><p class="dig-desc ko">장소를 통해 사람과 연결되는 진짜 관계</p><p class="dig-desc en">Find friends through shared places</p></div>
       </div>
     </div>
   </div>
@@ -1620,48 +1248,22 @@
 <!-- ─── WHY NOW ─── -->
 <section class="section whynow" id="whynow">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label ko">왜 지금인가</div>
-      <div class="section-label en">Why Now</div>
-      <h2 class="section-title">
+    <div class="sec-header reveal">
+      <div class="sec-label on-dark"><span class="dot"></span><span class="ko">왜 지금인가</span><span class="en">WHY NOW</span></div>
+      <h2 class="sec-title sec-title-display" style="color:var(--white)">
         <span class="ko">지금이 바로 그 순간입니다</span>
         <span class="en">The moment is now</span>
       </h2>
-      <p class="section-sub">
-        <span class="ko">한국을 찾는 외국인이 빠르게 늘고 있습니다. 그리고 그들은 더 이상 표면적인 관광에 만족하지 않습니다. 더 깊이, 더 로컬하게 한국을 경험하고 싶어합니다.</span>
-        <span class="en">More foreigners are coming to Korea than ever before. And they want more than surface tourism — they want to live it, feel it, and belong somewhere. Localoop Korea is built for exactly this shift.</span>
+      <p class="sec-sub" style="color:rgba(255,255,255,.6)">
+        <span class="ko">한국을 찾는 외국인이 빠르게 늘고 있습니다. 그리고 그들은 더 이상 표면적인 관광에 만족하지 않습니다.</span>
+        <span class="en">More foreigners are coming to Korea than ever. And they want more than surface tourism — they want to live it and belong somewhere.</span>
       </p>
     </div>
-
     <div class="whynow-grid">
-      <div class="whynow-item reveal reveal-delay-1">
-        <div class="whynow-icon">✈️</div>
-        <div class="whynow-stat ko">역대 최고</div>
-        <div class="whynow-stat en">Record high</div>
-        <div class="whynow-label ko">한국 방문 외국인 수, 사상 최고 수준</div>
-        <div class="whynow-label en">Foreign visitors &amp; residents in Korea</div>
-      </div>
-      <div class="whynow-item reveal reveal-delay-2">
-        <div class="whynow-icon">🏠</div>
-        <div class="whynow-stat ko">급증세</div>
-        <div class="whynow-stat en">Fast rising</div>
-        <div class="whynow-label ko">단순 관광 → 장기 체류 &amp; 거주 외국인 빠르게 증가</div>
-        <div class="whynow-label en">Short visits becoming long-term stays &amp; residency</div>
-      </div>
-      <div class="whynow-item reveal reveal-delay-3">
-        <div class="whynow-icon">🔍</div>
-        <div class="whynow-stat ko">폭발적</div>
-        <div class="whynow-stat en">Exploding</div>
-        <div class="whynow-label ko">로컬 경험과 진정성 있는 여행에 대한 수요</div>
-        <div class="whynow-label en">Demand for authentic local experiences over standard tourism</div>
-      </div>
-      <div class="whynow-item reveal reveal-delay-4">
-        <div class="whynow-icon">🌐</div>
-        <div class="whynow-stat ko">최고조</div>
-        <div class="whynow-stat en">Peak interest</div>
-        <div class="whynow-label ko">글로벌 교류와 언어 교환에 대한 관심</div>
-        <div class="whynow-label en">Interest in cultural exchange &amp; language learning</div>
-      </div>
+      <div class="whynow-item reveal reveal-delay-1"><div class="whynow-icon">✈️</div><div class="whynow-stat ko">역대 최고</div><div class="whynow-stat en">RECORD</div><div class="whynow-label ko">한국 방문 외국인 수, 사상 최고 수준</div><div class="whynow-label en">Foreign visitors &amp; residents in Korea</div></div>
+      <div class="whynow-item reveal reveal-delay-2"><div class="whynow-icon">🏠</div><div class="whynow-stat ko">급증세</div><div class="whynow-stat en">RISING</div><div class="whynow-label ko">단순 관광 → 장기 체류 &amp; 거주 빠르게 증가</div><div class="whynow-label en">Short visits becoming long-term stays</div></div>
+      <div class="whynow-item reveal reveal-delay-3"><div class="whynow-icon">🔍</div><div class="whynow-stat ko">폭발적</div><div class="whynow-stat en">EXPLODING</div><div class="whynow-label ko">로컬 경험과 진정성 있는 여행에 대한 수요</div><div class="whynow-label en">Demand for authentic local experiences</div></div>
+      <div class="whynow-item reveal reveal-delay-4"><div class="whynow-icon">🌐</div><div class="whynow-stat ko">최고조</div><div class="whynow-stat en">PEAK</div><div class="whynow-label ko">글로벌 교류와 언어 교환에 대한 관심</div><div class="whynow-label en">Interest in cultural &amp; language exchange</div></div>
     </div>
   </div>
 </section>
@@ -1669,52 +1271,34 @@
 <!-- ─── APP PREVIEW ─── -->
 <section class="section apppreview" id="apppreview">
   <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label ko">앱 미리보기</div>
-      <div class="section-label en">App Preview</div>
-      <h2 class="section-title">
+    <div class="sec-header reveal">
+      <div class="sec-label on-dark"><span class="dot"></span><span class="ko">앱 미리보기</span><span class="en">APP PREVIEW</span></div>
+      <h2 class="sec-title sec-title-display" style="color:var(--white)">
         <span class="ko">이런 화면으로 만나실 거예요</span>
         <span class="en">Here's what the app looks like</span>
       </h2>
-      <p class="section-sub">
-        <span class="ko">지도, 에티켓 가이드, 맛집, 모임, 프로필까지 — 한 앱에서 모두.</span>
-        <span class="en">Map, etiquette guide, local food, meetups, community — all in one app.</span>
-      </p>
     </div>
-
     <div class="screens-wrap">
-      <!-- Screen 1: Map -->
       <div class="screen-item reveal reveal-delay-1">
         <div class="mini-phone">
           <div class="mini-phone-screen">
-            <div class="mini-header">
-              <span class="ko">🗺️ 지역 탐색</span>
-              <span class="en">🗺️ Explore Map</span>
-              <span>···</span>
-            </div>
+            <div class="mini-header"><span class="ko">🗺️ 지역 탐색</span><span class="en">🗺️ Map</span><span>···</span></div>
             <div class="mini-body">
               <div class="mini-bg-map">
-                <div class="mini-pin" style="top:20%;left:30%;background:var(--c-primary)"><div class="mini-pin-inner">🍜</div></div>
-                <div class="mini-pin" style="top:45%;left:55%;background:var(--c-accent)"><div class="mini-pin-inner">☕</div></div>
-                <div class="mini-pin" style="top:60%;left:25%;background:var(--c-blue)"><div class="mini-pin-inner">📍</div></div>
-                <div class="mini-pin" style="top:30%;left:70%;background:#8B5CF6"><div class="mini-pin-inner">👥</div></div>
+                <div class="mini-pin" style="top:20%;left:30%;background:var(--yellow)"><div class="mini-pin-inner">🍜</div></div>
+                <div class="mini-pin" style="top:45%;left:55%;background:var(--red)"><div class="mini-pin-inner">☕</div></div>
+                <div class="mini-pin" style="top:60%;left:25%;background:var(--black)"><div class="mini-pin-inner" style="color:var(--yellow)">📍</div></div>
+                <div class="mini-pin" style="top:30%;left:70%;background:var(--black)"><div class="mini-pin-inner" style="color:var(--yellow)">👥</div></div>
               </div>
             </div>
           </div>
         </div>
-        <span class="screen-label ko">지도 탐색</span>
-        <span class="screen-label en">Local Map</span>
+        <span class="screen-label ko">지도 탐색</span><span class="screen-label en">Local Map</span>
       </div>
-
-      <!-- Screen 2: Etiquette -->
       <div class="screen-item reveal reveal-delay-2">
         <div class="mini-phone">
           <div class="mini-phone-screen">
-            <div class="mini-header">
-              <span class="ko">🙏 에티켓 가이드</span>
-              <span class="en">🙏 Etiquette Guide</span>
-              <span>···</span>
-            </div>
+            <div class="mini-header"><span class="ko">🙏 에티켓 가이드</span><span class="en">🙏 Etiquette</span><span>···</span></div>
             <div class="mini-body">
               <div class="mini-etiq">
                 <div class="mini-etiq-item ko">🍽️ 어른보다 먼저 식사하지 않아요</div>
@@ -1725,153 +1309,65 @@
                 <div class="mini-etiq-item en">🎁 Don't open gifts immediately</div>
                 <div class="mini-etiq-item ko">👟 실내에서는 신발을 벗어요</div>
                 <div class="mini-etiq-item en">👟 Remove shoes indoors</div>
-                <div class="mini-etiq-item ko">🤝 두 손으로 물건을 전달해요</div>
-                <div class="mini-etiq-item en">🤝 Use two hands when giving things</div>
               </div>
             </div>
           </div>
         </div>
-        <span class="screen-label ko">에티켓 가이드</span>
-        <span class="screen-label en">Etiquette Guide</span>
+        <span class="screen-label ko">에티켓 가이드</span><span class="screen-label en">Etiquette</span>
       </div>
-
-      <!-- Screen 3: Local Food -->
       <div class="screen-item reveal reveal-delay-3">
         <div class="mini-phone">
           <div class="mini-phone-screen">
-            <div class="mini-header">
-              <span class="ko">🍜 현지 맛집</span>
-              <span class="en">🍜 Local Food</span>
-              <span>···</span>
-            </div>
+            <div class="mini-header"><span class="ko">🍜 현지 맛집</span><span class="en">🍜 Local Food</span><span>···</span></div>
             <div class="mini-body">
               <div class="mini-list">
-                <div class="mini-list-item">
-                  <span class="mli-icon">🍱</span>
-                  <div>
-                    <div class="mli-text ko">을지로 솥밥 골목</div>
-                    <div class="mli-text en">Euljiro Rice Pot Alley</div>
-                    <div style="font-size:6px;color:#9CA3AF">★4.9 · 현지인 추천</div>
-                  </div>
-                </div>
-                <div class="mini-list-item">
-                  <span class="mli-icon">🥩</span>
-                  <div>
-                    <div class="mli-text ko">마포 뒷골목 고기집</div>
-                    <div class="mli-text en">Mapo Back-alley BBQ</div>
-                    <div style="font-size:6px;color:#9CA3AF">★4.8 · 숨겨진 맛집</div>
-                  </div>
-                </div>
-                <div class="mini-list-item">
-                  <span class="mli-icon">🍲</span>
-                  <div>
-                    <div class="mli-text ko">연남동 할머니 국수</div>
-                    <div class="mli-text en">Yeonnam-dong Grandma Noodles</div>
-                    <div style="font-size:6px;color:#9CA3AF">★4.7 · 30년 전통</div>
-                  </div>
-                </div>
-                <div class="mini-list-item">
-                  <span class="mli-icon">☕</span>
-                  <div>
-                    <div class="mli-text ko">성수 로스터리 카페</div>
-                    <div class="mli-text en">Seongsu Roastery Café</div>
-                    <div style="font-size:6px;color:#9CA3AF">★4.9 · 로컬 최애</div>
-                  </div>
-                </div>
+                <div class="mini-list-item"><span class="mli-icon">🍱</span><div><div class="mli-text ko">을지로 솥밥 골목</div><div class="mli-text en">Euljiro Rice Pot Alley</div><div style="font-size:6px;color:#888;font-weight:700">★4.9 · LOCAL PICK</div></div></div>
+                <div class="mini-list-item"><span class="mli-icon">🥩</span><div><div class="mli-text ko">마포 뒷골목 고기집</div><div class="mli-text en">Mapo Back-alley BBQ</div><div style="font-size:6px;color:#888;font-weight:700">★4.8 · HIDDEN GEM</div></div></div>
+                <div class="mini-list-item"><span class="mli-icon">🍲</span><div><div class="mli-text ko">연남동 할머니 국수</div><div class="mli-text en">Yeonnam Grandma Noodles</div><div style="font-size:6px;color:#888;font-weight:700">★4.7 · 30년 전통</div></div></div>
               </div>
             </div>
           </div>
         </div>
-        <span class="screen-label ko">로컬 맛집</span>
-        <span class="screen-label en">Local Food</span>
+        <span class="screen-label ko">로컬 맛집</span><span class="screen-label en">Local Food</span>
       </div>
-
-      <!-- Screen 4: Meetup -->
       <div class="screen-item reveal reveal-delay-4">
         <div class="mini-phone">
           <div class="mini-phone-screen">
-            <div class="mini-header">
-              <span class="ko">📅 모임 &amp; 이벤트</span>
-              <span class="en">📅 Meetups</span>
-              <span>···</span>
-            </div>
+            <div class="mini-header"><span class="ko">📅 모임</span><span class="en">📅 Meetups</span><span>···</span></div>
             <div class="mini-body">
               <div class="mini-meet">
-                <div class="mini-meet-card">
-                  <div class="mmc-top">
-                    <div class="mmc-avatar" style="background:var(--c-primary);color:#fff">J</div>
-                    <span class="mmc-name ko">Ji-yeon 주최</span>
-                    <span class="mmc-name en">Hosted by Ji-yeon</span>
-                  </div>
-                  <div class="mmc-title ko">🗣️ 홍대 언어 교환 모임</div>
-                  <div class="mmc-title en">🗣️ Hongdae Language Exchange</div>
-                  <div class="mmc-info ko">토요일 오후 2시 · 12명 참여 중</div>
-                  <div class="mmc-info en">Sat 2PM · 12 attending</div>
-                </div>
-                <div class="mini-meet-card">
-                  <div class="mmc-top">
-                    <div class="mmc-avatar" style="background:var(--c-accent);color:#fff">M</div>
-                    <span class="mmc-name ko">Marco 주최</span>
-                    <span class="mmc-name en">Hosted by Marco</span>
-                  </div>
-                  <div class="mmc-title ko">🍜 을지로 야시장 탐방</div>
-                  <div class="mmc-title en">🍜 Euljiro Night Market Tour</div>
-                  <div class="mmc-info ko">금요일 저녁 · 8명 참여 중</div>
-                  <div class="mmc-info en">Fri evening · 8 attending</div>
-                </div>
+                <div class="mini-meet-card"><div class="mmc-top"><div class="mmc-avatar">J</div><span class="mmc-name ko">Ji-yeon 주최</span><span class="mmc-name en">Ji-yeon</span></div><div class="mmc-title ko">🗣️ 홍대 언어 교환</div><div class="mmc-title en">🗣️ Hongdae Exchange</div><div class="mmc-info ko">토요일 · 12명</div><div class="mmc-info en">Sat · 12 going</div></div>
+                <div class="mini-meet-card"><div class="mmc-top"><div class="mmc-avatar" style="background:var(--red)">M</div><span class="mmc-name ko">Marco 주최</span><span class="mmc-name en">Marco</span></div><div class="mmc-title ko">🍜 을지로 야시장</div><div class="mmc-title en">🍜 Euljiro Night Market</div><div class="mmc-info ko">금요일 · 8명</div><div class="mmc-info en">Fri · 8 going</div></div>
               </div>
             </div>
           </div>
         </div>
-        <span class="screen-label ko">모임 &amp; 이벤트</span>
-        <span class="screen-label en">Meetups &amp; Events</span>
+        <span class="screen-label ko">모임 &amp; 이벤트</span><span class="screen-label en">Meetups</span>
       </div>
-
-      <!-- Screen 5: Profile -->
       <div class="screen-item reveal reveal-delay-5">
         <div class="mini-phone">
           <div class="mini-phone-screen">
-            <div class="mini-header">
-              <span class="ko">👤 프로필</span>
-              <span class="en">👤 Profile</span>
-              <span>···</span>
-            </div>
+            <div class="mini-header"><span class="ko">👤 프로필</span><span class="en">👤 Profile</span><span>···</span></div>
             <div class="mini-body">
               <div class="mini-profile">
                 <div class="mp-av">🧑</div>
                 <div class="mp-name ko">서울 마포구 · 외국인</div>
-                <div class="mp-name en">Mapo-gu, Seoul · Foreigner</div>
+                <div class="mp-name en">Mapo-gu · Foreigner</div>
                 <div class="mp-tags">
-                  <span class="mp-tag ko">언어교환</span>
-                  <span class="mp-tag en">Lang exchange</span>
-                  <span class="mp-tag ko">로컬 디깅</span>
-                  <span class="mp-tag en">Local digging</span>
-                  <span class="mp-tag ko">맛집 탐방</span>
-                  <span class="mp-tag en">Food explorer</span>
+                  <span class="mp-tag ko">언어교환</span><span class="mp-tag en">Exchange</span>
+                  <span class="mp-tag ko">로컬 디깅</span><span class="mp-tag en">Local dig</span>
+                  <span class="mp-tag ko">맛집</span><span class="mp-tag en">Food</span>
                 </div>
                 <div class="mp-stats">
-                  <div class="mp-stat">
-                    <div class="mp-stat-n" style="color:var(--c-primary)">24</div>
-                    <div class="mp-stat-l ko">방문 장소</div>
-                    <div class="mp-stat-l en">Places</div>
-                  </div>
-                  <div class="mp-stat">
-                    <div class="mp-stat-n" style="color:var(--c-accent)">8</div>
-                    <div class="mp-stat-l ko">모임 참여</div>
-                    <div class="mp-stat-l en">Meetups</div>
-                  </div>
-                  <div class="mp-stat">
-                    <div class="mp-stat-n" style="color:var(--c-blue)">15</div>
-                    <div class="mp-stat-l ko">친구</div>
-                    <div class="mp-stat-l en">Friends</div>
-                  </div>
+                  <div class="mp-stat"><div class="mp-stat-n">24</div><div class="mp-stat-l ko">방문</div><div class="mp-stat-l en">Places</div></div>
+                  <div class="mp-stat"><div class="mp-stat-n">8</div><div class="mp-stat-l ko">모임</div><div class="mp-stat-l en">Meets</div></div>
+                  <div class="mp-stat"><div class="mp-stat-n">15</div><div class="mp-stat-l ko">친구</div><div class="mp-stat-l en">Friends</div></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <span class="screen-label ko">커뮤니티 프로필</span>
-        <span class="screen-label en">Community Profile</span>
+        <span class="screen-label ko">커뮤니티 프로필</span><span class="screen-label en">Profile</span>
       </div>
     </div>
   </div>
@@ -1879,41 +1375,28 @@
 
 <!-- ─── CTA ─── -->
 <section class="cta-section" id="cta">
+  <div class="cta-starburst"></div>
+  <div class="cta-starburst-sm"></div>
   <div class="container">
     <div class="cta-inner reveal">
       <div class="cta-badge ko">🚀 곧 출시됩니다</div>
-      <div class="cta-badge en">🚀 Launching Soon</div>
-
+      <div class="cta-badge en">🚀 LAUNCHING SOON</div>
       <h2 class="cta-title">
-        <span class="ko">한국 생활,<br>이제 Localoop Korea에서 시작하세요</span>
-        <span class="en">Start your Korea life<br>with Localoop Korea</span>
+        <span class="ko">한국 생활,<br>지금 시작하세요</span>
+        <span class="en">Start your<br>Korea life now</span>
       </h2>
       <p class="cta-sub">
         <span class="ko">출시 알림을 받고 얼리액세스 혜택을 누리세요.<br>먼저 등록할수록 더 많은 혜택이 기다립니다.</span>
         <span class="en">Get notified at launch and unlock early access benefits.<br>The earlier you sign up, the more you get.</span>
       </p>
-
       <div class="cta-success" id="ctaSuccess">
         <span>✅</span>
         <span class="ko">등록 완료! 출시 소식을 가장 먼저 전해드릴게요 🎉</span>
         <span class="en">You're on the list! We'll reach out at launch 🎉</span>
       </div>
-
       <form class="cta-form" id="ctaForm" onsubmit="handleSubmit(event)">
-        <input
-          class="cta-input ko"
-          type="email"
-          placeholder="이메일 주소를 입력하세요"
-          required
-          autocomplete="email"
-        />
-        <input
-          class="cta-input en"
-          type="email"
-          placeholder="Enter your email address"
-          required
-          autocomplete="email"
-        />
+        <input class="cta-input ko" type="email" placeholder="이메일 주소를 입력하세요" required autocomplete="email" />
+        <input class="cta-input en" type="email" placeholder="Enter your email address" required autocomplete="email" />
         <button class="cta-submit" type="submit">
           <span class="ko">사전등록하기</span>
           <span class="en">Join the Waitlist</span>
@@ -1933,7 +1416,7 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="footer-logo">
-          <div class="footer-logo-icon">L</div>
+          <div class="footer-logo-box">L</div>
           <span>Localoop Korea</span>
         </div>
         <p class="footer-desc ko">외국인의 한국 생활을 로컬 디깅으로 바꾸는 지역 기반 생활 내비게이션·커뮤니티 플랫폼</p>
@@ -1945,48 +1428,36 @@
           </div>
         </div>
       </div>
-
       <div>
         <div class="footer-nav-title ko">서비스</div>
         <div class="footer-nav-title en">Service</div>
         <div class="footer-links">
-          <a href="#features" class="footer-link ko">핵심 기능</a>
-          <a href="#features" class="footer-link en">Features</a>
-          <a href="#apppreview" class="footer-link ko">앱 미리보기</a>
-          <a href="#apppreview" class="footer-link en">App Preview</a>
-          <a href="#audience" class="footer-link ko">서비스 소개</a>
-          <a href="#audience" class="footer-link en">About</a>
-          <a href="#cta" class="footer-link ko">사전등록</a>
-          <a href="#cta" class="footer-link en">Join Waitlist</a>
+          <a href="#features" class="footer-link ko">핵심 기능</a><a href="#features" class="footer-link en">Features</a>
+          <a href="#apppreview" class="footer-link ko">앱 미리보기</a><a href="#apppreview" class="footer-link en">App Preview</a>
+          <a href="#audience" class="footer-link ko">서비스 소개</a><a href="#audience" class="footer-link en">About</a>
+          <a href="#cta" class="footer-link ko">사전등록</a><a href="#cta" class="footer-link en">Join Waitlist</a>
         </div>
       </div>
-
       <div>
         <div class="footer-nav-title ko">더보기</div>
         <div class="footer-nav-title en">More</div>
         <div class="footer-links">
-          <a href="#" class="footer-link ko">Instagram</a>
-          <a href="#" class="footer-link en">Instagram</a>
-          <a href="#" class="footer-link ko">개인정보처리방침</a>
-          <a href="#" class="footer-link en">Privacy Policy</a>
-          <a href="#" class="footer-link ko">이용약관</a>
-          <a href="#" class="footer-link en">Terms of Service</a>
-          <a href="mailto:hello@localoop.kr" class="footer-link ko">문의하기</a>
-          <a href="mailto:hello@localoop.kr" class="footer-link en">Contact Us</a>
+          <a href="#" class="footer-link">Instagram</a>
+          <a href="#" class="footer-link ko">개인정보처리방침</a><a href="#" class="footer-link en">Privacy Policy</a>
+          <a href="#" class="footer-link ko">이용약관</a><a href="#" class="footer-link en">Terms of Service</a>
+          <a href="mailto:hello@localoop.kr" class="footer-link ko">문의하기</a><a href="mailto:hello@localoop.kr" class="footer-link en">Contact Us</a>
         </div>
       </div>
     </div>
-
     <div class="footer-bottom">
       <span>© 2025 Localoop Korea. All rights reserved.</span>
-      <span class="ko">외국인과 한국인을 잇는 플랫폼</span>
-      <span class="en">Connecting foreigners &amp; Koreans through local life</span>
+      <span class="ko" style="color:var(--yellow);font-weight:700">외국인과 한국인을 잇는 플랫폼</span>
+      <span class="en" style="color:var(--yellow);font-weight:700">Connecting foreigners &amp; Koreans through local life</span>
     </div>
   </div>
 </footer>
 
 <script>
-  /* ── Language Switcher ── */
   function setLang(lang) {
     document.documentElement.setAttribute('data-lang', lang);
     document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
@@ -1995,39 +1466,22 @@
     });
     try { localStorage.setItem('ll-lang', lang); } catch(e) {}
   }
-
-  (function initLang() {
-    try {
-      const saved = localStorage.getItem('ll-lang');
-      if (saved === 'en') setLang('en');
-    } catch(e) {}
+  (function() {
+    try { const s = localStorage.getItem('ll-lang'); if (s === 'en') setLang('en'); } catch(e) {}
   })();
 
-  /* ── Nav scroll effect ── */
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
 
-  /* ── Scroll reveal ── */
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
-  reveals.forEach(el => observer.observe(el));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  /* ── CTA Form ── */
   function handleSubmit(e) {
     e.preventDefault();
-    const form = document.getElementById('ctaForm');
-    const success = document.getElementById('ctaSuccess');
-    form.style.display = 'none';
-    success.classList.add('visible');
+    document.getElementById('ctaForm').style.display = 'none';
+    document.getElementById('ctaSuccess').classList.add('visible');
   }
 </script>
 </body>
