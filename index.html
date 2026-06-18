@@ -7,53 +7,43 @@
   <meta name="description" content="외국인의 한국 생활을 로컬 디깅으로 바꾸는 지역 기반 생활 내비게이션·커뮤니티 플랫폼" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <style>
     /* ─── Variables ─── */
     :root {
-      --font-kr: 'Noto Sans KR', sans-serif;
-      --font-en: 'Inter', sans-serif;
-
-      --yellow:      #FFD600;
-      --yellow-pale: #FFF9DF;
-      --yellow-mid:  #FFED80;
-      --red:         #E84560;
-      --red-dark:    #C73050;
-      --red-pale:    #FFF0F3;
-      --white:       #FFFFFF;
-      --gray-bg:     #F6F6F6;
-      --gray-line:   #E8E8E8;
-      --text:        #1A1A1A;
-      --text-2:      #555555;
-      --text-3:      #999999;
-      --black-deep:  #111111;
-
-      --r-sm:   6px;
-      --r-md:   12px;
-      --r-lg:   20px;
-      --r-xl:   28px;
-      --r-2xl:  40px;
-      --r-full: 9999px;
-
-      --sh-card: 0 2px 16px rgba(0,0,0,.07), 0 1px 4px rgba(0,0,0,.04);
-      --sh-md:   0 6px 28px rgba(0,0,0,.10);
-      --sh-lg:   0 12px 48px rgba(0,0,0,.12);
-
-      --max-w: 1160px;
-      --nav-h: 68px;
-      --sp: clamp(72px, 9vw, 120px);
+      --teal:       #1EC8C8;
+      --teal-dark:  #17A0A0;
+      --teal-mid:   #7DDDDD;
+      --teal-light: #D6F5F5;
+      --teal-pale:  #F0FAFA;
+      --teal-grad:  linear-gradient(135deg, #1EC8C8 0%, #0AA0B8 100%);
+      --yellow:     #FFD600;
+      --yellow-pale:#FFF9DF;
+      --orange:     #FF8A00;
+      --white:      #FFFFFF;
+      --gray:       #F5F7F8;
+      --gray-line:  #E0E8EA;
+      --text:       #1A2B2C;
+      --text-2:     #4A6467;
+      --text-3:     #9AABAC;
+      --font-kr:    'Noto Sans KR', sans-serif;
+      --font-en:    'Inter', sans-serif;
+      --max-w:      1040px;
+      --nav-h:      64px;
+      --sp:         clamp(60px, 8vw, 100px);
+      --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 22px; --r-2xl: 32px; --r-full: 9999px;
+      --sh: 0 2px 12px rgba(30,200,200,.1), 0 1px 4px rgba(0,0,0,.05);
+      --sh-md: 0 6px 24px rgba(30,200,200,.15), 0 2px 8px rgba(0,0,0,.07);
     }
-
-    /* ─── Reset ─── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-    body { font-family: var(--font-kr); background: var(--white); color: var(--text); line-height: 1.6; overflow-x: hidden; }
-    [data-lang="en"] body { font-family: var(--font-en); }
+    body { font-family: var(--font-kr); background: var(--white); color: var(--text); line-height: 1.7; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
     button { cursor: pointer; font-family: inherit; border: none; background: none; }
     ul { list-style: none; }
+    img { display: block; max-width: 100%; }
 
-    /* ─── Language ─── */
+    /* ─── Lang ─── */
     [data-lang="ko"] .en { display: none !important; }
     [data-lang="en"] .ko { display: none !important; }
 
@@ -61,624 +51,460 @@
     .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
     .section { padding: var(--sp) 0; }
 
-    /* ─── Eyebrow label ─── */
-    .eyebrow {
-      display: inline-block;
-      font-size: 0.8125rem;
-      font-weight: 700;
-      color: var(--red);
-      letter-spacing: 0.04em;
-      margin-bottom: 14px;
+    /* ─── Section headers ─── */
+    .sec-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 12px;
     }
-    .eyebrow-dot::before { content: '● '; font-size: 8px; vertical-align: middle; }
-
-    /* ─── Section titles — mixed weight style ─── */
+    .sec-eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--teal); border-radius: 2px; }
     .sec-title {
-      font-size: clamp(1.75rem, 4vw, 2.75rem);
-      font-weight: 400;
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 14px;
+      font-size: clamp(1.75rem, 4vw, 2.625rem);
+      font-weight: 800; line-height: 1.22; letter-spacing: -0.025em;
+      color: var(--text); margin-bottom: 14px;
     }
-    .sec-title strong { font-weight: 800; }
-    .sec-title-lg {
-      font-size: clamp(2.25rem, 5vw, 3.5rem);
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: -0.025em;
-    }
-    .sec-title-lg strong { font-weight: 800; }
+    .sec-title .point { color: var(--teal); }
+    .sec-title .point-y { color: var(--yellow); }
     .sec-sub {
-      font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
-      color: var(--text-2);
-      line-height: 1.75;
-      max-width: 560px;
+      font-size: clamp(.9rem, 1.8vw, 1.0625rem);
+      color: var(--text-2); line-height: 1.75; max-width: 560px;
     }
-    .sec-header { text-align: center; margin-bottom: clamp(40px, 6vw, 64px); }
+    .sec-header { text-align: center; margin-bottom: clamp(36px, 5vw, 58px); }
+    .sec-header .sec-eyebrow { display: block; }
     .sec-header .sec-sub { margin: 0 auto; }
-    .sec-header .eyebrow { display: block; }
 
     /* ─── Buttons ─── */
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 0.9375rem;
-      font-weight: 700;
-      border-radius: var(--r-full);
-      padding: 13px 30px;
-      transition: all 0.2s ease;
-      white-space: nowrap;
-      border: 2px solid transparent;
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      font-size: .9375rem; font-weight: 700; border-radius: var(--r-full);
+      padding: 13px 30px; transition: all .2s; white-space: nowrap; border: 2px solid transparent;
+      font-family: inherit;
     }
-    .btn-red {
-      background: var(--red);
-      color: var(--white);
-      border-color: var(--red);
-    }
-    .btn-red:hover { background: var(--red-dark); border-color: var(--red-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232,69,96,.3); }
-    .btn-yellow {
-      background: var(--yellow);
-      color: var(--text);
-      border-color: var(--yellow);
-    }
-    .btn-yellow:hover { background: #F5C800; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,214,0,.4); }
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border-color: var(--gray-line);
-    }
-    .btn-outline:hover { border-color: var(--text); }
-    .btn-outline-white {
-      background: transparent;
-      color: var(--white);
-      border-color: rgba(255,255,255,.5);
-    }
-    .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+    .btn-teal { background: var(--teal); color: var(--white); border-color: var(--teal); }
+    .btn-teal:hover { background: var(--teal-dark); border-color: var(--teal-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,200,200,.4); }
+    .btn-yellow { background: var(--yellow); color: var(--text); border-color: var(--yellow); }
+    .btn-yellow:hover { background: #F5C800; transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.6); }
+    .btn-outline:hover { background: rgba(255,255,255,.15); border-color: var(--white); }
+    .btn-outline-dark { background: transparent; color: var(--text); border-color: var(--gray-line); }
+    .btn-outline-dark:hover { border-color: var(--teal); color: var(--teal); }
     .btn-lg { padding: 15px 36px; font-size: 1rem; }
+
+    /* ─── Info card / TIP box pattern ─── */
+    .info-card {
+      background: var(--white); border-radius: var(--r-lg);
+      border: 1.5px solid var(--gray-line); padding: 22px 20px;
+      box-shadow: var(--sh); transition: box-shadow .2s, transform .2s;
+    }
+    .info-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+    .info-card-teal { background: var(--teal-pale); border-color: var(--teal-light); }
+    .tip-box {
+      background: var(--teal); border-radius: var(--r-md); padding: 14px 18px;
+      display: flex; align-items: flex-start; gap: 10px; color: var(--white);
+    }
+    .tip-badge {
+      background: var(--white); color: var(--teal);
+      font-size: .7rem; font-weight: 800; letter-spacing: .06em;
+      padding: 3px 8px; border-radius: var(--r-sm); flex-shrink: 0; line-height: 1.6;
+    }
+    .tip-text { font-size: .875rem; line-height: 1.6; color: rgba(255,255,255,.92); }
+    .num-badge {
+      width: 26px; height: 26px; border-radius: 50%; background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 800; color: var(--white); flex-shrink: 0;
+    }
+    .teal-list { display: flex; flex-direction: column; gap: 11px; }
+    .teal-list-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: .9375rem; color: var(--text-2); line-height: 1.55;
+    }
+    .teal-check {
+      width: 20px; height: 20px; border-radius: 50%; background: var(--teal-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--teal); font-weight: 800; flex-shrink: 0; margin-top: 2px;
+    }
 
     /* ─── NAV ─── */
     .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      height: var(--nav-h);
-      background: rgba(255,255,255,.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color .25s, box-shadow .25s;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h); background: rgba(255,255,255,.96);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent; transition: border-color .25s, box-shadow .25s;
     }
-    .nav.scrolled { border-bottom-color: var(--gray-line); box-shadow: 0 2px 12px rgba(0,0,0,.06); }
-    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .nav-logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 1.0625rem; color: var(--text); flex-shrink: 0; }
-    .nav-logo-circle {
-      width: 32px; height: 32px;
-      background: var(--yellow);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 900; font-size: 14px; color: var(--text);
+    .nav.scrolled { border-bottom-color: var(--gray-line); box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 1rem; color: var(--text); }
+    .logo-mark {
+      width: 33px; height: 33px; border-radius: 10px;
+      background: var(--teal-grad); display: flex; align-items: center;
+      justify-content: center; font-size: 15px; color: var(--white); font-weight: 900;
     }
     .nav-right { display: flex; align-items: center; gap: 10px; }
-    .lang-switcher {
-      display: flex; align-items: center;
-      background: var(--gray-bg);
-      border-radius: var(--r-full);
-      padding: 3px;
-      border: 1px solid var(--gray-line);
+    .lang-sw {
+      display: flex; background: var(--gray); border-radius: var(--r-full);
+      padding: 3px; border: 1px solid var(--gray-line);
     }
     .lang-btn {
-      font-size: 0.8rem; font-weight: 600;
-      color: var(--text-3); padding: 5px 13px;
-      border-radius: var(--r-full);
-      transition: all .18s;
+      font-size: .8rem; font-weight: 600; color: var(--text-3);
+      padding: 5px 13px; border-radius: var(--r-full); transition: all .18s;
       font-family: var(--font-en);
     }
-    .lang-btn.active { background: var(--white); color: var(--text); font-weight: 700; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
+    .lang-btn.active { background: var(--white); color: var(--teal); font-weight: 700; box-shadow: 0 1px 5px rgba(0,0,0,.1); }
     .nav-cta { display: none; }
-    @media (min-width: 600px) { .nav-cta { display: inline-flex; } }
+    @media (min-width: 560px) { .nav-cta { display: inline-flex; } }
 
     /* ─── HERO ─── */
     .hero {
-      padding-top: calc(var(--nav-h) + clamp(40px,6vw,80px));
-      padding-bottom: 0;
-      background: var(--yellow);
-      position: relative;
-      overflow: hidden;
+      padding-top: var(--nav-h);
+      background: var(--teal-grad);
+      position: relative; overflow: hidden;
     }
-    /* Big red circle — left decoration */
-    .hero-circle-red {
-      position: absolute;
-      width: clamp(180px, 22vw, 280px);
-      height: clamp(180px, 22vw, 280px);
-      background: var(--red);
-      border-radius: 50%;
-      top: clamp(60px, 8vw, 100px);
-      left: clamp(-80px, -6vw, -50px);
-      pointer-events: none;
+    /* Decorative circles */
+    .hero::before {
+      content: '';
+      position: absolute; top: -100px; right: -120px;
+      width: 480px; height: 480px; border-radius: 50%;
+      background: rgba(255,255,255,.09); pointer-events: none;
     }
-    /* Big yellow outline circle — right decoration */
-    .hero-circle-yellow {
-      position: absolute;
-      width: clamp(220px, 28vw, 380px);
-      height: clamp(220px, 28vw, 380px);
-      border-radius: 50%;
-      background: rgba(255,255,255,.18);
-      top: -60px;
-      right: -80px;
-      pointer-events: none;
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 60px; left: -80px;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: rgba(255,255,255,.07); pointer-events: none;
     }
     .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      align-items: flex-end;
-      position: relative;
-      z-index: 1;
+      display: grid; grid-template-columns: 1fr;
+      align-items: end; gap: 32px; padding: clamp(40px,6vw,72px) 0 0;
+      position: relative; z-index: 1;
     }
-    @media (min-width: 900px) { .hero-inner { grid-template-columns: 1fr 1fr; gap: 0; } }
-    .hero-content { padding-bottom: clamp(40px, 6vw, 72px); }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--text);
-      color: var(--yellow);
-      font-size: 0.8125rem;
-      font-weight: 700;
-      padding: 5px 14px;
-      border-radius: var(--r-full);
-      margin-bottom: 22px;
-      letter-spacing: 0.04em;
+    @media (min-width: 880px) { .hero-inner { grid-template-columns: 1fr 1fr; gap: 0; } }
+    .hero-content { padding-bottom: clamp(40px,6vw,72px); }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.2); backdrop-filter: blur(6px);
+      color: var(--white); font-size: .8125rem; font-weight: 700;
+      padding: 6px 14px; border-radius: var(--r-full); margin-bottom: 22px;
+      border: 1px solid rgba(255,255,255,.3);
     }
-    .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse 2s infinite; flex-shrink: 0; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.6)} }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); animation: pulse 2s infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.7)} }
     .hero-title {
-      font-size: clamp(2.5rem, 6.5vw, 4.5rem);
-      font-weight: 400;
-      line-height: 1.18;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 20px;
+      font-size: clamp(2.375rem, 6.5vw, 4.25rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.18; letter-spacing: -0.03em; margin-bottom: 18px;
     }
-    .hero-title strong { font-weight: 800; }
-    .hero-title em { font-style: normal; color: var(--red); font-weight: 800; }
+    .hero-title em { font-style: normal; color: var(--yellow); }
     .hero-sub {
-      font-size: clamp(0.9375rem, 1.8vw, 1.0625rem);
-      color: rgba(26,26,26,.72);
-      line-height: 1.75;
-      margin-bottom: 32px;
-      max-width: 480px;
+      font-size: clamp(.9375rem, 1.8vw, 1.0625rem);
+      color: rgba(255,255,255,.82); line-height: 1.75;
+      margin-bottom: 30px; max-width: 480px;
     }
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .hero-note { font-size: 0.8125rem; color: rgba(26,26,26,.55); font-weight: 500; }
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+    /* wave bottom */
+    .hero-wave { display: block; width: 100%; height: 52px; margin-bottom: -1px; }
 
-    /* Hero visual */
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      position: relative;
-      padding: 0 140px;
+    /* Hero phone */
+    .hero-visual-wrap {
+      display: flex; align-items: flex-end; justify-content: center;
+      position: relative; padding: 0 80px;
       overflow: visible;
     }
-    @media (max-width: 1060px) { .hero-visual { padding: 0 80px; } }
-    @media (max-width: 900px)  { .hero-visual { padding: 20px 0 0; } }
-
-    /* Phone */
-    .phone-wrap { position: relative; width: 260px; margin: 0 auto; }
-    .phone {
-      width: 260px; height: 520px;
-      background: var(--text);
-      border-radius: 40px;
-      padding: 10px;
-      box-shadow: var(--sh-lg), 0 0 0 1px rgba(255,255,255,.08) inset;
+    @media (max-width: 880px) { .hero-visual-wrap { padding: 0 20px; } }
+    .hero-phone {
+      width: 230px; height: 458px; background: #0D1F20;
+      border-radius: 36px; padding: 8px; box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.06) inset;
+      flex-shrink: 0;
     }
     .phone-screen {
-      width: 100%; height: 100%;
-      background: #F8FAFB;
-      border-radius: 32px;
-      overflow: hidden;
+      width: 100%; height: 100%; background: #F2FAFA;
+      border-radius: 30px; overflow: hidden; display: flex; flex-direction: column;
+    }
+    .ph-notch {
+      position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+      width: 70px; height: 22px; background: #0D1F20; border-radius: 0 0 12px 12px; z-index: 2;
+    }
+    .ph-head {
+      background: var(--white); padding: 28px 11px 9px;
+      display: flex; align-items: center; gap: 7px;
+      border-bottom: 1px solid #EBF4F4; position: relative;
+    }
+    .ph-search { flex: 1; background: var(--teal-pale); border-radius: var(--r-full); padding: 6px 10px; font-size: 9px; color: var(--text-3); display: flex; align-items: center; gap: 4px; }
+    .ph-av { width: 24px; height: 24px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--white); font-weight: 800; }
+    .ph-map { height: 160px; background: linear-gradient(150deg,#C8EEE8,#A8DDDC); position: relative; overflow: hidden; }
+    .ph-map-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(30,200,200,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(30,200,200,.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .ph-pin { position: absolute; display: flex; flex-direction: column; align-items: center; }
+    .ph-pin-dot { width: 20px; height: 20px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,.2); }
+    .ph-pin-dot span { transform: rotate(45deg); font-size: 10px; }
+    .ph-pin-lbl { background: var(--white); font-size: 7px; font-weight: 700; padding: 2px 5px; border-radius: 3px; margin-top: 2px; box-shadow: 0 1px 4px rgba(0,0,0,.12); white-space: nowrap; }
+    .ph-list { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .ph-card { background: var(--white); border-radius: 8px; padding: 7px 9px; display: flex; align-items: center; gap: 7px; box-shadow: 0 1px 4px rgba(30,200,200,.1); }
+    .ph-ic { width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+    .ph-nm { font-size: 9px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .ph-mt { font-size: 8px; color: var(--text-3); }
+    .ph-badge { font-size: 7px; font-weight: 700; padding: 2px 6px; border-radius: var(--r-full); flex-shrink: 0; }
+    .ph-bottom {
+      margin-top: auto; background: var(--white);
+      border-top: 1px solid #EBF4F4;
+      display: flex; justify-content: space-around; padding: 8px 0 11px;
+    }
+    .ph-tab { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 7px; color: var(--text-3); }
+    .ph-tab.on { color: var(--teal); }
+    .ph-tab-ic { font-size: 16px; }
+
+    /* float cards */
+    .flt {
+      position: absolute;
+      background: var(--white); border-radius: 12px; padding: 9px 13px;
+      display: flex; align-items: center; gap: 9px;
+      box-shadow: 0 6px 24px rgba(0,0,0,.13); min-width: 152px; white-space: nowrap;
+      animation: floaty 4s ease-in-out infinite; z-index: 20;
+    }
+    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+    .flt-stripe { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 12px 12px 0 0; background: var(--teal); }
+    .flt-ic { font-size: 19px; flex-shrink: 0; }
+    .flt-lbl { display: flex; flex-direction: column; gap: 1px; }
+    .flt-t { font-size: 11px; font-weight: 700; color: var(--text); }
+    .flt-s { font-size: 9px; color: var(--text-3); }
+    .flt-a { top: 48px;  right: -140px; animation-delay: 0s; }
+    .flt-b { bottom: 80px; left: -150px; animation-delay: 1.6s; }
+    .flt-c { top: 210px; right: -140px; animation-delay: 3s; }
+    @media (max-width: 1060px) { .flt-a{right:-72px} .flt-b{left:-72px} .flt-c{right:-72px} }
+    @media (max-width: 880px)  { .flt-a,.flt-b,.flt-c{display:none} }
+
+    /* ─── HOW IT WORKS (roadmap) ─── */
+    .howto { background: var(--teal-pale); }
+    .roadmap { display: flex; flex-direction: column; gap: 0; max-width: 680px; margin: 0 auto; }
+    .rm-step {
+      display: grid; grid-template-columns: 52px 1fr; gap: 0;
       position: relative;
     }
-    .phone-notch {
-      position: absolute; top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 80px; height: 26px;
-      background: var(--text);
-      border-radius: 0 0 16px 16px;
-      z-index: 2;
+    .rm-left { display: flex; flex-direction: column; align-items: center; }
+    .rm-circle {
+      width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+      background: var(--teal-grad); display: flex; align-items: center;
+      justify-content: center; font-size: 1.25rem; box-shadow: 0 4px 14px rgba(30,200,200,.4);
+      position: relative; z-index: 1;
     }
-    .pscreen-header {
-      padding: 34px 13px 10px;
-      background: var(--white);
-      display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid var(--gray-line);
+    .rm-line {
+      width: 2px; flex: 1; min-height: 24px;
+      background: repeating-linear-gradient(to bottom, var(--teal) 0, var(--teal) 5px, transparent 5px, transparent 9px);
+      margin: 0 auto;
     }
-    .pscreen-search {
-      flex: 1; background: var(--gray-bg); border-radius: var(--r-full);
-      padding: 7px 12px; font-size: 11px; color: var(--text-3);
-      display: flex; align-items: center; gap: 5px; margin-right: 8px;
+    .rm-step:last-child .rm-line { display: none; }
+    .rm-content {
+      padding: 0 0 28px 20px; padding-top: 10px;
     }
-    .pscreen-avatar {
-      width: 28px; height: 28px; background: var(--yellow); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: var(--text); font-weight: 800;
+    .rm-tag {
+      font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 5px;
     }
-    .pscreen-map {
-      height: 180px;
-      background: linear-gradient(145deg, #EAF5EF 0%, #D4EDDF 100%);
-      position: relative; overflow: hidden;
+    .rm-title { font-size: 1.0625rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .rm-desc  { font-size: .875rem; color: var(--text-2); line-height: 1.65; }
+    .rm-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .rm-chip {
+      font-size: .75rem; font-weight: 700; padding: 3px 10px;
+      border-radius: var(--r-full); background: var(--teal-light); color: var(--teal);
     }
-    .map-grid {
-      position: absolute; inset: 0;
-      background-image: linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px);
-      background-size: 22px 22px;
-    }
-    .map-road-h { position: absolute; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.75); }
-    .map-road-v { position: absolute; top: 0; bottom: 0; width: 3px; background: rgba(255,255,255,.75); }
-    .map-pin { position: absolute; display: flex; flex-direction: column; align-items: center; }
-    .map-pin-dot {
-      width: 22px; height: 22px;
-      border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,.2);
-    }
-    .map-pin-dot span { transform: rotate(45deg); font-size: 11px; }
-    .map-pin-label {
-      background: var(--white); color: var(--text);
-      font-size: 8px; font-weight: 700;
-      padding: 2px 6px; border-radius: 4px; margin-top: 3px;
-      white-space: nowrap; box-shadow: 0 1px 4px rgba(0,0,0,.12);
-    }
-    .pscreen-places { padding: 10px; display: flex; flex-direction: column; gap: 7px; }
-    .place-card-mini {
-      background: var(--white); border-radius: 8px; padding: 8px 10px;
-      display: flex; align-items: center; gap: 8px;
-      box-shadow: var(--sh-card);
-    }
-    .place-icon-mini { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-    .place-info-mini { flex: 1; min-width: 0; }
-    .place-name-mini { font-size: 10px; font-weight: 700; color: var(--text); }
-    .place-meta-mini { font-size: 9px; color: var(--text-3); }
-    .place-badge-mini { font-size: 8px; padding: 2px 7px; border-radius: var(--r-full); font-weight: 700; }
-    .pscreen-nav {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      background: var(--white); border-top: 1px solid var(--gray-line);
-      display: flex; align-items: center; justify-content: space-around;
-      padding: 9px 0 13px;
-    }
-    .pnav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 8px; color: var(--text-3); }
-    .pnav-item.active { color: var(--red); }
-    .pnav-icon { font-size: 17px; }
 
-    /* Float cards */
-    .float-card {
-      position: absolute;
-      background: var(--white);
-      border-radius: 14px; padding: 10px 14px;
-      display: flex; align-items: center; gap: 10px;
-      white-space: nowrap;
-      animation: float-y 4s ease-in-out infinite;
-      z-index: 20; min-width: 168px;
-      box-shadow: var(--sh-md);
+    /* ─── AUDIENCE CHOICE (선택 1 / 2 style) ─── */
+    .audience { background: var(--white); }
+    .aud-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 720px) { .aud-grid { grid-template-columns: 1fr 1fr; } }
+    .aud-box { border-radius: var(--r-2xl); overflow: hidden; box-shadow: var(--sh-md); }
+    .aud-head {
+      padding: 22px 28px; display: flex; align-items: center; gap: 12px;
     }
-    @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    .fc-1 { top: 50px;  right: -148px; animation-delay: 0s; }
-    .fc-2 { bottom: 90px; left: -158px; animation-delay: 1.4s; }
-    .fc-3 { top: 220px; right: -148px; animation-delay: 2.8s; }
-    @media (max-width: 1060px) { .fc-1{right:-82px} .fc-2{left:-82px} .fc-3{right:-82px} }
-    @media (max-width: 900px)  { .fc-1,.fc-2,.fc-3{display:none} }
-    .fc-stripe { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 14px 14px 0 0; background: var(--yellow); }
-    .fc-icon { font-size: 20px; flex-shrink: 0; }
-    .fc-label { display: flex; flex-direction: column; gap: 2px; }
-    .fc-text { font-weight: 700; color: var(--text); font-size: 12px; line-height: 1.3; }
-    .fc-sub  { font-size: 10px; color: var(--text-3); line-height: 1.3; }
-
-    /* ─── PROBLEM ─── */
-    .problem { background: var(--white); }
-    .problem-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    @media (min-width: 768px) { .problem-grid { grid-template-columns: 1fr 1fr; } }
-    .problem-group {
-      background: var(--gray-bg);
-      border-radius: var(--r-2xl); padding: 36px 32px;
-    }
-    .problem-group-head {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 22px;
-    }
-    .prob-tag {
-      font-size: 0.75rem; font-weight: 700; padding: 4px 12px;
-      border-radius: var(--r-full); letter-spacing: .03em;
-    }
-    .prob-tag-f { background: var(--yellow); color: var(--text); }
-    .prob-tag-k { background: var(--red); color: var(--white); }
-    .prob-group-title { font-size: 1.0625rem; font-weight: 700; color: var(--text); }
-    .problem-items { display: flex; flex-direction: column; gap: 9px; }
-    .problem-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      background: var(--white); border-radius: var(--r-md); padding: 12px 14px;
-      box-shadow: 0 1px 4px rgba(0,0,0,.05);
-      border-left: 3px solid var(--yellow);
-    }
-    .problem-item.red-l { border-left-color: var(--red); }
-    .prob-emoji { font-size: 17px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
-    .prob-text { font-size: 0.875rem; color: var(--text-2); line-height: 1.55; }
-
-    /* ─── SOLUTION ─── */
-    .solution { background: var(--gray-bg); }
-    .solution-pillars { display: grid; grid-template-columns: 1fr; gap: 18px; }
-    @media (min-width: 640px) { .solution-pillars { grid-template-columns: repeat(3, 1fr); } }
-    .pillar {
-      background: var(--white); border-radius: var(--r-xl);
-      padding: 32px 26px; text-align: center;
-      box-shadow: var(--sh-card);
-      transition: transform .2s, box-shadow .2s;
-      overflow: hidden; position: relative;
-    }
-    .pillar:hover { transform: translateY(-4px); box-shadow: var(--sh-md); }
-    .pillar-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; }
-    .pillar:nth-child(1) .pillar-top-bar { background: var(--yellow); }
-    .pillar:nth-child(2) .pillar-top-bar { background: var(--red); }
-    .pillar:nth-child(3) .pillar-top-bar { background: var(--text); }
-    .pillar-icon {
-      width: 60px; height: 60px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; margin: 0 auto 18px;
-    }
-    .pillar:nth-child(1) .pillar-icon { background: var(--yellow-pale); }
-    .pillar:nth-child(2) .pillar-icon { background: var(--red-pale); }
-    .pillar:nth-child(3) .pillar-icon { background: var(--gray-bg); }
-    .pillar-title { font-size: 1.0625rem; font-weight: 700; margin-bottom: 10px; }
-    .pillar-desc { font-size: 0.875rem; color: var(--text-2); line-height: 1.65; }
+    .aud-box-f .aud-head { background: var(--teal-grad); }
+    .aud-box-k .aud-head { background: linear-gradient(135deg,#FF8A00,#F5C800); }
+    .aud-head-icon { font-size: 1.625rem; }
+    .aud-head-label { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+    .aud-head-title { font-size: 1.1875rem; font-weight: 800; color: var(--white); line-height: 1.3; }
+    .aud-body { background: var(--white); padding: 22px 28px; }
+    .aud-points { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .aud-point { display: flex; align-items: flex-start; gap: 10px; font-size: .9rem; color: var(--text-2); line-height: 1.5; }
+    .aud-tick { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+    .aud-box-f .aud-tick { background: var(--teal-light); color: var(--teal); }
+    .aud-box-k .aud-tick { background: var(--yellow-pale); color: var(--orange); }
 
     /* ─── FEATURES ─── */
-    .features { background: var(--white); }
-    .features-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 640px)  { .features-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1024px) { .features-grid { grid-template-columns: repeat(3, 1fr); } }
-    .feature-card {
-      border-radius: var(--r-lg); padding: 26px 22px;
-      background: var(--gray-bg);
-      transition: transform .2s, box-shadow .2s;
+    .features { background: var(--gray); }
+    .feat-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 600px)  { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .feat-grid { grid-template-columns: repeat(3, 1fr); } }
+    .feat-card {
+      background: var(--white); border-radius: var(--r-xl);
+      overflow: hidden; box-shadow: var(--sh);
+      transition: transform .2s, box-shadow .2s; display: flex; flex-direction: column;
     }
-    .feature-card:hover { transform: translateY(-3px); box-shadow: var(--sh-card); background: var(--white); }
-    .feature-icon {
-      width: 46px; height: 46px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 21px; margin-bottom: 14px;
-      background: var(--white);
-      box-shadow: 0 1px 6px rgba(0,0,0,.07);
+    .feat-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
+    .feat-img {
+      height: 110px; display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; flex-shrink: 0;
     }
-    .feature-title { font-size: 0.9375rem; font-weight: 700; margin-bottom: 8px; }
-    .feature-desc  { font-size: 0.875rem; color: var(--text-2); line-height: 1.62; }
-
-    /* ─── DUAL AUDIENCE ─── */
-    .dual { background: var(--gray-bg); }
-    .dual-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    @media (min-width: 768px) { .dual-grid { grid-template-columns: 1fr 1fr; } }
-    .dual-card {
-      border-radius: var(--r-2xl);
-      padding: clamp(32px,5vw,52px);
-      position: relative; overflow: hidden;
-    }
-    .dual-card-foreign { background: var(--yellow); }
-    .dual-card-korean  { background: var(--red); }
-    /* decorative circle */
-    .dual-card::after {
-      content: '';
-      position: absolute; bottom: -60px; right: -60px;
-      width: 200px; height: 200px; border-radius: 50%;
-      pointer-events: none;
-    }
-    .dual-card-foreign::after { background: rgba(255,255,255,.25); }
-    .dual-card-korean::after  { background: rgba(255,255,255,.15); }
-    .dual-tag {
-      display: inline-block; font-size: 0.75rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase;
-      padding: 5px 13px; border-radius: var(--r-full); margin-bottom: 14px;
-    }
-    .dual-card-foreign .dual-tag { background: var(--text); color: var(--yellow); }
-    .dual-card-korean  .dual-tag { background: rgba(255,255,255,.25); color: var(--white); }
-    .dual-title {
-      font-size: clamp(1.625rem, 3.5vw, 2.375rem);
-      font-weight: 400; line-height: 1.25; margin-bottom: 22px;
-    }
-    .dual-title strong { font-weight: 800; }
-    .dual-card-foreign .dual-title { color: var(--text); }
-    .dual-card-korean  .dual-title { color: var(--white); }
-    .dual-points { display: flex; flex-direction: column; gap: 11px; position: relative; z-index: 1; }
-    .dual-point { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9375rem; line-height: 1.5; }
-    .dual-card-foreign .dual-point { color: rgba(26,26,26,.85); }
-    .dual-card-korean  .dual-point { color: rgba(255,255,255,.9); }
-    .dual-check {
-      width: 18px; height: 18px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 10px; flex-shrink: 0; margin-top: 2px; font-weight: 700;
-    }
-    .dual-card-foreign .dual-check { background: var(--text); color: var(--yellow); }
-    .dual-card-korean  .dual-check { background: rgba(255,255,255,.3); color: var(--white); }
+    .feat-body { padding: 18px 18px 20px; flex: 1; }
+    .feat-tag { font-size: .7rem; font-weight: 700; color: var(--teal); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 7px; }
+    .feat-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
+    .feat-desc  { font-size: .875rem; color: var(--text-2); line-height: 1.65; }
 
     /* ─── LOCAL DIGGING ─── */
     .digging { background: var(--white); }
-    .digging-inner { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
-    @media (min-width: 900px) { .digging-inner { grid-template-columns: 1fr 1fr; gap: 72px; } }
-    .digging-visual-area { position: relative; }
-    /* big yellow circle decoration */
-    .digging-circle {
-      width: clamp(220px, 30vw, 360px);
-      height: clamp(220px, 30vw, 360px);
-      border-radius: 50%;
-      background: var(--yellow-pale);
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 0;
+    .dig-inner { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
+    @media (min-width: 860px) { .dig-inner { grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; } }
+    .dig-photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .dig-photo {
+      border-radius: var(--r-lg); overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
     }
-    .digging-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; position: relative; z-index: 1; }
-    .dig-card {
-      background: var(--white); border-radius: var(--r-lg); padding: 22px 18px;
-      box-shadow: var(--sh-card);
-      transition: transform .2s, box-shadow .2s;
+    .dig-photo:first-child { grid-column: 1 / -1; height: 170px; }
+    .dig-photo:not(:first-child) { height: 130px; }
+    .dig-labels { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .dig-label { display: flex; align-items: flex-start; gap: 10px; font-size: .9375rem; color: var(--text-2); }
+    .dig-dot { width: 22px; height: 22px; border-radius: 50%; background: var(--teal-light); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ─── ETIQUETTE (rules) ─── */
+    .etiquette { background: var(--teal-pale); }
+    .etiq-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    @media (min-width: 600px) { .etiq-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .etiq-grid { grid-template-columns: repeat(3, 1fr); } }
+    .etiq-card {
+      background: var(--white); border-radius: var(--r-lg); padding: 20px 18px;
+      border-top: 4px solid var(--teal); box-shadow: var(--sh);
+      transition: transform .2s;
     }
-    .dig-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); }
-    .dig-icon { font-size: 26px; margin-bottom: 10px; }
-    .dig-title { font-size: 0.9375rem; font-weight: 700; margin-bottom: 6px; }
-    .dig-desc  { font-size: 0.8125rem; color: var(--text-2); line-height: 1.55; }
+    .etiq-card:hover { transform: translateY(-2px); }
+    .etiq-icon { font-size: 1.625rem; margin-bottom: 10px; }
+    .etiq-title { font-size: .9375rem; font-weight: 800; color: var(--text); margin-bottom: 7px; }
+    .etiq-desc  { font-size: .8125rem; color: var(--text-2); line-height: 1.6; }
 
     /* ─── WHY NOW ─── */
-    .whynow {
-      background: var(--yellow);
-      position: relative; overflow: hidden;
+    .whynow { background: var(--white); }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    @media (min-width: 720px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+    .stat-card {
+      background: var(--teal-pale); border-radius: var(--r-xl); padding: 26px 20px; text-align: center;
+      border: 1.5px solid var(--teal-light); transition: background .2s, transform .2s;
     }
-    .whynow-circle {
-      position: absolute; border-radius: 50%;
-      background: rgba(255,255,255,.2);
-      pointer-events: none;
-    }
-    .wc1 { width: 400px; height: 400px; top: -150px; right: -100px; }
-    .wc2 { width: 250px; height: 250px; bottom: -80px; left: -50px; }
-    .whynow .sec-title, .whynow .sec-title-lg { color: var(--text); }
-    .whynow .eyebrow { color: var(--red); }
-    .whynow-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    @media (min-width: 768px) { .whynow-grid { grid-template-columns: repeat(4, 1fr); } }
-    .whynow-item {
-      background: rgba(255,255,255,.55);
-      backdrop-filter: blur(4px);
-      border-radius: var(--r-xl); padding: 24px 20px; text-align: center;
-      transition: background .2s, transform .2s;
-    }
-    .whynow-item:hover { background: rgba(255,255,255,.8); transform: translateY(-3px); }
-    .whynow-icon { font-size: 28px; margin-bottom: 12px; }
-    .whynow-stat { font-size: 1.375rem; font-weight: 800; color: var(--text); margin-bottom: 6px; line-height: 1.2; }
-    .whynow-label { font-size: 0.8125rem; color: var(--text-2); line-height: 1.4; font-weight: 500; }
+    .stat-card:hover { background: var(--teal-light); transform: translateY(-2px); }
+    .stat-icon { font-size: 1.75rem; margin-bottom: 10px; }
+    .stat-num { font-size: 1.25rem; font-weight: 800; color: var(--teal); margin-bottom: 5px; line-height: 1.2; }
+    .stat-label { font-size: .8125rem; color: var(--text-2); line-height: 1.45; font-weight: 600; }
+    /* tips section inside whynow */
+    .tips-wrap { display: flex; flex-direction: column; gap: 12px; margin-top: clamp(32px,4vw,48px); }
+    @media (min-width: 680px) { .tips-wrap { flex-direction: row; } }
 
     /* ─── APP PREVIEW ─── */
-    .apppreview { background: var(--gray-bg); }
-    .screens-wrap { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; padding-top: 8px; }
-    .screen-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .screen-label { font-size: 0.75rem; color: var(--text-3); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
-    .mini-phone {
-      width: 148px; height: 296px; background: var(--text);
-      border-radius: 24px; padding: 6px;
-      box-shadow: var(--sh-lg);
-    }
-    .mini-phone-screen { width: 100%; height: 100%; background: #F8FAFB; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
-    .mini-header { padding: 8px; background: var(--white); font-size: 7px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; color: var(--text); border-bottom: 1px solid var(--gray-line); }
-    .mini-body { flex: 1; overflow: hidden; position: relative; }
-    .mini-bg-map { background: linear-gradient(135deg, #EDF7F2, #D5EDE5); width: 100%; height: 100%; position: relative; }
-    .mini-pin { position: absolute; width: 14px; height: 14px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; }
-    .mini-pin-inner { font-size: 7px; transform: rotate(45deg); }
-    .mini-list { padding: 6px; display: flex; flex-direction: column; gap: 5px; }
-    .mini-list-item { background: var(--white); border-radius: 6px; padding: 5px; display: flex; align-items: center; gap: 5px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
-    .mli-icon { font-size: 12px; }
-    .mli-text { font-size: 7px; color: var(--text); font-weight: 700; }
-    .mini-etiq { padding: 6px; display: flex; flex-direction: column; gap: 4px; }
-    .mini-etiq-item { background: var(--white); border-radius: 5px; padding: 5px 6px; border-left: 3px solid var(--yellow); font-size: 7px; color: var(--text); line-height: 1.3; font-weight: 600; }
-    .mini-meet { padding: 6px; display: flex; flex-direction: column; gap: 5px; }
-    .mini-meet-card { background: var(--white); border-radius: 7px; padding: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
-    .mmc-top { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
-    .mmc-avatar { width: 14px; height: 14px; border-radius: 50%; font-size: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-    .mmc-name  { font-size: 7px; font-weight: 700; }
-    .mmc-title { font-size: 8px; font-weight: 800; margin-bottom: 3px; }
-    .mmc-info  { font-size: 7px; color: var(--text-3); }
-    .mini-profile { padding: 10px 8px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .mp-av { width: 38px; height: 38px; border-radius: 50%; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 17px; }
-    .mp-name { font-size: 8px; font-weight: 700; text-align: center; }
-    .mp-tags { display: flex; gap: 3px; flex-wrap: wrap; justify-content: center; }
-    .mp-tag { font-size: 7px; padding: 2px 5px; border-radius: 4px; background: var(--yellow-pale); color: var(--text); font-weight: 700; }
-    .mp-stats { display: flex; gap: 10px; }
-    .mp-stat { text-align: center; }
-    .mp-stat-n { font-size: 11px; font-weight: 800; color: var(--red); }
-    .mp-stat-l { font-size: 7px; color: var(--text-3); }
+    .apppreview { background: var(--gray); }
+    .screens { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; }
+    .sc-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .sc-label { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+    .mini { width: 140px; height: 280px; background: #0D1F20; border-radius: 22px; padding: 5px; box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+    .mini-s { width: 100%; height: 100%; background: var(--white); border-radius: 19px; overflow: hidden; display: flex; flex-direction: column; }
+    .mh { padding: 7px 8px; background: var(--white); border-bottom: 1px solid #EBF4F4; display: flex; align-items: center; justify-content: space-between; }
+    .mh-txt { font-size: 7px; font-weight: 800; color: var(--teal); }
+    .mb { flex: 1; overflow: hidden; position: relative; }
+    /* map screen */
+    .mb-map { background: linear-gradient(150deg,#C8EEE8,#A8DDDC); width: 100%; height: 100%; position: relative; }
+    .mb-pin { position: absolute; font-size: 14px; transform: translate(-50%,-50%); }
+    /* list screen */
+    .mb-list { padding: 5px; display: flex; flex-direction: column; gap: 4px; }
+    .mb-li { background: var(--teal-pale); border-radius: 5px; padding: 5px 6px; font-size: 7px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 4px; }
+    /* etiq screen */
+    .mb-etiq { padding: 5px; display: flex; flex-direction: column; gap: 3px; }
+    .mb-ei { background: var(--white); border-left: 2px solid var(--teal); border-radius: 3px; padding: 4px 5px; font-size: 7px; color: var(--text); line-height: 1.4; font-weight: 600; }
+    /* meetup screen */
+    .mb-meet { padding: 5px; display: flex; flex-direction: column; gap: 5px; }
+    .mb-mc { background: var(--white); border-radius: 6px; padding: 5px 6px; box-shadow: 0 1px 3px rgba(30,200,200,.1); }
+    .mb-mc-top { display: flex; align-items: center; gap: 3px; margin-bottom: 3px; }
+    .mb-mc-av { width: 12px; height: 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 6px; font-weight: 800; }
+    .mb-mc-nm { font-size: 6px; font-weight: 700; }
+    .mb-mc-t { font-size: 7px; font-weight: 800; color: var(--text); }
+    .mb-mc-i { font-size: 6px; color: var(--text-3); }
+    /* profile screen */
+    .mb-prof { padding: 8px 6px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .mb-pr-av { width: 32px; height: 32px; border-radius: 50%; background: var(--teal-light); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .mb-pr-nm { font-size: 7px; font-weight: 700; }
+    .mb-pr-tags { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; }
+    .mb-pr-tag { font-size: 6px; padding: 1px 4px; border-radius: 3px; background: var(--teal-pale); color: var(--teal); font-weight: 700; }
+    .mb-pr-stats { display: flex; gap: 8px; }
+    .mb-pr-s { text-align: center; }
+    .mb-pr-sn { font-size: 9px; font-weight: 800; color: var(--teal); }
+    .mb-pr-sl { font-size: 6px; color: var(--text-3); }
+    .mf { background: var(--white); border-top: 1px solid #EBF4F4; display: flex; justify-content: space-around; padding: 5px 0 7px; }
+    .mft { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 6px; color: var(--text-3); }
+    .mft.on { color: var(--teal); }
+    .mft-ic { font-size: 13px; }
 
     /* ─── CTA ─── */
-    .cta-section {
-      background: var(--red);
-      padding: var(--sp) 0;
+    .cta-sec {
+      background: var(--teal-grad); padding: var(--sp) 0;
       position: relative; overflow: hidden;
     }
-    .cta-circle-1 { position: absolute; width: 420px; height: 420px; border-radius: 50%; background: rgba(255,255,255,.08); top: -120px; right: -80px; pointer-events: none; }
-    .cta-circle-2 { position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,.06); bottom: -60px; left: -40px; pointer-events: none; }
+    .cta-sec::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 360px; height: 360px; border-radius: 50%; background: rgba(255,255,255,.08); pointer-events: none;
+    }
+    .cta-sec::after {
+      content: ''; position: absolute; bottom: -50px; left: -50px;
+      width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,.06); pointer-events: none;
+    }
     .cta-inner { text-align: center; position: relative; z-index: 1; }
-    .cta-eyebrow {
-      display: inline-block;
-      background: rgba(255,255,255,.2);
-      color: var(--white);
-      font-size: 0.75rem; font-weight: 700;
-      padding: 5px 14px; border-radius: var(--r-full);
-      margin-bottom: 18px; letter-spacing: .06em;
-    }
-    .cta-title {
-      font-size: clamp(2.25rem, 5.5vw, 4rem);
-      font-weight: 400; color: var(--white);
-      line-height: 1.18; letter-spacing: -0.025em; margin-bottom: 14px;
-    }
-    .cta-title strong { font-weight: 800; }
-    .cta-sub { font-size: 1.0625rem; color: rgba(255,255,255,.75); line-height: 1.65; margin-bottom: 36px; }
-    .cta-form {
-      display: flex; flex-direction: column; gap: 12px;
-      max-width: 440px; margin: 0 auto 16px;
-    }
+    .cta-eyebrow { display: inline-block; background: rgba(255,255,255,.2); color: var(--white); font-size: .75rem; font-weight: 700; padding: 5px 14px; border-radius: var(--r-full); margin-bottom: 18px; letter-spacing: .06em; border: 1px solid rgba(255,255,255,.3); }
+    .cta-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; color: var(--white); line-height: 1.18; letter-spacing: -0.025em; margin-bottom: 14px; }
+    .cta-title em { font-style: normal; color: var(--yellow); }
+    .cta-sub { font-size: 1.0625rem; color: rgba(255,255,255,.78); line-height: 1.7; margin-bottom: 34px; }
+    .cta-form { display: flex; flex-direction: column; gap: 11px; max-width: 420px; margin: 0 auto 14px; }
     @media (min-width: 480px) { .cta-form { flex-direction: row; } }
     .cta-input {
-      flex: 1; padding: 14px 20px;
-      border-radius: var(--r-full); border: 2px solid rgba(255,255,255,.3);
-      background: rgba(255,255,255,.15); backdrop-filter: blur(8px);
-      color: var(--white); font-size: 0.9375rem; font-family: inherit; outline: none;
+      flex: 1; padding: 13px 20px; border-radius: var(--r-full);
+      border: 2px solid rgba(255,255,255,.3); background: rgba(255,255,255,.15);
+      backdrop-filter: blur(8px); color: var(--white); font-size: .9375rem; font-family: inherit; outline: none;
       transition: border-color .2s, background .2s;
     }
-    .cta-input::placeholder { color: rgba(255,255,255,.55); }
+    .cta-input::placeholder { color: rgba(255,255,255,.5); }
     .cta-input:focus { border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.22); }
     .cta-submit {
-      padding: 14px 28px; background: var(--white); color: var(--red);
-      border-radius: var(--r-full); font-size: 0.9375rem; font-weight: 800;
-      border: 2px solid var(--white); font-family: inherit; cursor: pointer;
-      white-space: nowrap; transition: all .2s;
+      padding: 13px 26px; background: var(--yellow); color: var(--text);
+      border-radius: var(--r-full); font-size: .9375rem; font-weight: 800; border: none;
+      font-family: inherit; cursor: pointer; white-space: nowrap; transition: all .2s;
     }
-    .cta-submit:hover { background: var(--yellow); color: var(--text); border-color: var(--yellow); transform: translateY(-1px); }
-    .cta-note { font-size: 0.8125rem; color: rgba(255,255,255,.5); font-weight: 500; }
-    .cta-success {
-      display: none; background: rgba(255,255,255,.15); border: 2px solid rgba(255,255,255,.3);
-      border-radius: var(--r-md); padding: 16px 24px;
-      color: var(--white); font-weight: 700; font-size: 0.9375rem;
-      margin: 0 auto 16px; max-width: 440px;
-    }
-    .cta-success.visible { display: flex; align-items: center; gap: 10px; justify-content: center; }
+    .cta-submit:hover { background: #F5C800; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,214,0,.5); }
+    .cta-note { font-size: .8125rem; color: rgba(255,255,255,.5); font-weight: 500; }
+    .cta-ok { display: none; background: rgba(255,255,255,.15); border: 2px solid rgba(255,255,255,.3); border-radius: var(--r-md); padding: 15px 22px; color: var(--white); font-weight: 700; font-size: .9375rem; margin: 0 auto 14px; max-width: 420px; }
+    .cta-ok.show { display: flex; align-items: center; gap: 10px; justify-content: center; }
 
     /* ─── FOOTER ─── */
-    .footer { background: var(--black-deep); color: rgba(255,255,255,.5); padding: 52px 0 36px; }
-    .footer-inner { display: grid; grid-template-columns: 1fr; gap: 36px; }
-    @media (min-width: 640px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 900px) { .footer-inner { grid-template-columns: 2fr 1fr 1fr; } }
-    .footer-brand { max-width: 280px; }
-    .footer-logo { display: flex; align-items: center; gap: 9px; font-weight: 800; color: var(--white); font-size: 1rem; margin-bottom: 13px; }
-    .footer-logo-circle { width: 28px; height: 28px; background: var(--yellow); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text); font-size: 13px; font-weight: 900; }
-    .footer-desc { font-size: 0.875rem; line-height: 1.7; margin-bottom: 20px; }
-    .footer-lang .lang-btn { color: rgba(255,255,255,.5); }
-    .footer-lang .lang-btn.active { background: var(--yellow); color: var(--text); }
-    .footer-nav-title { font-size: 0.7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 14px; }
-    .footer-links { display: flex; flex-direction: column; gap: 10px; }
-    .footer-link { font-size: 0.875rem; color: rgba(255,255,255,.5); transition: color .15s; }
-    .footer-link:hover { color: var(--yellow); }
-    .footer-bottom {
-      margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08);
-      display: flex; flex-direction: column; gap: 8px; font-size: 0.8125rem;
+    .footer { background: #0D1F20; color: rgba(255,255,255,.45); padding: 52px 0 36px; }
+    .foot-inner { display: grid; grid-template-columns: 1fr; gap: 36px; }
+    @media (min-width: 640px) { .foot-inner { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 900px) { .foot-inner { grid-template-columns: 2fr 1fr 1fr; } }
+    .foot-brand { max-width: 270px; }
+    .foot-logo { display: flex; align-items: center; gap: 9px; font-weight: 800; color: var(--white); font-size: 1rem; margin-bottom: 12px; }
+    .foot-logo-mark { width: 28px; height: 28px; border-radius: 8px; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--white); font-weight: 900; }
+    .foot-desc { font-size: .875rem; line-height: 1.7; margin-bottom: 20px; }
+    .foot-lang .lang-btn { color: rgba(255,255,255,.45); }
+    .foot-lang .lang-btn.active { background: var(--teal); color: var(--white); }
+    .foot-nav-title { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 14px; }
+    .foot-links { display: flex; flex-direction: column; gap: 10px; }
+    .foot-link { font-size: .875rem; color: rgba(255,255,255,.45); transition: color .15s; }
+    .foot-link:hover { color: var(--teal); }
+    .foot-bottom {
+      margin-top: 40px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.07);
+      display: flex; flex-direction: column; gap: 8px; font-size: .8125rem;
     }
-    @media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
+    @media (min-width: 640px) { .foot-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
 
     /* ─── Scroll reveal ─── */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
-    .d1 { transition-delay: .1s; }
-    .d2 { transition-delay: .2s; }
-    .d3 { transition-delay: .3s; }
-    .d4 { transition-delay: .4s; }
-    .d5 { transition-delay: .5s; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.vis { opacity: 1; transform: none; }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
+    .d4{transition-delay:.4s} .d5{transition-delay:.5s}
 
-    @media (max-width: 480px) { .phone-wrap { transform: scale(.88); transform-origin: center top; } }
+    @media (max-width: 440px) { .hero-phone { transform: scale(.88); transform-origin: center top; } }
   </style>
 </head>
 <body>
@@ -688,17 +514,16 @@
   <div class="container">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <div class="nav-logo-circle">L</div>
+        <div class="logo-mark">L</div>
         <span>Localoop Korea</span>
       </a>
       <div class="nav-right">
-        <div class="lang-switcher" role="group">
+        <div class="lang-sw" role="group">
           <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')">한국어</button>
           <button class="lang-btn"        data-lang="en" onclick="setLang('en')">English</button>
         </div>
-        <a href="#cta" class="btn btn-red nav-cta" style="padding:9px 22px;font-size:.875rem">
-          <span class="ko">사전등록</span>
-          <span class="en">Join Waitlist</span>
+        <a href="#cta" class="btn btn-teal nav-cta" style="padding:9px 22px;font-size:.875rem">
+          <span class="ko">사전등록</span><span class="en">Join Waitlist</span>
         </a>
       </div>
     </div>
@@ -707,14 +532,11 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-circle-red"></div>
-  <div class="hero-circle-yellow"></div>
   <div class="container">
     <div class="hero-inner">
-
       <div class="hero-content">
-        <div class="hero-eyebrow reveal">
-          <span class="dot"></span>
+        <div class="hero-badge reveal">
+          <span class="badge-dot"></span>
           <span class="ko">외국인 + 한국인 모두를 위한 서비스</span>
           <span class="en">Built for foreigners &amp; Koreans together</span>
         </div>
@@ -723,216 +545,211 @@
           <span class="en">Turn life in Korea<br>into <em>Local Digging</em></span>
         </h1>
         <p class="hero-sub reveal d2">
-          <span class="ko">언어 장벽, 낯선 동네, 외로운 일상—<br>Localoop Korea가 외국인의 한국 생활을 더 쉽고, 더 즐겁고, 더 로컬하게 만듭니다.</span>
+          <span class="ko">언어 장벽, 낯선 동네, 외로운 일상 — Localoop Korea가 외국인의 한국 생활을 더 쉽고, 더 즐겁고, 더 로컬하게 만듭니다.</span>
           <span class="en">Language barriers, unfamiliar streets, the loneliness of a new city — Localoop Korea makes life in Korea easier, more local, and genuinely connected.</span>
         </p>
-        <div class="hero-ctas reveal d3">
-          <a href="#cta" class="btn btn-red btn-lg">
-            <span class="ko">사전등록하기</span>
-            <span class="en">Join the Waitlist</span>
+        <div class="hero-btns reveal d3">
+          <a href="#cta" class="btn btn-yellow btn-lg">
+            <span class="ko">사전등록하기</span><span class="en">Join the Waitlist</span>
           </a>
-          <a href="#apppreview" class="btn btn-outline btn-lg">
-            <span class="ko">서비스 미리보기</span>
-            <span class="en">Preview the App</span>
+          <a href="#howto" class="btn btn-outline btn-lg">
+            <span class="ko">이용 방법 보기</span><span class="en">See How It Works</span>
           </a>
         </div>
-        <p class="hero-note reveal d4">
-          <span class="ko">✦ 출시 알림과 얼리액세스 혜택을 먼저 받아보세요</span>
-          <span class="en">✦ Get launch updates &amp; early access perks first</span>
-        </p>
       </div>
 
-      <div class="hero-visual reveal d2">
-        <div class="phone-wrap">
-          <div class="float-card fc-1">
-            <div class="fc-stripe"></div>
-            <span class="fc-icon">🍜</span>
-            <div class="fc-label">
-              <span class="fc-text ko">현지인 추천 맛집</span>
-              <span class="fc-text en">Local food pick</span>
-              <span class="fc-sub ko">마포구 · ★4.9</span>
-              <span class="fc-sub en">Mapo-gu · ★4.9</span>
+      <div class="hero-visual-wrap reveal d2">
+        <div style="position:relative">
+          <div class="flt flt-a">
+            <div class="flt-stripe"></div>
+            <span class="flt-ic">🍜</span>
+            <div class="flt-lbl">
+              <span class="flt-t ko">현지인 추천 맛집</span><span class="flt-t en">Local food pick</span>
+              <span class="flt-s ko">마포구 · ★4.9</span><span class="flt-s en">Mapo-gu · ★4.9</span>
             </div>
           </div>
-          <div class="float-card fc-2">
-            <div class="fc-stripe" style="background:var(--red)"></div>
-            <span class="fc-icon">🤝</span>
-            <div class="fc-label">
-              <span class="fc-text ko">새 친구 연결됨!</span>
-              <span class="fc-text en">New connection!</span>
-              <span class="fc-sub ko">서울 · 언어교환</span>
-              <span class="fc-sub en">Seoul · Language exchange</span>
+          <div class="flt flt-b">
+            <div class="flt-stripe" style="background:var(--orange)"></div>
+            <span class="flt-ic">🤝</span>
+            <div class="flt-lbl">
+              <span class="flt-t ko">새 친구 연결됨!</span><span class="flt-t en">New connection!</span>
+              <span class="flt-s ko">서울 · 언어교환</span><span class="flt-s en">Seoul · Exchange</span>
             </div>
           </div>
-          <div class="float-card fc-3">
-            <div class="fc-stripe" style="background:var(--text)"></div>
-            <span class="fc-icon">📅</span>
-            <div class="fc-label">
-              <span class="fc-text ko">이번 주 모임</span>
-              <span class="fc-text en">Meetup this week</span>
-              <span class="fc-sub ko">홍대 · 12명 참여</span>
-              <span class="fc-sub en">Hongdae · 12 going</span>
+          <div class="flt flt-c">
+            <div class="flt-stripe" style="background:var(--yellow)"></div>
+            <span class="flt-ic">📅</span>
+            <div class="flt-lbl">
+              <span class="flt-t ko">이번 주 모임</span><span class="flt-t en">Meetup this week</span>
+              <span class="flt-s ko">홍대 · 12명</span><span class="flt-s en">Hongdae · 12 going</span>
             </div>
           </div>
-          <div class="phone">
-            <div class="phone-notch"></div>
+          <div class="hero-phone" style="position:relative">
+            <div class="ph-notch"></div>
             <div class="phone-screen">
-              <div class="pscreen-header">
-                <div class="pscreen-search">
-                  <span>🔍</span>
-                  <span class="ko">장소, 동네 검색...</span>
-                  <span class="en">Search places...</span>
-                </div>
-                <div class="pscreen-avatar">나</div>
+              <div class="ph-head">
+                <div class="ph-search">🔍 <span class="ko">장소, 동네 검색...</span><span class="en">Search places...</span></div>
+                <div class="ph-av">나</div>
               </div>
-              <div class="pscreen-map">
-                <div class="map-grid"></div>
-                <div class="map-road-h" style="top:40%"></div>
-                <div class="map-road-h" style="top:68%"></div>
-                <div class="map-road-v" style="left:35%"></div>
-                <div class="map-road-v" style="left:65%"></div>
-                <div class="map-pin" style="top:20%;left:27%">
-                  <div class="map-pin-dot" style="background:var(--yellow)"><span>🍱</span></div>
-                  <div class="map-pin-label ko">현지 맛집</div>
-                  <div class="map-pin-label en">Local food</div>
-                </div>
-                <div class="map-pin" style="top:43%;left:55%">
-                  <div class="map-pin-dot" style="background:var(--red)"><span>👥</span></div>
-                  <div class="map-pin-label ko">모임 장소</div>
-                  <div class="map-pin-label en">Meetup</div>
-                </div>
-                <div class="map-pin" style="top:14%;left:62%">
-                  <div class="map-pin-dot" style="background:var(--text)"><span style="color:var(--yellow)">📍</span></div>
-                  <div class="map-pin-label ko">외국인 친화</div>
-                  <div class="map-pin-label en">Friendly</div>
-                </div>
+              <div class="ph-map">
+                <div class="ph-map-grid"></div>
+                <div class="ph-pin" style="top:22%;left:28%"><div class="ph-pin-dot" style="background:var(--teal)"><span>🍱</span></div><div class="ph-pin-lbl ko">현지 맛집</div><div class="ph-pin-lbl en">Local food</div></div>
+                <div class="ph-pin" style="top:44%;left:57%"><div class="ph-pin-dot" style="background:var(--orange)"><span>👥</span></div><div class="ph-pin-lbl ko">모임</div><div class="ph-pin-lbl en">Meetup</div></div>
+                <div class="ph-pin" style="top:15%;left:65%"><div class="ph-pin-dot" style="background:var(--yellow)"><span>📍</span></div><div class="ph-pin-lbl ko">친화 장소</div><div class="ph-pin-lbl en">Friendly</div></div>
               </div>
-              <div class="pscreen-places">
-                <div class="place-card-mini">
-                  <div class="place-icon-mini" style="background:var(--yellow-pale)">🍜</div>
-                  <div class="place-info-mini">
-                    <div class="place-name-mini ko">을지로 골목 국밥</div>
-                    <div class="place-name-mini en">Euljiro Alley Gukbap</div>
-                    <div class="place-meta-mini ko">현지인 추천 · 4.9★</div>
-                    <div class="place-meta-mini en">Local pick · 4.9★</div>
-                  </div>
-                  <div class="place-badge-mini" style="background:var(--yellow-pale);color:var(--text)">✓</div>
-                </div>
-                <div class="place-card-mini">
-                  <div class="place-icon-mini" style="background:var(--red-pale)">☕</div>
-                  <div class="place-info-mini">
-                    <div class="place-name-mini ko">성수 숨겨진 카페</div>
-                    <div class="place-name-mini en">Hidden café, Seongsu</div>
-                    <div class="place-meta-mini ko">로컬 디깅 · 4.8★</div>
-                    <div class="place-meta-mini en">Local digging · 4.8★</div>
-                  </div>
-                  <div class="place-badge-mini" style="background:var(--red-pale);color:var(--red)">🔍</div>
-                </div>
+              <div class="ph-list">
+                <div class="ph-card"><div class="ph-ic" style="background:var(--teal-pale)">🍜</div><div><div class="ph-nm ko">을지로 골목 국밥</div><div class="ph-nm en">Euljiro Alley Gukbap</div><div class="ph-mt ko">현지인 추천 · 4.9★</div><div class="ph-mt en">Local pick · 4.9★</div></div><div class="ph-badge" style="background:var(--teal-light);color:var(--teal)">✓</div></div>
+                <div class="ph-card"><div class="ph-ic" style="background:var(--yellow-pale)">☕</div><div><div class="ph-nm ko">성수 숨겨진 카페</div><div class="ph-nm en">Hidden café, Seongsu</div><div class="ph-mt ko">로컬 디깅 · 4.8★</div><div class="ph-mt en">Local digging · 4.8★</div></div><div class="ph-badge" style="background:var(--yellow-pale);color:var(--orange)">🔍</div></div>
               </div>
-              <div class="pscreen-nav">
-                <div class="pnav-item active"><span class="pnav-icon">🗺️</span><span class="ko">지도</span><span class="en">Map</span></div>
-                <div class="pnav-item"><span class="pnav-icon">🔍</span><span class="ko">탐색</span><span class="en">Explore</span></div>
-                <div class="pnav-item"><span class="pnav-icon">📅</span><span class="ko">모임</span><span class="en">Meetup</span></div>
-                <div class="pnav-item"><span class="pnav-icon">👤</span><span class="ko">나</span><span class="en">Me</span></div>
+              <div class="ph-bottom">
+                <div class="ph-tab on"><span class="ph-tab-ic">🗺️</span><span class="ko">지도</span><span class="en">Map</span></div>
+                <div class="ph-tab"><span class="ph-tab-ic">🔍</span><span class="ko">탐색</span><span class="en">Explore</span></div>
+                <div class="ph-tab"><span class="ph-tab-ic">📅</span><span class="ko">모임</span><span class="en">Events</span></div>
+                <div class="ph-tab"><span class="ph-tab-ic">👤</span><span class="ko">나</span><span class="en">Me</span></div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <!-- wave -->
+  <svg class="hero-wave" viewBox="0 0 1440 52" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0 52L60 44C120 36 240 20 360 16C480 12 600 20 720 26C840 32 960 36 1080 32C1200 28 1320 16 1380 10L1440 4V52H0Z" fill="#FFFFFF"/>
+  </svg>
+</section>
 
+<!-- HOW IT WORKS -->
+<section class="section howto" id="howto">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow ko">이용 순서</span><span class="sec-eyebrow en">How It Works</span>
+      <h2 class="sec-title">
+        <span class="ko">Localoop Korea <span class="point">이용 진행 순서</span></span>
+        <span class="en">Your <span class="point">Localoop Korea</span> Journey</span>
+      </h2>
+      <p class="sec-sub">
+        <span class="ko">가입부터 첫 로컬 디깅까지, 단 몇 단계로 한국 생활이 달라집니다.</span>
+        <span class="en">From sign-up to your first local dig — just a few steps to transform your life in Korea.</span>
+      </p>
+    </div>
+    <div class="roadmap">
+      <div class="rm-step reveal d1">
+        <div class="rm-left"><div class="rm-circle">📲</div><div class="rm-line"></div></div>
+        <div class="rm-content">
+          <div class="rm-tag ko">STEP 1</div><div class="rm-tag en">STEP 1</div>
+          <div class="rm-title ko">앱 다운로드 &amp; 가입</div><div class="rm-title en">Download &amp; Sign Up</div>
+          <p class="rm-desc ko">간단한 회원가입 후 내 위치 동네를 설정하세요. 외국인/한국인 모드 선택 가능.</p>
+          <p class="rm-desc en">Quick sign-up, then set your neighborhood. Choose foreigner or Korean mode.</p>
+          <div class="rm-chips">
+            <span class="rm-chip ko">소셜 로그인</span><span class="rm-chip en">Social login</span>
+            <span class="rm-chip ko">위치 설정</span><span class="rm-chip en">Location setup</span>
+            <span class="rm-chip ko">언어 선택</span><span class="rm-chip en">Language choice</span>
+          </div>
+        </div>
+      </div>
+      <div class="rm-step reveal d2">
+        <div class="rm-left"><div class="rm-circle">🗺️</div><div class="rm-line"></div></div>
+        <div class="rm-content">
+          <div class="rm-tag ko">STEP 2</div><div class="rm-tag en">STEP 2</div>
+          <div class="rm-title ko">내 동네 탐색 시작</div><div class="rm-title en">Start Exploring Your Area</div>
+          <p class="rm-desc ko">외국인 친화 장소, 현지인 추천 맛집, 로컬 디깅 스팟을 지도에서 바로 발견하세요.</p>
+          <p class="rm-desc en">Discover foreigner-friendly spots, local food picks, and hidden local gems on your map.</p>
+          <div class="rm-chips">
+            <span class="rm-chip ko">지역 지도</span><span class="rm-chip en">Local map</span>
+            <span class="rm-chip ko">카테고리 필터</span><span class="rm-chip en">Category filter</span>
+            <span class="rm-chip ko">평점 &amp; 리뷰</span><span class="rm-chip en">Ratings</span>
+          </div>
+        </div>
+      </div>
+      <div class="rm-step reveal d3">
+        <div class="rm-left"><div class="rm-circle">👥</div><div class="rm-line"></div></div>
+        <div class="rm-content">
+          <div class="rm-tag ko">STEP 3</div><div class="rm-tag en">STEP 3</div>
+          <div class="rm-title ko">커뮤니티 연결</div><div class="rm-title en">Connect with the Community</div>
+          <p class="rm-desc ko">근처 외국인/한국인과 친구를 맺고, 언어 교환 파트너를 찾고, 모임에 참여하세요.</p>
+          <p class="rm-desc en">Connect with foreigners and Koreans nearby, find language exchange partners, join meetups.</p>
+          <div class="rm-chips">
+            <span class="rm-chip ko">친구 연결</span><span class="rm-chip en">Connections</span>
+            <span class="rm-chip ko">언어 교환</span><span class="rm-chip en">Language exchange</span>
+            <span class="rm-chip ko">모임 참여</span><span class="rm-chip en">Join meetups</span>
+          </div>
+        </div>
+      </div>
+      <div class="rm-step reveal d4">
+        <div class="rm-left"><div class="rm-circle">🔍</div><div class="rm-line"></div></div>
+        <div class="rm-content">
+          <div class="rm-tag ko">STEP 4</div><div class="rm-tag en">STEP 4</div>
+          <div class="rm-title ko">로컬 디깅 경험</div><div class="rm-title en">Experience Local Digging</div>
+          <p class="rm-desc ko">현지인만 아는 숨겨진 동네, 골목, 문화를 직접 경험하세요. 한국이 완전히 달리 보입니다.</p>
+          <p class="rm-desc en">Experience hidden neighborhoods, back alleys, and local culture only insiders know. Korea will never look the same.</p>
+          <div class="rm-chips">
+            <span class="rm-chip ko">로컬 스팟</span><span class="rm-chip en">Local spots</span>
+            <span class="rm-chip ko">문화 체험</span><span class="rm-chip en">Culture</span>
+            <span class="rm-chip ko">진짜 인연</span><span class="rm-chip en">Real bonds</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM -->
-<section class="section problem" id="problem">
+<!-- AUDIENCE CHOICE -->
+<section class="section audience" id="audience">
   <div class="container">
     <div class="sec-header reveal">
-      <span class="eyebrow eyebrow-dot ko">문제</span>
-      <span class="eyebrow eyebrow-dot en">The Problem</span>
-      <h2 class="sec-title-lg">
-        <span class="ko">한국 생활, 솔직히 <strong>쉽지 않습니다</strong></span>
-        <span class="en">Life in Korea isn't <strong>always easy</strong></span>
+      <span class="sec-eyebrow ko">이용 대상</span><span class="sec-eyebrow en">Who Is This For</span>
+      <h2 class="sec-title">
+        <span class="ko"><span class="point">누구</span>를 위한 서비스인가요?</span>
+        <span class="en">Who is <span class="point">this for?</span></span>
       </h2>
-      <p class="sec-sub">
-        <span class="ko">외국인도, 한국인도 각자의 어려움을 가지고 있습니다.</span>
-        <span class="en">Both foreigners and Koreans face their own challenges.</span>
-      </p>
     </div>
-    <div class="problem-grid">
-      <div class="problem-group reveal d1">
-        <div class="problem-group-head">
-          <span class="prob-tag prob-tag-f ko">외국인</span>
-          <span class="prob-tag prob-tag-f en">Foreigners</span>
-          <span class="prob-group-title ko">이런 어려움 겪고 있지 않나요?</span>
-          <span class="prob-group-title en">Sound familiar?</span>
+    <div class="aud-grid">
+      <div class="aud-box aud-box-f reveal d1">
+        <div class="aud-head">
+          <span class="aud-head-icon">🌍</span>
+          <div>
+            <div class="aud-head-label ko">선택 1 · 외국인을 위해</div>
+            <div class="aud-head-label en">Option 1 · For Foreigners</div>
+            <div class="aud-head-title ko">한국에 사는 / 방문하는 외국인</div>
+            <div class="aud-head-title en">Foreigners living in or visiting Korea</div>
+          </div>
         </div>
-        <div class="problem-items">
-          <div class="problem-item"><span class="prob-emoji">🗣️</span><span class="prob-text ko">한국어를 못 하면 아무것도 못 할 것 같아요</span><span class="prob-text en">Getting around without Korean feels impossible</span></div>
-          <div class="problem-item"><span class="prob-emoji">💳</span><span class="prob-text ko">카드가 안 되고, ATM도 찾기 어렵고</span><span class="prob-text en">Cash, cards, ATMs — it's all confusing</span></div>
-          <div class="problem-item"><span class="prob-emoji">🚌</span><span class="prob-text ko">버스, 지하철 어떻게 타는지 모르겠어요</span><span class="prob-text en">Public transport is overwhelming</span></div>
-          <div class="problem-item"><span class="prob-emoji">📋</span><span class="prob-text ko">행정 절차가 너무 복잡해요</span><span class="prob-text en">Administrative tasks feel endless</span></div>
-          <div class="problem-item"><span class="prob-emoji">🙏</span><span class="prob-text ko">한국 에티켓, 뭘 조심해야 하는지 모르겠어요</span><span class="prob-text en">I don't know the unspoken rules here</span></div>
-          <div class="problem-item"><span class="prob-emoji">👥</span><span class="prob-text ko">한국 친구를 사귀고 싶은데 기회가 없어요</span><span class="prob-text en">Hard to make genuine Korean friends</span></div>
-        </div>
-      </div>
-      <div class="problem-group reveal d2">
-        <div class="problem-group-head">
-          <span class="prob-tag prob-tag-k ko">한국인</span>
-          <span class="prob-tag prob-tag-k en">Koreans</span>
-          <span class="prob-group-title ko">이런 아쉬움 있지 않나요?</span>
-          <span class="prob-group-title en">Missing something?</span>
-        </div>
-        <div class="problem-items">
-          <div class="problem-item red-l"><span class="prob-emoji">🌍</span><span class="prob-text ko">자연스럽게 외국인 친구를 만날 방법이 없어요</span><span class="prob-text en">Hard to meet foreign friends naturally</span></div>
-          <div class="problem-item red-l"><span class="prob-emoji">💬</span><span class="prob-text ko">믿을 만한 언어 교환 파트너를 찾기 어려워요</span><span class="prob-text en">No reliable language exchange exists</span></div>
-          <div class="problem-item red-l"><span class="prob-emoji">📍</span><span class="prob-text ko">내가 아는 좋은 동네, 맛집을 나눌 공간이 없어요</span><span class="prob-text en">Nowhere to share my real local favorites</span></div>
-          <div class="problem-item red-l"><span class="prob-emoji">🤝</span><span class="prob-text ko">외국인에게 진짜 한국을 소개하고 싶은데 방법이 없어요</span><span class="prob-text en">I want to share real Korea but don't know how</span></div>
+        <div class="aud-body">
+          <div class="aud-points">
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">언어 걱정 없이 한국을 즐기세요</span><span class="en">Explore Korea without the language stress</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">현지인 추천 맛집과 숨겨진 동네 발견</span><span class="en">Find food and neighborhoods locals actually love</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">외국인·한국인 친구와 자연스러운 연결</span><span class="en">Connect with both foreigners and Korean friends</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">에티켓·결제·교통 실용 가이드 제공</span><span class="en">Practical guides for etiquette, payment, transport</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">행정 절차도 단계별로 쉽게 해결</span><span class="en">Step-by-step help for admin tasks</span></div>
+          </div>
+          <a href="#cta" class="btn btn-teal" style="font-size:.875rem;padding:11px 24px">
+            <span class="ko">나는 외국인이에요 →</span><span class="en">I'm a foreigner →</span>
+          </a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOLUTION -->
-<section class="section solution" id="solution">
-  <div class="container">
-    <div class="sec-header reveal">
-      <span class="eyebrow eyebrow-dot ko">솔루션</span>
-      <span class="eyebrow eyebrow-dot en">The Solution</span>
-      <h2 class="sec-title-lg">
-        <span class="ko">Localoop Korea가 <strong>모든 것을 연결합니다</strong></span>
-        <span class="en">Localoop Korea <strong>connects it all</strong></span>
-      </h2>
-      <p class="sec-sub">
-        <span class="ko">관광을 넘어, 진짜 한국 생활로. 정보에서 관계로.</span>
-        <span class="en">Beyond tourism, into real local life. From information to genuine connection.</span>
-      </p>
-    </div>
-    <div class="solution-pillars">
-      <div class="pillar reveal d1">
-        <div class="pillar-top-bar"></div>
-        <div class="pillar-icon">🗺️</div>
-        <div class="pillar-title ko">생활 내비게이션</div>
-        <div class="pillar-title en">Living Navigation</div>
-        <p class="pillar-desc ko">외국인 친화적 장소 찾기부터 에티켓 가이드, 결제·교통·행정 실용 정보까지. 한국 생활의 길잡이.</p>
-        <p class="pillar-desc en">Find foreigner-friendly places, learn etiquette, and get practical guides for payment, transport, and admin.</p>
-      </div>
-      <div class="pillar reveal d2">
-        <div class="pillar-top-bar"></div>
-        <div class="pillar-icon">🤝</div>
-        <div class="pillar-title ko">로컬 커뮤니티</div>
-        <div class="pillar-title en">Local Community</div>
-        <p class="pillar-desc ko">지역 기반 친구 연결, 언어 교환, 모임과 이벤트. 외국인과 한국인이 진짜 관계를 만드는 공간.</p>
-        <p class="pillar-desc en">Region-based friend connections, language exchange, and meetups. Where real relationships form.</p>
-      </div>
-      <div class="pillar reveal d3">
-        <div class="pillar-top-bar"></div>
-        <div class="pillar-icon">🔍</div>
-        <div class="pillar-title ko">로컬 디깅</div>
-        <div class="pillar-title en">Local Digging</div>
-        <p class="pillar-desc ko">현지인만 아는 숨겨진 동네, 맛집, 골목, 그리고 진짜 한국 경험. 관광을 넘어선 생활.</p>
-        <p class="pillar-desc en">Hidden neighborhoods, local food, back alleys, and real Korean experiences only locals know.</p>
+      <div class="aud-box aud-box-k reveal d2">
+        <div class="aud-head">
+          <span class="aud-head-icon">🇰🇷</span>
+          <div>
+            <div class="aud-head-label ko">선택 2 · 한국인을 위해</div>
+            <div class="aud-head-label en">Option 2 · For Koreans</div>
+            <div class="aud-head-title ko">세계와 연결되고 싶은 한국인</div>
+            <div class="aud-head-title en">Koreans who want a global community</div>
+          </div>
+        </div>
+        <div class="aud-body">
+          <div class="aud-points">
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">자연스럽게 외국인 친구를 만나세요</span><span class="en">Meet foreign friends naturally</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">언어 교환과 진짜 문화 교류</span><span class="en">Real language exchange and cultural connection</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">내가 아는 동네·맛집을 세계에 알려주세요</span><span class="en">Share your local spots with a global audience</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">외국인의 한국 생활을 돕는 로컬 가이드</span><span class="en">Become a local guide for foreigners</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">글로벌 감각으로 내 커뮤니티를 확장</span><span class="en">Expand your circle with a global mindset</span></div>
+          </div>
+          <a href="#cta" class="btn btn-yellow" style="font-size:.875rem;padding:11px 24px">
+            <span class="ko">나는 한국인이에요 →</span><span class="en">I'm Korean →</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -942,61 +759,36 @@
 <section class="section features" id="features">
   <div class="container">
     <div class="sec-header reveal">
-      <span class="eyebrow eyebrow-dot ko">핵심 기능</span>
-      <span class="eyebrow eyebrow-dot en">Core Features</span>
-      <h2 class="sec-title-lg">
-        <span class="ko">한국 생활에 <strong>필요한 모든 것</strong></span>
-        <span class="en">Everything you need for <strong>life in Korea</strong></span>
+      <span class="sec-eyebrow ko">핵심 기능</span><span class="sec-eyebrow en">Core Features</span>
+      <h2 class="sec-title">
+        <span class="ko">한국 생활에 필요한 <span class="point">모든 기능</span></span>
+        <span class="en">Everything you need for <span class="point">life in Korea</span></span>
       </h2>
     </div>
-    <div class="features-grid">
-      <div class="feature-card reveal d1"><div class="feature-icon">📍</div><h3 class="feature-title ko">외국인 친화 장소 발견</h3><h3 class="feature-title en">Foreigner-Friendly Places</h3><p class="feature-desc ko">영어 메뉴, 카드 결제 가능한 식당·카페·관공서·병원을 지도에서 바로 찾아보세요.</p><p class="feature-desc en">Find restaurants, cafes, hospitals, and offices that are easy to navigate as a foreigner.</p></div>
-      <div class="feature-card reveal d2"><div class="feature-icon">🙏</div><h3 class="feature-title ko">에티켓 &amp; 문화 가이드</h3><h3 class="feature-title en">Etiquette &amp; Culture Guide</h3><p class="feature-desc ko">한국에서 꼭 알아야 할 예절과 문화 팁. 가이드북에 없는 진짜 현지 감각.</p><p class="feature-desc en">Korean customs and social norms — the stuff guidebooks skip.</p></div>
-      <div class="feature-card reveal d3"><div class="feature-icon">🍜</div><h3 class="feature-title ko">현지인 추천 맛집 &amp; 메뉴</h3><h3 class="feature-title en">Local Restaurant Picks</h3><p class="feature-desc ko">진짜 한국인이 즐겨 찾는 동네 맛집과 추천 메뉴. 현지인의 직접 추천.</p><p class="feature-desc en">Authentic picks from real Koreans — not algorithm-ranked review aggregators.</p></div>
-      <div class="feature-card reveal d1"><div class="feature-icon">👥</div><h3 class="feature-title ko">지역 기반 친구 연결</h3><h3 class="feature-title en">Region-Based Connections</h3><p class="feature-desc ko">내 동네의 외국인/한국인 유저와 공통 관심사로 자연스럽게 연결되세요.</p><p class="feature-desc en">Meet foreigners and Koreans in your neighborhood through shared interests.</p></div>
-      <div class="feature-card reveal d2"><div class="feature-icon">📅</div><h3 class="feature-title ko">모임 &amp; 이벤트</h3><h3 class="feature-title en">Meetups &amp; Events</h3><p class="feature-desc ko">근처 모임을 찾거나 직접 이벤트를 만들어보세요. 언어 교환, 문화 체험, 동네 탐방까지.</p><p class="feature-desc en">Find local meetups or create your own. Language exchanges, cultural experiences, and more.</p></div>
-      <div class="feature-card reveal d3"><div class="feature-icon">📖</div><h3 class="feature-title ko">실용 생활 가이드</h3><h3 class="feature-title en">Practical Living Guide</h3><p class="feature-desc ko">결제, 교통, 행정 절차를 단계별로 쉽게 해결. 한국에서 혼자도 살아갈 수 있도록.</p><p class="feature-desc en">Step-by-step help for payments, transport, and admin — handle Korea on your own.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- DUAL AUDIENCE -->
-<section class="section dual" id="audience">
-  <div class="container">
-    <div class="sec-header reveal">
-      <span class="eyebrow eyebrow-dot ko">두 가지 경험</span>
-      <span class="eyebrow eyebrow-dot en">Two Experiences</span>
-      <h2 class="sec-title-lg">
-        <span class="ko"><strong>누구</strong>를 위한 서비스인가요?</span>
-        <span class="en">Who is <strong>this for?</strong></span>
-      </h2>
-    </div>
-    <div class="dual-grid">
-      <div class="dual-card dual-card-foreign reveal d1">
-        <div class="dual-tag ko">외국인을 위해</div>
-        <div class="dual-tag en">For Foreigners</div>
-        <h3 class="dual-title ko">한국 생활이<br><strong>더 쉬워집니다</strong></h3>
-        <h3 class="dual-title en">Korea, finally<br><strong>on your terms</strong></h3>
-        <div class="dual-points">
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">언어 걱정 없이 한국을 즐기세요</span><span class="en">Explore Korea without the language stress</span></div>
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">현지인이 추천하는 진짜 맛집과 동네를 발견하세요</span><span class="en">Find neighborhoods and food locals actually love</span></div>
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">한국 문화와 에티켓을 자연스럽게 배우세요</span><span class="en">Learn Korean culture and etiquette naturally</span></div>
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">외국인 &amp; 한국 친구와 자연스럽게 연결되세요</span><span class="en">Connect with foreigners and Korean friends nearby</span></div>
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">결제·교통·행정을 실용 가이드로 쉽게 해결하세요</span><span class="en">Solve everyday friction with practical guides</span></div>
-        </div>
+    <div class="feat-grid">
+      <div class="feat-card reveal d1">
+        <div class="feat-img" style="background:linear-gradient(135deg,#D6F5F5,#A8E8E8)">📍</div>
+        <div class="feat-body"><div class="feat-tag ko">생활 내비게이션</div><div class="feat-tag en">Living Navigation</div><h3 class="feat-title ko">외국인 친화 장소 발견</h3><h3 class="feat-title en">Foreigner-Friendly Places</h3><p class="feat-desc ko">영어 메뉴, 카드 결제 가능한 식당·카페·관공서·병원을 지도에서 바로 찾아보세요.</p><p class="feat-desc en">Find restaurants, cafes, hospitals, and offices that are easy to navigate as a foreigner.</p></div>
       </div>
-      <div class="dual-card dual-card-korean reveal d2">
-        <div class="dual-tag ko">한국인을 위해</div>
-        <div class="dual-tag en">For Koreans</div>
-        <h3 class="dual-title ko">세계와 연결되는<br><strong>새로운 방법</strong></h3>
-        <h3 class="dual-title en">Connect with the world<br><strong>through your neighborhood</strong></h3>
-        <div class="dual-points">
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">자연스럽게 외국인 친구를 만나세요</span><span class="en">Meet foreign friends in a natural setting</span></div>
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">언어 교환과 진짜 문화 교류를 즐기세요</span><span class="en">Practice language through real friendships</span></div>
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">내가 사랑하는 동네와 맛집을 세계에 알려주세요</span><span class="en">Share your local spots with a global audience</span></div>
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">외국인에게 진짜 한국을 소개하는 가이드가 되세요</span><span class="en">Become a local guide for foreigners</span></div>
-          <div class="dual-point"><div class="dual-check">✓</div><span class="ko">글로벌 감각으로 내 커뮤니티를 더 넓히세요</span><span class="en">Expand your circle with a global mindset</span></div>
-        </div>
+      <div class="feat-card reveal d2">
+        <div class="feat-img" style="background:linear-gradient(135deg,#FFF5E0,#FFE8A0)">🙏</div>
+        <div class="feat-body"><div class="feat-tag ko">문화 가이드</div><div class="feat-tag en">Culture Guide</div><h3 class="feat-title ko">에티켓 &amp; 문화 가이드</h3><h3 class="feat-title en">Etiquette &amp; Culture</h3><p class="feat-desc ko">한국에서 꼭 알아야 할 예절과 문화 팁. 가이드북에 없는 진짜 현지 감각.</p><p class="feat-desc en">Korean customs and social norms — the stuff guidebooks always skip.</p></div>
+      </div>
+      <div class="feat-card reveal d3">
+        <div class="feat-img" style="background:linear-gradient(135deg,#FFE8E0,#FFCDB0)">🍜</div>
+        <div class="feat-body"><div class="feat-tag ko">로컬 디깅</div><div class="feat-tag en">Local Digging</div><h3 class="feat-title ko">현지인 추천 맛집</h3><h3 class="feat-title en">Local Food Picks</h3><p class="feat-desc ko">진짜 한국인이 즐겨 찾는 동네 맛집과 숨겨진 메뉴. 현지인의 직접 추천.</p><p class="feat-desc en">Authentic picks from real Koreans — not algorithm-ranked review aggregators.</p></div>
+      </div>
+      <div class="feat-card reveal d1">
+        <div class="feat-img" style="background:linear-gradient(135deg,#E8F5FF,#C0DDFF)">👥</div>
+        <div class="feat-body"><div class="feat-tag ko">커뮤니티</div><div class="feat-tag en">Community</div><h3 class="feat-title ko">지역 기반 친구 연결</h3><h3 class="feat-title en">Region-Based Connections</h3><p class="feat-desc ko">내 동네의 외국인/한국인 유저와 공통 관심사로 자연스럽게 연결하세요.</p><p class="feat-desc en">Meet foreigners and Koreans in your neighborhood through shared interests.</p></div>
+      </div>
+      <div class="feat-card reveal d2">
+        <div class="feat-img" style="background:linear-gradient(135deg,#EEE0FF,#D0B0FF)">📅</div>
+        <div class="feat-body"><div class="feat-tag ko">모임 &amp; 이벤트</div><div class="feat-tag en">Meetups</div><h3 class="feat-title ko">모임 &amp; 이벤트</h3><h3 class="feat-title en">Meetups &amp; Events</h3><p class="feat-desc ko">근처 모임을 찾거나 직접 만들어보세요. 언어 교환, 문화 체험, 동네 탐방까지.</p><p class="feat-desc en">Find or create local meetups. Language exchanges, cultural experiences, and more.</p></div>
+      </div>
+      <div class="feat-card reveal d3">
+        <div class="feat-img" style="background:linear-gradient(135deg,#E0F5E8,#B0DDBA)">📖</div>
+        <div class="feat-body"><div class="feat-tag ko">실용 가이드</div><div class="feat-tag en">Practical Guide</div><h3 class="feat-title ko">실용 생활 가이드</h3><h3 class="feat-title en">Practical Living Guide</h3><p class="feat-desc ko">결제, 교통, 행정 절차를 단계별로 쉽게. 한국에서 혼자도 살아갈 수 있도록.</p><p class="feat-desc en">Step-by-step help for payments, transport, and admin — handle Korea on your own.</p></div>
       </div>
     </div>
   </div>
@@ -1005,31 +797,65 @@
 <!-- LOCAL DIGGING -->
 <section class="section digging" id="localdigging">
   <div class="container">
-    <div class="digging-inner">
+    <div class="dig-inner">
       <div class="reveal">
-        <span class="eyebrow eyebrow-dot ko">로컬 디깅</span>
-        <span class="eyebrow eyebrow-dot en">Local Digging</span>
-        <h2 class="sec-title-lg" style="margin-bottom:16px">
-          <span class="ko">로컬 디깅이란<br><strong>무엇인가요?</strong></span>
-          <span class="en">What is<br><strong>Local Digging?</strong></span>
+        <span class="sec-eyebrow ko">로컬 디깅이란?</span><span class="sec-eyebrow en">What is Local Digging?</span>
+        <h2 class="sec-title" style="margin-bottom:16px">
+          <span class="ko">관광을 넘어<br><span class="point">진짜 한국</span>을 경험하세요</span>
+          <span class="en">Beyond tourism —<br>experience <span class="point">real Korea</span></span>
         </h2>
-        <p class="sec-sub" style="margin-bottom:20px">
-          <span class="ko">유명 관광지 너머, 진짜 한국이 있습니다. 현지인이 매일 가는 동네 맛집, 아무도 모르는 골목, 계절마다 바뀌는 로컬 문화—로컬 디깅은 그 모든 것을 직접 경험하는 방법입니다.</span>
-          <span class="en">Beyond the tourist trail, the real Korea is waiting. Local digging means exploring neighborhoods, foods, and hidden gems that locals actually live and love.</span>
+        <p class="sec-sub" style="margin-bottom:22px">
+          <span class="ko">유명 관광지 너머에 진짜 한국이 있습니다. 현지인이 매일 가는 동네 맛집, 아무도 모르는 골목, 계절마다 바뀌는 로컬 문화. 로컬 디깅은 그 모든 것을 직접 경험하는 방법입니다.</span>
+          <span class="en">Beyond the tourist trail, the real Korea is waiting. Hidden food, back alleys, and local rhythms only residents know. Local digging is how you experience all of it.</span>
         </p>
-        <p style="font-size:.875rem;font-weight:700;color:var(--text-3)">
-          <span class="ko">이것은 여행 앱이 아닙니다 →</span>
-          <span class="en">This is not a travel app →</span>
-        </p>
-      </div>
-      <div class="digging-visual-area">
-        <div class="digging-circle"></div>
-        <div class="digging-highlights">
-          <div class="dig-card reveal d1"><div class="dig-icon">🏘️</div><h4 class="dig-title ko">숨겨진 동네 발견</h4><h4 class="dig-title en">Hidden Neighborhoods</h4><p class="dig-desc ko">관광객이 모르는 진짜 동네를 탐색하세요</p><p class="dig-desc en">Explore streets tourists never find</p></div>
-          <div class="dig-card reveal d2"><div class="dig-icon">🍱</div><h4 class="dig-title ko">로컬 맛집 &amp; 메뉴</h4><h4 class="dig-title en">Local Food</h4><p class="dig-desc ko">매주 가는 현지인만 아는 맛집과 메뉴</p><p class="dig-desc en">From people who eat there every week</p></div>
-          <div class="dig-card reveal d3"><div class="dig-icon">👣</div><h4 class="dig-title ko">문화 체험 &amp; 로컬 습관</h4><h4 class="dig-title en">Cultural Habits</h4><p class="dig-desc ko">한국 사람들이 실제로 즐기는 문화</p><p class="dig-desc en">Join the rhythms of real local life</p></div>
-          <div class="dig-card reveal d4"><div class="dig-icon">🤝</div><h4 class="dig-title ko">진짜 인연</h4><h4 class="dig-title en">Real Connection</h4><p class="dig-desc ko">장소를 통해 사람과 연결되는 진짜 관계</p><p class="dig-desc en">Find friends through shared places</p></div>
+        <div class="dig-labels">
+          <div class="dig-label"><div class="dig-dot">🏘️</div><span class="ko">관광객이 모르는 진짜 동네 탐색</span><span class="en">Explore streets tourists never find</span></div>
+          <div class="dig-label"><div class="dig-dot">🍱</div><span class="ko">매주 가는 현지인만 아는 맛집</span><span class="en">Food picks from people who eat there every week</span></div>
+          <div class="dig-label"><div class="dig-dot">👣</div><span class="ko">한국인들이 실제로 즐기는 문화와 습관</span><span class="en">Join the real rhythms of local life</span></div>
+          <div class="dig-label"><div class="dig-dot">🤝</div><span class="ko">장소를 통해 사람과 연결되는 진짜 인연</span><span class="en">Find friends through shared places</span></div>
         </div>
+      </div>
+      <div class="dig-photo-grid reveal d2">
+        <div class="dig-photo" style="background:linear-gradient(135deg,#C8EEE8,#88CCC8)">🏙️</div>
+        <div class="dig-photo" style="background:linear-gradient(135deg,#FFE8C0,#FFCA80)">🍜</div>
+        <div class="dig-photo" style="background:linear-gradient(135deg,#E0D8F8,#C0B0EE)">🌸</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ETIQUETTE GUIDE -->
+<section class="section etiquette" id="etiquette">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow ko">문화 &amp; 에티켓 가이드</span><span class="sec-eyebrow en">Culture &amp; Etiquette</span>
+      <h2 class="sec-title">
+        <span class="ko">한국에서 꼭 알아야 할 <span class="point">에티켓 가이드</span></span>
+        <span class="en">Essential Korean <span class="point">etiquette guide</span></span>
+      </h2>
+      <p class="sec-sub">
+        <span class="ko">가이드북에 없는 진짜 한국 생활 예절. 앱 안에서 언제든지 확인하세요.</span>
+        <span class="en">Real Korean etiquette you won't find in guidebooks. Always available inside the app.</span>
+      </p>
+    </div>
+    <div class="etiq-grid">
+      <div class="etiq-card reveal d1"><div class="etiq-icon">🍽️</div><h3 class="etiq-title ko">식사 예절</h3><h3 class="etiq-title en">Dining Etiquette</h3><p class="etiq-desc ko">어른보다 먼저 드시지 않고, 어른이 앉은 후 앉습니다. 술잔은 두 손으로 받으세요.</p><p class="etiq-desc en">Don't eat before elders. Sit after elders. Receive glasses with two hands.</p></div>
+      <div class="etiq-card reveal d2"><div class="etiq-icon">🚇</div><h3 class="etiq-title ko">대중교통</h3><h3 class="etiq-title en">Public Transport</h3><p class="etiq-desc ko">노약자석은 빈 자리여도 앉지 마세요. 전화 통화는 낮은 목소리로. 음식 섭취 금지.</p><p class="etiq-desc en">Don't sit in priority seats even when empty. Speak softly on calls. No eating.</p></div>
+      <div class="etiq-card reveal d3"><div class="etiq-icon">👟</div><h3 class="etiq-title ko">실내 예절</h3><h3 class="etiq-title en">Indoor Manners</h3><p class="etiq-desc ko">집이나 일부 식당에서는 신발을 벗어야 합니다. 입구에서 확인하세요.</p><p class="etiq-desc en">Remove shoes at homes and some restaurants. Check at the entrance.</p></div>
+      <div class="etiq-card reveal d1"><div class="etiq-icon">🎁</div><h3 class="etiq-title ko">선물 문화</h3><h3 class="etiq-title en">Gift Culture</h3><p class="etiq-desc ko">선물을 바로 열지 않는 것이 예의입니다. 두 손으로 주고받으세요.</p><p class="etiq-desc en">It's polite not to open gifts immediately. Give and receive with both hands.</p></div>
+      <div class="etiq-card reveal d2"><div class="etiq-icon">💳</div><h3 class="etiq-title ko">결제 &amp; 팁</h3><h3 class="etiq-title en">Payment &amp; Tipping</h3><p class="etiq-desc ko">한국은 팁 문화가 없습니다. 일부 소규모 가게는 현금만 받으니 미리 확인하세요.</p><p class="etiq-desc en">No tipping culture in Korea. Some small shops are cash-only — check first.</p></div>
+      <div class="etiq-card reveal d3"><div class="etiq-icon">🗣️</div><h3 class="etiq-title ko">경어 사용</h3><h3 class="etiq-title en">Honorifics</h3><p class="etiq-desc ko">나이에 따라 존댓말을 씁니다. 모를 때는 공손하게 먼저 인사하면 됩니다.</p><p class="etiq-desc en">Respectful language varies by age. When unsure, a polite greeting always works.</p></div>
+    </div>
+    <div class="tips-wrap reveal d1">
+      <div class="tip-box" style="flex:1">
+        <span class="tip-badge">TIP!</span>
+        <p class="tip-text ko">한국에서는 나이를 묻는 것이 실례가 아닙니다 — 적절한 경어를 쓰기 위해서예요. 당황하지 마세요!</p>
+        <p class="tip-text en">Koreans often ask your age — not rude, just needed for proper honorifics. Don't be surprised!</p>
+      </div>
+      <div class="tip-box" style="flex:1">
+        <span class="tip-badge">TIP!</span>
+        <p class="tip-text ko">한국 식당에서는 물이 보통 셀프입니다. 테이블 위 버튼을 누르거나 직접 가져오세요.</p>
+        <p class="tip-text en">Water is usually self-serve in Korean restaurants. Press the table button or help yourself.</p>
       </div>
     </div>
   </div>
@@ -1037,26 +863,35 @@
 
 <!-- WHY NOW -->
 <section class="section whynow" id="whynow">
-  <div class="whynow-circle wc1"></div>
-  <div class="whynow-circle wc2"></div>
-  <div class="container" style="position:relative;z-index:1">
+  <div class="container">
     <div class="sec-header reveal">
-      <span class="eyebrow eyebrow-dot ko">왜 지금인가</span>
-      <span class="eyebrow eyebrow-dot en">Why Now</span>
-      <h2 class="sec-title-lg">
-        <span class="ko">지금이 바로 <strong>그 순간입니다</strong></span>
-        <span class="en">The moment <strong>is now</strong></span>
+      <span class="sec-eyebrow ko">왜 지금인가</span><span class="sec-eyebrow en">Why Now</span>
+      <h2 class="sec-title">
+        <span class="ko">지금이 바로 <span class="point">그 순간</span>입니다</span>
+        <span class="en">The moment <span class="point">is now</span></span>
       </h2>
       <p class="sec-sub">
         <span class="ko">한국을 찾는 외국인이 빠르게 늘고 있습니다. 그리고 그들은 더 이상 표면적인 관광에 만족하지 않습니다.</span>
-        <span class="en">More foreigners are coming to Korea than ever. And they want more than surface tourism — they want to live it and belong somewhere.</span>
+        <span class="en">More foreigners than ever are coming to Korea — and they want more than surface tourism.</span>
       </p>
     </div>
-    <div class="whynow-grid">
-      <div class="whynow-item reveal d1"><div class="whynow-icon">✈️</div><div class="whynow-stat ko">역대 최고</div><div class="whynow-stat en">Record High</div><div class="whynow-label ko">한국 방문 외국인 수</div><div class="whynow-label en">Foreign visitors &amp; residents</div></div>
-      <div class="whynow-item reveal d2"><div class="whynow-icon">🏠</div><div class="whynow-stat ko">빠른 증가</div><div class="whynow-stat en">Fast Rising</div><div class="whynow-label ko">장기 체류 &amp; 거주 외국인</div><div class="whynow-label en">Long-term stays &amp; residency</div></div>
-      <div class="whynow-item reveal d3"><div class="whynow-icon">🔍</div><div class="whynow-stat ko">폭발적 수요</div><div class="whynow-stat en">Surging</div><div class="whynow-label ko">로컬 경험에 대한 관심</div><div class="whynow-label en">Demand for authentic experiences</div></div>
-      <div class="whynow-item reveal d4"><div class="whynow-icon">🌐</div><div class="whynow-stat ko">최고조</div><div class="whynow-stat en">Peak Interest</div><div class="whynow-label ko">글로벌 교류와 언어 교환</div><div class="whynow-label en">Cultural &amp; language exchange</div></div>
+    <div class="stat-grid">
+      <div class="stat-card reveal d1"><div class="stat-icon">✈️</div><div class="stat-num ko">역대 최고</div><div class="stat-num en">Record High</div><div class="stat-label ko">한국 방문 외국인 수</div><div class="stat-label en">Foreign visitors to Korea</div></div>
+      <div class="stat-card reveal d2"><div class="stat-icon">🏠</div><div class="stat-num ko">빠른 증가</div><div class="stat-num en">Fast Rising</div><div class="stat-label ko">장기 체류 &amp; 거주 외국인</div><div class="stat-label en">Long-term foreign residents</div></div>
+      <div class="stat-card reveal d3"><div class="stat-icon">🔍</div><div class="stat-num ko">폭발적 수요</div><div class="stat-num en">Surging</div><div class="stat-label ko">로컬 경험에 대한 관심</div><div class="stat-label en">Demand for authentic experiences</div></div>
+      <div class="stat-card reveal d4"><div class="stat-icon">🌐</div><div class="stat-num ko">최고조</div><div class="stat-num en">Peak</div><div class="stat-label ko">글로벌 교류 &amp; 언어 교환</div><div class="stat-label en">Cultural &amp; language exchange</div></div>
+    </div>
+    <div class="tips-wrap reveal d2" style="margin-top:clamp(28px,4vw,44px)">
+      <div class="tip-box" style="flex:1">
+        <span class="tip-badge">INFO</span>
+        <p class="tip-text ko">기존 플랫폼들은 관광객 중심이거나 단기 방문 위주입니다. Localoop Korea는 장기 거주 외국인을 위한 진짜 생활 플랫폼입니다.</p>
+        <p class="tip-text en">Existing platforms focus on tourists and short-term visitors. Localoop Korea is built for long-term foreign residents who want to truly live here.</p>
+      </div>
+      <div class="tip-box" style="flex:1;background:rgba(255,138,0,.85)">
+        <span class="tip-badge" style="color:var(--orange)">WHY US</span>
+        <p class="tip-text ko">외국인과 한국인을 동시에 연결하는 플랫폼은 Localoop Korea가 처음입니다. 양방향 문화 교류의 새로운 기준.</p>
+        <p class="tip-text en">Localoop Korea is the first platform to bridge foreigners and Koreans together. A new standard for two-way cultural exchange.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1065,119 +900,116 @@
 <section class="section apppreview" id="apppreview">
   <div class="container">
     <div class="sec-header reveal">
-      <span class="eyebrow eyebrow-dot ko">앱 미리보기</span>
-      <span class="eyebrow eyebrow-dot en">App Preview</span>
-      <h2 class="sec-title-lg">
-        <span class="ko">이런 화면으로 <strong>만나실 거예요</strong></span>
-        <span class="en">Here's what <strong>the app looks like</strong></span>
+      <span class="sec-eyebrow ko">앱 미리보기</span><span class="sec-eyebrow en">App Preview</span>
+      <h2 class="sec-title">
+        <span class="ko">이런 화면으로 <span class="point">만나실 거예요</span></span>
+        <span class="en">Here's <span class="point">what the app looks like</span></span>
       </h2>
       <p class="sec-sub">
-        <span class="ko">지도, 에티켓 가이드, 맛집, 모임, 프로필까지 — 한 앱에서 모두.</span>
-        <span class="en">Map, etiquette, local food, meetups, community — all in one app.</span>
+        <span class="ko">지도, 에티켓, 맛집, 모임, 프로필 — 한 앱에서 모두 해결하세요.</span>
+        <span class="en">Map, etiquette, local food, meetups, and your community profile — all in one app.</span>
       </p>
     </div>
-    <div class="screens-wrap">
-      <div class="screen-item reveal d1">
-        <div class="mini-phone"><div class="mini-phone-screen">
-          <div class="mini-header"><span class="ko">🗺️ 지역 탐색</span><span class="en">🗺️ Map</span><span>···</span></div>
-          <div class="mini-body"><div class="mini-bg-map">
-            <div class="mini-pin" style="top:20%;left:30%;background:var(--yellow)"><div class="mini-pin-inner">🍜</div></div>
-            <div class="mini-pin" style="top:45%;left:55%;background:var(--red)"><div class="mini-pin-inner">☕</div></div>
-            <div class="mini-pin" style="top:60%;left:25%;background:var(--text)"><div class="mini-pin-inner" style="color:var(--yellow)">📍</div></div>
+    <div class="screens">
+      <div class="sc-wrap reveal d1">
+        <div class="mini"><div class="mini-s">
+          <div class="mh"><span class="mh-txt ko">🗺️ 지역 지도</span><span class="mh-txt en">🗺️ Map</span><span style="font-size:7px;color:var(--text-3)">···</span></div>
+          <div class="mb"><div class="mb-map">
+            <div class="mb-pin" style="top:30%;left:35%">📍</div>
+            <div class="mb-pin" style="top:50%;left:60%">🍜</div>
+            <div class="mb-pin" style="top:20%;left:65%">☕</div>
           </div></div>
+          <div class="mf"><div class="mft on"><span class="mft-ic">🗺️</span><span class="ko">지도</span><span class="en">Map</span></div><div class="mft"><span class="mft-ic">🔍</span><span class="ko">탐색</span><span class="en">Explore</span></div><div class="mft"><span class="mft-ic">📅</span><span class="ko">모임</span><span class="en">Events</span></div><div class="mft"><span class="mft-ic">👤</span><span class="ko">나</span><span class="en">Me</span></div></div>
         </div></div>
-        <span class="screen-label ko">지도 탐색</span><span class="screen-label en">Local Map</span>
+        <span class="sc-label ko">지도 탐색</span><span class="sc-label en">Local Map</span>
       </div>
-      <div class="screen-item reveal d2">
-        <div class="mini-phone"><div class="mini-phone-screen">
-          <div class="mini-header"><span class="ko">🙏 에티켓</span><span class="en">🙏 Etiquette</span><span>···</span></div>
-          <div class="mini-body"><div class="mini-etiq">
-            <div class="mini-etiq-item ko">🍽️ 어른보다 먼저 식사하지 않아요</div>
-            <div class="mini-etiq-item en">🍽️ Don't eat before elders</div>
-            <div class="mini-etiq-item ko">🚇 노약자석은 비워두세요</div>
-            <div class="mini-etiq-item en">🚇 Keep priority seats empty</div>
-            <div class="mini-etiq-item ko">🎁 선물은 바로 열지 않아요</div>
-            <div class="mini-etiq-item en">🎁 Don't open gifts right away</div>
-            <div class="mini-etiq-item ko">👟 실내에서는 신발을 벗어요</div>
-            <div class="mini-etiq-item en">👟 Remove shoes indoors</div>
+      <div class="sc-wrap reveal d2">
+        <div class="mini"><div class="mini-s">
+          <div class="mh"><span class="mh-txt ko">🍜 현지 맛집</span><span class="mh-txt en">🍜 Local Food</span><span style="font-size:7px;color:var(--text-3)">···</span></div>
+          <div class="mb"><div class="mb-list">
+            <div class="mb-li">🍱 <span class="ko">을지로 솥밥 골목</span><span class="en">Euljiro Rice Pot Alley</span></div>
+            <div class="mb-li">🥩 <span class="ko">마포 뒷골목 고기집</span><span class="en">Mapo BBQ Back Alley</span></div>
+            <div class="mb-li">🍲 <span class="ko">연남동 할머니 국수</span><span class="en">Yeonnam Grandma Noodles</span></div>
+            <div class="mb-li">☕ <span class="ko">성수 숨겨진 카페</span><span class="en">Seongsu Hidden Café</span></div>
           </div></div>
+          <div class="mf"><div class="mft"><span class="mft-ic">🗺️</span></div><div class="mft on"><span class="mft-ic">🔍</span></div><div class="mft"><span class="mft-ic">📅</span></div><div class="mft"><span class="mft-ic">👤</span></div></div>
         </div></div>
-        <span class="screen-label ko">에티켓 가이드</span><span class="screen-label en">Etiquette</span>
+        <span class="sc-label ko">로컬 맛집</span><span class="sc-label en">Local Food</span>
       </div>
-      <div class="screen-item reveal d3">
-        <div class="mini-phone"><div class="mini-phone-screen">
-          <div class="mini-header"><span class="ko">🍜 현지 맛집</span><span class="en">🍜 Local Food</span><span>···</span></div>
-          <div class="mini-body"><div class="mini-list">
-            <div class="mini-list-item"><span class="mli-icon">🍱</span><div><div class="mli-text ko">을지로 솥밥 골목</div><div class="mli-text en">Euljiro Rice Pot Alley</div><div style="font-size:6px;color:#aaa;font-weight:600">★4.9 · LOCAL PICK</div></div></div>
-            <div class="mini-list-item"><span class="mli-icon">🥩</span><div><div class="mli-text ko">마포 뒷골목 고기집</div><div class="mli-text en">Mapo Back-alley BBQ</div><div style="font-size:6px;color:#aaa;font-weight:600">★4.8 · HIDDEN GEM</div></div></div>
-            <div class="mini-list-item"><span class="mli-icon">🍲</span><div><div class="mli-text ko">연남동 할머니 국수</div><div class="mli-text en">Yeonnam Grandma Noodles</div><div style="font-size:6px;color:#aaa;font-weight:600">★4.7 · 30년 전통</div></div></div>
+      <div class="sc-wrap reveal d3">
+        <div class="mini"><div class="mini-s">
+          <div class="mh"><span class="mh-txt ko">🙏 에티켓</span><span class="mh-txt en">🙏 Etiquette</span><span style="font-size:7px;color:var(--text-3)">···</span></div>
+          <div class="mb"><div class="mb-etiq">
+            <div class="mb-ei ko">🍽️ 어른보다 먼저 먹지 않아요</div><div class="mb-ei en">🍽️ Don't eat before elders</div>
+            <div class="mb-ei ko">🚇 노약자석은 비워두세요</div><div class="mb-ei en">🚇 Keep priority seats empty</div>
+            <div class="mb-ei ko">👟 실내 신발 벗기</div><div class="mb-ei en">👟 Remove shoes indoors</div>
+            <div class="mb-ei ko">🎁 선물은 바로 열지 않아요</div><div class="mb-ei en">🎁 Don't open gifts right away</div>
           </div></div>
+          <div class="mf"><div class="mft"><span class="mft-ic">🗺️</span></div><div class="mft"><span class="mft-ic">🔍</span></div><div class="mft on"><span class="mft-ic">📅</span></div><div class="mft"><span class="mft-ic">👤</span></div></div>
         </div></div>
-        <span class="screen-label ko">로컬 맛집</span><span class="screen-label en">Local Food</span>
+        <span class="sc-label ko">에티켓 가이드</span><span class="sc-label en">Etiquette</span>
       </div>
-      <div class="screen-item reveal d4">
-        <div class="mini-phone"><div class="mini-phone-screen">
-          <div class="mini-header"><span class="ko">📅 모임</span><span class="en">📅 Meetups</span><span>···</span></div>
-          <div class="mini-body"><div class="mini-meet">
-            <div class="mini-meet-card"><div class="mmc-top"><div class="mmc-avatar" style="background:var(--yellow)">J</div><span class="mmc-name ko">Ji-yeon 주최</span><span class="mmc-name en">Ji-yeon</span></div><div class="mmc-title ko">🗣️ 홍대 언어 교환</div><div class="mmc-title en">🗣️ Hongdae Exchange</div><div class="mmc-info ko">토요일 · 12명</div><div class="mmc-info en">Sat · 12 going</div></div>
-            <div class="mini-meet-card"><div class="mmc-top"><div class="mmc-avatar" style="background:var(--red);color:#fff">M</div><span class="mmc-name ko">Marco 주최</span><span class="mmc-name en">Marco</span></div><div class="mmc-title ko">🍜 을지로 야시장</div><div class="mmc-title en">🍜 Night Market Tour</div><div class="mmc-info ko">금요일 · 8명</div><div class="mmc-info en">Fri · 8 going</div></div>
+      <div class="sc-wrap reveal d4">
+        <div class="mini"><div class="mini-s">
+          <div class="mh"><span class="mh-txt ko">📅 모임</span><span class="mh-txt en">📅 Meetups</span><span style="font-size:7px;color:var(--text-3)">···</span></div>
+          <div class="mb"><div class="mb-meet">
+            <div class="mb-mc"><div class="mb-mc-top"><div class="mb-mc-av" style="background:var(--teal-light);color:var(--teal)">J</div><span class="mb-mc-nm ko">Ji-yeon 주최</span><span class="mb-mc-nm en">Ji-yeon</span></div><div class="mb-mc-t ko">🗣️ 홍대 언어 교환</div><div class="mb-mc-t en">🗣️ Hongdae Exchange</div><div class="mb-mc-i ko">토 · 12명</div><div class="mb-mc-i en">Sat · 12 going</div></div>
+            <div class="mb-mc"><div class="mb-mc-top"><div class="mb-mc-av" style="background:var(--yellow-pale);color:var(--orange)">M</div><span class="mb-mc-nm ko">Marco 주최</span><span class="mb-mc-nm en">Marco</span></div><div class="mb-mc-t ko">🍜 을지로 야시장</div><div class="mb-mc-t en">🍜 Night Market Tour</div><div class="mb-mc-i ko">금 · 8명</div><div class="mb-mc-i en">Fri · 8 going</div></div>
           </div></div>
+          <div class="mf"><div class="mft"><span class="mft-ic">🗺️</span></div><div class="mft"><span class="mft-ic">🔍</span></div><div class="mft on"><span class="mft-ic">📅</span></div><div class="mft"><span class="mft-ic">👤</span></div></div>
         </div></div>
-        <span class="screen-label ko">모임 &amp; 이벤트</span><span class="screen-label en">Meetups</span>
+        <span class="sc-label ko">모임 &amp; 이벤트</span><span class="sc-label en">Meetups</span>
       </div>
-      <div class="screen-item reveal d5">
-        <div class="mini-phone"><div class="mini-phone-screen">
-          <div class="mini-header"><span class="ko">👤 프로필</span><span class="en">👤 Profile</span><span>···</span></div>
-          <div class="mini-body"><div class="mini-profile">
-            <div class="mp-av">🧑</div>
-            <div class="mp-name ko">서울 마포구 · 외국인</div>
-            <div class="mp-name en">Mapo-gu · Foreigner</div>
-            <div class="mp-tags"><span class="mp-tag ko">언어교환</span><span class="mp-tag en">Exchange</span><span class="mp-tag ko">로컬 디깅</span><span class="mp-tag en">Local dig</span></div>
-            <div class="mp-stats">
-              <div class="mp-stat"><div class="mp-stat-n">24</div><div class="mp-stat-l ko">방문</div><div class="mp-stat-l en">Places</div></div>
-              <div class="mp-stat"><div class="mp-stat-n">8</div><div class="mp-stat-l ko">모임</div><div class="mp-stat-l en">Meets</div></div>
-              <div class="mp-stat"><div class="mp-stat-n">15</div><div class="mp-stat-l ko">친구</div><div class="mp-stat-l en">Friends</div></div>
+      <div class="sc-wrap reveal d5">
+        <div class="mini"><div class="mini-s">
+          <div class="mh"><span class="mh-txt ko">👤 프로필</span><span class="mh-txt en">👤 Profile</span><span style="font-size:7px;color:var(--text-3)">···</span></div>
+          <div class="mb"><div class="mb-prof">
+            <div class="mb-pr-av">🧑</div>
+            <div class="mb-pr-nm ko">서울 마포구 · 외국인</div><div class="mb-pr-nm en">Mapo-gu, Seoul · Foreigner</div>
+            <div class="mb-pr-tags"><span class="mb-pr-tag ko">언어교환</span><span class="mb-pr-tag en">Exchange</span><span class="mb-pr-tag ko">로컬 디깅</span><span class="mb-pr-tag en">Local dig</span></div>
+            <div class="mb-pr-stats">
+              <div class="mb-pr-s"><div class="mb-pr-sn">24</div><div class="mb-pr-sl ko">방문</div><div class="mb-pr-sl en">Places</div></div>
+              <div class="mb-pr-s"><div class="mb-pr-sn">8</div><div class="mb-pr-sl ko">모임</div><div class="mb-pr-sl en">Meets</div></div>
+              <div class="mb-pr-s"><div class="mb-pr-sn">15</div><div class="mb-pr-sl ko">친구</div><div class="mb-pr-sl en">Friends</div></div>
             </div>
           </div></div>
+          <div class="mf"><div class="mft"><span class="mft-ic">🗺️</span></div><div class="mft"><span class="mft-ic">🔍</span></div><div class="mft"><span class="mft-ic">📅</span></div><div class="mft on"><span class="mft-ic">👤</span></div></div>
         </div></div>
-        <span class="screen-label ko">커뮤니티 프로필</span><span class="screen-label en">Profile</span>
+        <span class="sc-label ko">커뮤니티 프로필</span><span class="sc-label en">Profile</span>
       </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section" id="cta">
-  <div class="cta-circle-1"></div>
-  <div class="cta-circle-2"></div>
+<section class="cta-sec" id="cta">
   <div class="container">
     <div class="cta-inner reveal">
       <div class="cta-eyebrow ko">🚀 곧 출시됩니다</div>
       <div class="cta-eyebrow en">🚀 Launching Soon</div>
       <h2 class="cta-title">
-        <span class="ko">한국 생활,<br><strong>지금 시작하세요</strong></span>
-        <span class="en">Start your<br><strong>Korea life now</strong></span>
+        <span class="ko">한국 생활,<br><em>지금 시작하세요</em></span>
+        <span class="en">Your Korea life<br><em>starts here</em></span>
       </h2>
       <p class="cta-sub">
-        <span class="ko">출시 알림을 받고 얼리액세스 혜택을 누리세요.</span>
-        <span class="en">Get notified at launch and unlock early access benefits.</span>
+        <span class="ko">출시 알림을 받고 얼리액세스 혜택을 먼저 누리세요.</span>
+        <span class="en">Get notified at launch and unlock early access benefits first.</span>
       </p>
-      <div class="cta-success" id="ctaSuccess">
+      <div class="cta-ok" id="ctaOk">
         <span>✅</span>
         <span class="ko">등록 완료! 출시 소식을 가장 먼저 전해드릴게요 🎉</span>
         <span class="en">You're on the list! We'll reach out at launch 🎉</span>
       </div>
-      <form class="cta-form" id="ctaForm" onsubmit="handleSubmit(event)">
+      <form class="cta-form" id="ctaForm" onsubmit="handleCta(event)">
         <input class="cta-input ko" type="email" placeholder="이메일 주소를 입력하세요" required autocomplete="email" />
         <input class="cta-input en" type="email" placeholder="Enter your email address"  required autocomplete="email" />
         <button class="cta-submit" type="submit">
-          <span class="ko">사전등록하기</span>
-          <span class="en">Join the Waitlist</span>
+          <span class="ko">사전등록</span><span class="en">Join Now</span>
         </button>
       </form>
       <p class="cta-note">
         <span class="ko">스팸 없이, 출시 소식만 보내드립니다</span>
-        <span class="en">No spam. Just the launch news.</span>
+        <span class="en">No spam. Just the launch news when it's ready.</span>
       </p>
     </div>
   </div>
@@ -1186,47 +1018,42 @@
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="footer-logo-circle">L</div>
-          <span>Localoop Korea</span>
-        </div>
-        <p class="footer-desc ko">외국인의 한국 생활을 로컬 디깅으로 바꾸는 지역 기반 생활 내비게이션·커뮤니티 플랫폼</p>
-        <p class="footer-desc en">A region-based living navigation and community platform for foreigners and Koreans.</p>
-        <div class="footer-lang">
-          <div class="lang-switcher">
+    <div class="foot-inner">
+      <div class="foot-brand">
+        <div class="foot-logo"><div class="foot-logo-mark">L</div><span>Localoop Korea</span></div>
+        <p class="foot-desc ko">외국인의 한국 생활을 로컬 디깅으로 바꾸는 지역 기반 생활 내비게이션·커뮤니티 플랫폼</p>
+        <p class="foot-desc en">A region-based living navigation and community platform turning life in Korea into local digging.</p>
+        <div class="foot-lang">
+          <div class="lang-sw">
             <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')">한국어</button>
             <button class="lang-btn"        data-lang="en" onclick="setLang('en')">English</button>
           </div>
         </div>
       </div>
       <div>
-        <div class="footer-nav-title ko">서비스</div>
-        <div class="footer-nav-title en">Service</div>
-        <div class="footer-links">
-          <a href="#features"   class="footer-link ko">핵심 기능</a><a href="#features"   class="footer-link en">Features</a>
-          <a href="#apppreview" class="footer-link ko">앱 미리보기</a><a href="#apppreview" class="footer-link en">App Preview</a>
-          <a href="#audience"   class="footer-link ko">서비스 소개</a><a href="#audience"   class="footer-link en">About</a>
-          <a href="#cta"        class="footer-link ko">사전등록</a><a href="#cta"        class="footer-link en">Join Waitlist</a>
+        <div class="foot-nav-title ko">서비스</div><div class="foot-nav-title en">Service</div>
+        <div class="foot-links">
+          <a href="#features"   class="foot-link ko">핵심 기능</a><a href="#features"   class="foot-link en">Features</a>
+          <a href="#apppreview" class="foot-link ko">앱 미리보기</a><a href="#apppreview" class="foot-link en">App Preview</a>
+          <a href="#howto"      class="foot-link ko">이용 방법</a><a href="#howto"      class="foot-link en">How It Works</a>
+          <a href="#cta"        class="foot-link ko">사전등록</a><a href="#cta"        class="foot-link en">Join Waitlist</a>
         </div>
       </div>
       <div>
-        <div class="footer-nav-title ko">더보기</div>
-        <div class="footer-nav-title en">More</div>
-        <div class="footer-links">
-          <a href="#" class="footer-link">Instagram</a>
-          <a href="#" class="footer-link ko">개인정보처리방침</a><a href="#" class="footer-link en">Privacy Policy</a>
-          <a href="#" class="footer-link ko">이용약관</a><a href="#" class="footer-link en">Terms of Service</a>
-          <a href="mailto:hello@localoop.kr" class="footer-link ko">문의하기</a>
-          <a href="mailto:hello@localoop.kr" class="footer-link en">Contact Us</a>
+        <div class="foot-nav-title ko">더보기</div><div class="foot-nav-title en">More</div>
+        <div class="foot-links">
+          <a href="#" class="foot-link">Instagram</a>
+          <a href="#" class="foot-link ko">개인정보처리방침</a><a href="#" class="foot-link en">Privacy Policy</a>
+          <a href="#" class="foot-link ko">이용약관</a><a href="#" class="foot-link en">Terms of Service</a>
+          <a href="mailto:hello@localoop.kr" class="foot-link ko">문의하기</a>
+          <a href="mailto:hello@localoop.kr" class="foot-link en">Contact Us</a>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="foot-bottom">
       <span>© 2025 Localoop Korea. All rights reserved.</span>
-      <span style="color:var(--yellow);font-weight:600" class="ko">외국인과 한국인을 잇는 플랫폼</span>
-      <span style="color:var(--yellow);font-weight:600" class="en">Connecting foreigners &amp; Koreans through local life</span>
+      <span style="color:var(--teal);font-weight:600" class="ko">외국인과 한국인을 잇는 플랫폼</span>
+      <span style="color:var(--teal);font-weight:600" class="en">Connecting foreigners &amp; Koreans through local life</span>
     </div>
   </div>
 </footer>
@@ -1243,19 +1070,16 @@
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20), { passive: true });
 
-  new IntersectionObserver((entries, obs) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' })
-  .observe && document.querySelectorAll('.reveal').forEach(el =>
+  document.querySelectorAll('.reveal').forEach(el =>
     new IntersectionObserver((entries, obs) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' }).observe(el)
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }).observe(el)
   );
 
-  function handleSubmit(e) {
+  function handleCta(e) {
     e.preventDefault();
     document.getElementById('ctaForm').style.display = 'none';
-    document.getElementById('ctaSuccess').classList.add('visible');
+    document.getElementById('ctaOk').classList.add('show');
   }
 </script>
 </body>
