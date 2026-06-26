@@ -350,6 +350,33 @@
     .feat-title { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 8px; line-height: 1.3; }
     .feat-desc  { font-size: .875rem; color: var(--text-2); line-height: 1.65; }
 
+    /* ─── AI TECH SECTION ─── */
+    .ai-sec { background: var(--text); padding: var(--sp) 0; }
+    .ai-sec .sec-eyebrow { color: var(--teal-mid); }
+    .ai-sec .sec-eyebrow::before { background: var(--teal-mid); }
+    .ai-sec .sec-title { color: var(--white); }
+    .ai-sec .sec-title .point { color: var(--yellow); }
+    .ai-sec .sec-sub { color: rgba(255,255,255,.6); max-width: 640px; }
+    .ai-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 700px) { .ai-grid { grid-template-columns: repeat(3, 1fr); } }
+    .ai-card {
+      background: rgba(255,255,255,.05); border-radius: var(--r-xl);
+      border: 1px solid rgba(255,255,255,.1); padding: 28px 24px;
+      position: relative; transition: background .2s, transform .2s;
+    }
+    .ai-card:hover { background: rgba(255,255,255,.09); transform: translateY(-2px); }
+    .ai-card-icon { font-size: 2rem; margin-bottom: 14px; }
+    .ai-card-title { font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 10px; line-height: 1.35; }
+    .ai-card-desc { font-size: .875rem; color: rgba(255,255,255,.6); line-height: 1.65; }
+    .patent-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: .7rem; font-weight: 700; letter-spacing: .03em;
+      background: rgba(255,214,0,.12); color: var(--yellow);
+      border: 1px solid rgba(255,214,0,.3); border-radius: var(--r-full);
+      padding: 3px 10px; margin-top: 14px;
+    }
+    .patent-badge::before { content: '⚡'; font-size: .65rem; }
+
     /* ─── LOCAL DIGGING ─── */
     .digging { background: var(--white); }
     .dig-inner { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
@@ -545,8 +572,8 @@
           <span class="en">Turn life in Korea<br>into <em>Local Digging</em></span>
         </h1>
         <p class="hero-sub reveal d2">
-          <span class="ko">언어 장벽, 낯선 동네, 외로운 일상 — Localoop Korea가 외국인의 한국 생활을 더 쉽고, 더 즐겁고, 더 로컬하게 만듭니다.</span>
-          <span class="en">Language barriers, unfamiliar streets, the loneliness of a new city — Localoop Korea makes life in Korea easier, more local, and genuinely connected.</span>
+          <span class="ko">언어 장벽, 낯선 동네, 외로운 일상 — AI가 당신의 위치·언어 수준·체류 목적을 실시간으로 반영해 지금 가장 필요한 생활 안내와 로컬 경험을 자동으로 연결합니다.</span>
+          <span class="en">Language barriers, unfamiliar streets, the loneliness of a new city — AI reads your location, language level, and purpose of stay in real time to guide you to exactly what you need, right now.</span>
         </p>
         <div class="hero-btns reveal d3">
           <a href="https://localoop-korea-t9af.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-yellow btn-lg">
@@ -617,6 +644,52 @@
   <svg class="hero-wave" viewBox="0 0 1440 52" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
     <path d="M0 52L60 44C120 36 240 20 360 16C480 12 600 20 720 26C840 32 960 36 1080 32C1200 28 1320 16 1380 10L1440 4V52H0Z" fill="#FFFFFF"/>
   </svg>
+</section>
+
+<!-- AI TECH -->
+<section class="ai-sec" id="ai">
+  <div class="container">
+    <div class="sec-header reveal">
+      <span class="sec-eyebrow ko">AI 기술</span><span class="sec-eyebrow en">AI Technology</span>
+      <h2 class="sec-title">
+        <span class="ko">AI 기술이 만드는 <span class="point">차이</span></span>
+        <span class="en">The Difference <span class="point">AI Makes</span></span>
+      </h2>
+      <p class="sec-sub">
+        <span class="ko">로컬루프 코리아는 단순 정보 제공 앱이 아닙니다. 3종의 특허 기반 AI 엔진이 당신의 상황을 실시간으로 읽고, 지금 가장 필요한 것을 자동으로 연결합니다.</span>
+        <span class="en">Localoop Korea isn't just an info app. Three patented AI engines read your situation in real time and connect you to exactly what you need, right now.</span>
+      </p>
+    </div>
+    <div class="ai-grid">
+      <div class="ai-card reveal d1">
+        <div class="ai-card-icon">🧠</div>
+        <div class="ai-card-title ko">생활 태스크 그래프 엔진</div>
+        <div class="ai-card-title en">Life Task Graph Engine</div>
+        <p class="ai-card-desc ko">당신의 위치·언어 수준·기해결 과업을 반영해 지금 해야 할 일을 동적으로 산출합니다.</p>
+        <p class="ai-card-desc en">Dynamically calculates what you need to do right now based on your location, language level, and completed tasks.</p>
+        <div class="patent-badge ko">특허 출원 중</div>
+        <div class="patent-badge en">Patent Pending</div>
+      </div>
+      <div class="ai-card reveal d2">
+        <div class="ai-card-icon">📍</div>
+        <div class="ai-card-title ko">외국인 친화도 자동 등급화 엔진</div>
+        <div class="ai-card-title en">Auto Friendliness Rating Engine</div>
+        <p class="ai-card-desc ko">공개 웹 데이터를 NLP로 분석해 장소별 외국인 이용 가능성을 S~D 5단계로 자동 등급화합니다.</p>
+        <p class="ai-card-desc en">Analyzes public web data with NLP to auto-rate every place from S to D for foreigner accessibility.</p>
+        <div class="patent-badge ko">특허 출원 중</div>
+        <div class="patent-badge en">Patent Pending</div>
+      </div>
+      <div class="ai-card reveal d3">
+        <div class="ai-card-icon">🗺️</div>
+        <div class="ai-card-title ko">로컬 소비 데이터 코스 추천 엔진</div>
+        <div class="ai-card-title en">Local Data Course Engine</div>
+        <p class="ai-card-desc ko">한국인 소비 데이터·리뷰·검색 패턴으로 로컬성 지수를 산출하고 개인화 코스를 자동 조합합니다.</p>
+        <p class="ai-card-desc en">Calculates a Locality Index from Korean consumer behavior and auto-builds personalized local courses.</p>
+        <div class="patent-badge ko">특허 출원 중</div>
+        <div class="patent-badge en">Patent Pending</div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -722,6 +795,8 @@
             <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">외국인·한국인 친구와 자연스러운 연결</span><span class="en">Connect with both foreigners and Korean friends</span></div>
             <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">에티켓·결제·교통 실용 가이드 제공</span><span class="en">Practical guides for etiquette, payment, transport</span></div>
             <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">행정 절차도 단계별로 쉽게 해결</span><span class="en">Step-by-step help for admin tasks</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">AI가 체류 단계별로 지금 해야 할 일을 자동 안내</span><span class="en">AI guides you through what to do at each stage of your stay</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">외국인 친화도 S~D 등급으로 안심하고 장소 이용</span><span class="en">Use places confidently with S~D foreigner-friendliness ratings</span></div>
           </div>
           <a href="https://localoop-korea-t9af.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-teal" style="font-size:.875rem;padding:11px 24px">
             <span class="ko">나는 외국인이에요 →</span><span class="en">I'm a foreigner →</span>
@@ -745,6 +820,7 @@
             <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">내가 아는 동네·맛집을 세계에 알려주세요</span><span class="en">Share your local spots with a global audience</span></div>
             <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">외국인의 한국 생활을 돕는 로컬 가이드</span><span class="en">Become a local guide for foreigners</span></div>
             <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">글로벌 감각으로 내 커뮤니티를 확장</span><span class="en">Expand your circle with a global mindset</span></div>
+            <div class="aud-point"><div class="aud-tick">✓</div><span class="ko">실시간 번역 채팅으로 언어 걱정 없이 외국인과 소통</span><span class="en">Chat with foreigners without language barriers via real-time translation</span></div>
           </div>
           <a href="https://localoop-korea-t9af.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-yellow" style="font-size:.875rem;padding:11px 24px">
             <span class="ko">나는 한국인이에요 →</span><span class="en">I'm Korean →</span>
@@ -761,34 +837,34 @@
     <div class="sec-header reveal">
       <span class="sec-eyebrow ko">핵심 기능</span><span class="sec-eyebrow en">Core Features</span>
       <h2 class="sec-title">
-        <span class="ko">한국 생활에 필요한 <span class="point">모든 기능</span></span>
-        <span class="en">Everything you need for <span class="point">life in Korea</span></span>
+        <span class="ko">한국 생활에 필요한 모든 것을 <span class="point">하나의 플랫폼에서</span></span>
+        <span class="en">Everything you need for life in Korea — <span class="point">in one platform</span></span>
       </h2>
     </div>
     <div class="feat-grid">
       <div class="feat-card reveal d1">
         <div class="feat-img" style="background:linear-gradient(135deg,#D6F5F5,#A8E8E8)">📍</div>
-        <div class="feat-body"><div class="feat-tag ko">생활 내비게이션</div><div class="feat-tag en">Living Navigation</div><h3 class="feat-title ko">외국인 친화 장소 발견</h3><h3 class="feat-title en">Foreigner-Friendly Places</h3><p class="feat-desc ko">영어 메뉴, 카드 결제 가능한 식당·카페·관공서·병원을 지도에서 바로 찾아보세요.</p><p class="feat-desc en">Find restaurants, cafes, hospitals, and offices that are easy to navigate as a foreigner.</p></div>
+        <div class="feat-body"><div class="feat-tag ko">생활 내비게이션</div><div class="feat-tag en">Living Navigation</div><h3 class="feat-title ko">위치 기반 생활정보 탐색</h3><h3 class="feat-title en">Location-Based Living Search</h3><p class="feat-desc ko">지도 기반 인터페이스로 주변 장소·음식점·생활 편의시설을 탐색하고, 외국어 메뉴 여부·결제 편의성·외국어 응대 가능 여부를 함께 확인할 수 있습니다.</p><p class="feat-desc en">Browse nearby places, restaurants, and facilities on a map — and instantly see language support, payment options, and staff accessibility.</p></div>
       </div>
       <div class="feat-card reveal d2">
-        <div class="feat-img" style="background:linear-gradient(135deg,#FFF5E0,#FFE8A0)">🙏</div>
-        <div class="feat-body"><div class="feat-tag ko">문화 가이드</div><div class="feat-tag en">Culture Guide</div><h3 class="feat-title ko">에티켓 &amp; 문화 가이드</h3><h3 class="feat-title en">Etiquette &amp; Culture</h3><p class="feat-desc ko">한국에서 꼭 알아야 할 예절과 문화 팁. 가이드북에 없는 진짜 현지 감각.</p><p class="feat-desc en">Korean customs and social norms — the stuff guidebooks always skip.</p></div>
+        <div class="feat-img" style="background:linear-gradient(135deg,#FFF5E0,#FFE8A0)">🏅</div>
+        <div class="feat-body"><div class="feat-tag ko">AI 등급화</div><div class="feat-tag en">AI Rating</div><h3 class="feat-title ko">외국인 친화도 자동 등급화</h3><h3 class="feat-title en">Auto Foreigner-Friendliness Rating</h3><p class="feat-desc ko">웹 데이터 NLP 분석으로 장소별 외국인 이용 가능성을 S~D 5단계로 자동 산출합니다. 직접 방문하지 않아도 대규모 장소 데이터베이스가 자동으로 평가·갱신됩니다.</p><p class="feat-desc en">Using NLP analysis of web data, every place gets an auto-rated friendliness score from S to D — updated continuously without anyone needing to visit.</p></div>
       </div>
       <div class="feat-card reveal d3">
-        <div class="feat-img" style="background:linear-gradient(135deg,#FFE8E0,#FFCDB0)">🍜</div>
-        <div class="feat-body"><div class="feat-tag ko">로컬 디깅</div><div class="feat-tag en">Local Digging</div><h3 class="feat-title ko">현지인 추천 맛집</h3><h3 class="feat-title en">Local Food Picks</h3><p class="feat-desc ko">진짜 한국인이 즐겨 찾는 동네 맛집과 숨겨진 메뉴. 현지인의 직접 추천.</p><p class="feat-desc en">Authentic picks from real Koreans — not algorithm-ranked review aggregators.</p></div>
+        <div class="feat-img" style="background:linear-gradient(135deg,#E8F5FF,#C0DDFF)">📋</div>
+        <div class="feat-body"><div class="feat-tag ko">생활 과업</div><div class="feat-tag en">Life Tasks</div><h3 class="feat-title ko">생활 과업 기반 단계별 안내</h3><h3 class="feat-title en">Step-by-Step Life Task Guide</h3><p class="feat-desc ko">체류 단계(도착 초기·생활 안정기·장기 정착)에 따라 지금 해야 할 일을 자동으로 산출하고 안내합니다. "도착 1주일 내 해야 할 일"처럼 과업 단위로 패키지 형태로 제공합니다.</p><p class="feat-desc en">Based on your stage of stay — just arrived, settling in, or long-term — the app automatically surfaces what you need to do right now, packaged as clear task bundles.</p></div>
       </div>
       <div class="feat-card reveal d1">
-        <div class="feat-img" style="background:linear-gradient(135deg,#E8F5FF,#C0DDFF)">👥</div>
-        <div class="feat-body"><div class="feat-tag ko">커뮤니티</div><div class="feat-tag en">Community</div><h3 class="feat-title ko">지역 기반 친구 연결</h3><h3 class="feat-title en">Region-Based Connections</h3><p class="feat-desc ko">내 동네의 외국인/한국인 유저와 공통 관심사로 자연스럽게 연결하세요.</p><p class="feat-desc en">Meet foreigners and Koreans in your neighborhood through shared interests.</p></div>
+        <div class="feat-img" style="background:linear-gradient(135deg,#E0F5E8,#B0DDBA)">🗺️</div>
+        <div class="feat-body"><div class="feat-tag ko">로컬 디깅</div><div class="feat-tag en">Local Digging</div><h3 class="feat-title ko">개인화 로컬 경험 코스 추천</h3><h3 class="feat-title en">Personalized Local Experience Courses</h3><p class="feat-desc ko">한국인 소비 데이터·리뷰·검색 패턴을 분석한 로컬성 지수(LI)를 기반으로, 언어 수준·모험 성향·예산에 맞는 반나절·하루 로컬 경험 코스를 자동으로 조합해 제공합니다.</p><p class="feat-desc en">Using a Locality Index built from real Korean consumer data, the app builds half-day or full-day local courses matched to your language level, budget, and sense of adventure.</p></div>
       </div>
       <div class="feat-card reveal d2">
-        <div class="feat-img" style="background:linear-gradient(135deg,#EEE0FF,#D0B0FF)">📅</div>
-        <div class="feat-body"><div class="feat-tag ko">모임 &amp; 이벤트</div><div class="feat-tag en">Meetups</div><h3 class="feat-title ko">모임 &amp; 이벤트</h3><h3 class="feat-title en">Meetups &amp; Events</h3><p class="feat-desc ko">근처 모임을 찾거나 직접 만들어보세요. 언어 교환, 문화 체험, 동네 탐방까지.</p><p class="feat-desc en">Find or create local meetups. Language exchanges, cultural experiences, and more.</p></div>
+        <div class="feat-img" style="background:linear-gradient(135deg,#EEE0FF,#D0B0FF)">👥</div>
+        <div class="feat-body"><div class="feat-tag ko">커뮤니티</div><div class="feat-tag en">Community</div><h3 class="feat-title ko">Meetup · People 커뮤니티 연결</h3><h3 class="feat-title en">Meetup &amp; People Connection</h3><p class="feat-desc ko">지역 기반으로 외국인·한국인이 함께 참여하는 모임(언어 교환·취미·지역 탐방 등)을 개설하거나 참여할 수 있습니다. 관심사·언어·거주 지역을 고려한 교류 상대를 자동으로 추천합니다.</p><p class="feat-desc en">Create or join local meetups — language exchanges, hobby groups, neighborhood tours. The app recommends people to connect with based on your interests, language, and location.</p></div>
       </div>
       <div class="feat-card reveal d3">
-        <div class="feat-img" style="background:linear-gradient(135deg,#E0F5E8,#B0DDBA)">📖</div>
-        <div class="feat-body"><div class="feat-tag ko">실용 가이드</div><div class="feat-tag en">Practical Guide</div><h3 class="feat-title ko">실용 생활 가이드</h3><h3 class="feat-title en">Practical Living Guide</h3><p class="feat-desc ko">결제, 교통, 행정 절차를 단계별로 쉽게. 한국에서 혼자도 살아갈 수 있도록.</p><p class="feat-desc en">Step-by-step help for payments, transport, and admin — handle Korea on your own.</p></div>
+        <div class="feat-img" style="background:linear-gradient(135deg,#FFE8E0,#FFCDB0)">💬</div>
+        <div class="feat-body"><div class="feat-tag ko">번역 채팅</div><div class="feat-tag en">Translation Chat</div><h3 class="feat-title ko">실시간 다국어 번역 채팅</h3><h3 class="feat-title en">Real-Time Multilingual Chat</h3><p class="feat-desc ko">각자의 언어로 입력하면 상대방 언어로 자동 번역되어 표시됩니다. 원문과 번역문을 함께 보여주는 이중 언어 표기로 번역 품질을 직접 확인할 수 있습니다.</p><p class="feat-desc en">Type in your language — the other person reads it in theirs. Messages show both the original and the translation so you always know what was said.</p></div>
       </div>
     </div>
   </div>
@@ -985,6 +1061,10 @@
 <section class="cta-sec" id="cta">
   <div class="container">
     <div class="cta-inner reveal">
+      <p style="font-size:clamp(1rem,2.2vw,1.25rem);color:rgba(255,255,255,.9);font-weight:700;line-height:1.55;margin-bottom:28px;max-width:560px;margin-left:auto;margin-right:auto">
+        <span class="ko">278만 명의 외국인이 한국에 살고 있습니다.<br>그들을 위한 진짜 서비스가 시작됩니다.</span>
+        <span class="en">2.78 million foreigners call Korea home.<br>The service they've been waiting for is here.</span>
+      </p>
       <div class="cta-eyebrow ko">🚀 곧 출시됩니다</div>
       <div class="cta-eyebrow en">🚀 Launching Soon</div>
       <h2 class="cta-title">
