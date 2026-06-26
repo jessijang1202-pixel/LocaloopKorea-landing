@@ -151,7 +151,25 @@
     }
     .lang-btn.active { background: var(--white); color: var(--teal); font-weight: 700; box-shadow: 0 1px 5px rgba(0,0,0,.1); }
     .nav-cta { display: none; }
-    @media (min-width: 560px) { .nav-cta { display: inline-flex; } }
+    @media (min-width: 560px) {
+      .nav-cta {
+        display: inline-flex;
+        padding: 7px 16px;
+        font-size: .8125rem;
+        font-weight: 600;
+        border-radius: var(--r-full);
+        background: transparent;
+        color: var(--teal);
+        border: 1.5px solid var(--teal);
+        letter-spacing: .01em;
+      }
+      .nav-cta:hover {
+        background: var(--teal);
+        color: var(--white);
+        transform: none;
+        box-shadow: none;
+      }
+    }
 
     /* ─── HERO ─── */
     .hero {
@@ -549,7 +567,7 @@
           <button class="lang-btn active" data-lang="ko" onclick="setLang('ko')">한국어</button>
           <button class="lang-btn"        data-lang="en" onclick="setLang('en')">English</button>
         </div>
-        <a href="https://localoop-korea-t9af.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-teal nav-cta" style="padding:9px 22px;font-size:.875rem">
+        <a href="https://localoop-korea-t9af.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn nav-cta">
           <span class="ko">웹앱 체험하기</span><span class="en">Try the App</span>
         </a>
       </div>
